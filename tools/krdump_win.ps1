@@ -3,7 +3,7 @@
 # Chạy trong guest:
 #   powershell -ExecutionPolicy Bypass -File \\host.lan\Data\boomkr-re\tools\krdump_win.ps1 `
 #       -Exe C:\boomkr\CA.exe -OutDir C:\krdump2 -WaitMs 1200
-param([string]$Exe, [string]$OutDir, [int]$WaitMs = 1200, [string]$Shots = "")
+param([string]$Exe, [string]$OutDir, [int]$WaitMs = 1200, [string]$Shots = "", [int]$Target = 0)
 
 $ErrorActionPreference = "Stop"
 $src = @"
@@ -60,6 +60,14 @@ public static class KrDump {
 }
 "@
 Add-Type -TypeDefinition $src -ReferencedAssemblies System.Diagnostics.Process
+if ($Target -ne 0) {
+  try { [KrDump]::Dump($Target, $OutDir); Write-Host "dump pid $Target xong -> $OutDir" }
+  catch { Write-Host "lỗi: $_" }
+  Get-ChildItem $OutDir -Recurse -File | Measure-Object -Property Length -Sum | ForEach-Object {
+    Write-Host ("tổng {0} file, {1:N0} B" -f $_.Count, $_.Sum) }
+  return
+}
+
 # -Shots "300,600,900,1200": dump module ảnh nhiều mốc (giữ được trạng thái sau unpack trước khi thoát)
 if ($Shots -ne "") {
   $times = $Shots.Split(",") | ForEach-Object { [int]$_ }

@@ -380,3 +380,37 @@ treo trong `WinTrust` đủ lâu.)
    làm mẫu) → khi client gọi `ExitProcess(1)`, log backtrace/return address → tìm ra chỗ thoát, rồi patch.
 3. **Chặn `ProcessPatch`**: nếu nó gọi `WinTrust`/`WinINet` (đã thấy load các DLL đó), hook các API này
    để luôn trả "thành công" — có thể đủ để client đi tiếp mà không cần biết nội dung dialog.
+
+## 15. Hook DLL + chạy được client ở trạng thái SỐNG — **[VERIFIED]**
+
+### Công cụ
+
+| File | Vai trò |
+|---|---|
+| `tools/krhook.c` → `krhook.dll` (32-bit) | inline hook: `WinVerifyTrust(Ex)`, `InternetOpen/Connect`, `HttpOpenRequest/SendRequest`, `InternetReadFile`, `ExitProcess`, `TerminateProcess`, `RtlExitUserProcess`, `MessageBoxA/W`, `WideCharToMultiByte` |
+| `tools/krlaunch.c` → `krlaunch.exe` | `CreateProcess` suspended → `VirtualAllocEx`+`WriteProcessMemory`+`CreateRemoteThread(LoadLibraryA)` → `ResumeThread` |
+| `tools/krdump_win.ps1` | dump theo mốc thời gian (`-Shots`) hoặc theo pid đang sống (`-Target`) |
+
+### Kết quả
+
+1. Inject OK (`LoadLibraryA -> OK (0x6e7e0000)`), hook cài đủ 12 hàm.
+2. **Client không còn thoát ngay**: sống > 20 s, RSS 68–71 MB (so với 21 MB khi chết sớm).
+3. **Dump theo pid sống → image ĐÃ UNPACK**:
+   - có chuỗi `ProcessPatch`, `EndOfInit! exitcode=`
+   - entropy giảm: `7,90 → 5,55` (vùng `.text`), `6,37`/`6,75` các vùng khác
+   - `out/windump5/mod_00400000_CA.exe.bin` (31.842.304 B) — **ảnh module đã unpack thật**
+4. Dialog tiếng Hàn vẫn hiện; bấm OK → `ExitProcess(0)` **từ `0x70E51811`** (CRT, không phải code game).
+
+### Vì sao vẫn chưa đọc được nội dung dialog
+
+`MessageBoxA` nhận được **bytes `3f` (`?`)** — tức chuỗi đã bị đổi wide→ANSI bằng ACP=1252 **trước**
+MessageBox. Hook `WideCharToMultiByte` **không bắt được** ⇒ app dùng đường chuyển khác (resource string,
+hoặc hàm tự viết). Muốn đọc phải: (a) hook `MultiByteToWideChar`/`LoadString*`, hoặc (b) đổi ACP của
+**process** (không được trên Windows), hoặc (c) đọc thẳng resource trong `.rsrc` của image unpacked.
+
+### Điểm mấu chốt cho bước sau
+
+- Đã có **image unpacked** ⇒ có thể tìm resource/dialog text trực tiếp trong `.rsrc`.
+- Đã có **process sống** ⇒ có thể dump bất cứ lúc nào, thậm chí sau khi bấm OK (nếu hook chặn `ExitProcess`
+  bằng cách không gọi hàm thật — hiện hook chỉ log rồi gọi thật).
+- `.themida` vẫn 7,95 ⇒ VM chưa chạy; phải qua `ProcessPatch` mới giải mã.
