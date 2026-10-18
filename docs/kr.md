@@ -687,3 +687,44 @@ ket thuc (giu hook)
 2. Nếu client không bao giờ gọi ExitProcess/MessageBoxA: tìm **chỗ nó dừng** bằng cách so sánh 2 dump
    theo thời gian (vùng nào thay đổi) hoặc hook `Sleep`/`WaitForSingleObject`/`connect`.
 3. Mục tiêu cuối: tìm nhánh quyết định của `ProcessPatch` để patch, rồi xác nhận `.themida` giải mã.
+
+## 24. Giới hạn của IAT hook + CALog lặp — **[VERIFIED]**
+
+### CALog cho thấy client lặp
+
+```
+967 : InitBeforePatch
+967 : ProcessPatch...
+967 : EndOfInit! exitcode=1      <- lần đầu
+967 : InitBeforePatch            <- rồi chạy lại
+967 : ProcessPatch...
+(…)
+```
+
+⇒ `ProcessPatch` trả **1** rồi client **khởi động lại vòng** (không phải treo). Đó là lý do ta thấy
+nhiều `CA.exe` và process "sống" lâu.
+
+### IAT hook chỉ thấy import của chính EXE
+
+| API | hook được? | ghi chú |
+|---|---|---|
+| `CreateFileA` | ✅ slot `0x1D7D984` | nhưng **0 lần gọi** bị bắt |
+| `ExitProcess` | ✅ slot `0x1D7E7A4` | **0 lần gọi** |
+| `MessageBoxA` | ❌ không có slot | IAT dựng muộn / không dùng |
+| `CreateFileW`, `NtCreateFile`, `NtTerminateProcess` | ❌ | không có slot trong dải ảnh |
+
+Lý do: **CALog được ghi qua CRT/msvcrt**, và các lệnh gọi nằm *bên trong* DLL khác — chúng dùng IAT của
+chính DLL đó, không phải IAT của `CA.exe`. Patch IAT của exe **không nhìn thấy** các call này.
+
+### Hướng đúng: hook prologue (hoặc trampoline)
+
+Muốn bắt mọi caller (kể cả trong CRT) phải vá **đầu hàm** trong bộ nhớ (5 byte `jmp rel32` tới stub của
+ta, stub chạy lại các byte bị ghi đè rồi nhảy tiếp vào thân hàm). Rủi ro: anti-tamper có thể kiểm tra
+byte đầu của API — cần thử và so sánh với plain run.
+
+### Việc tiếp
+
+1. Viết `prologue hook` cho `kernel32!WriteFile` (hoặc `msvcrt!fwrite`) để bắt **nội dung CALog + caller**
+   ⇒ ra thẳng hàm log ⇒ lần ngược lên `ProcessPatch`.
+2. Hoặc hook `ntdll!NtWriteFile` (thấp nhất, mọi đường đều qua).
+3. Khi có caller của dòng `ProcessPatch...`, disassemble quanh đó trong `modO.bin` để tìm nhánh trả 1.

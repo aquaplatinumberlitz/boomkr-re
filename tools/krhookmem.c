@@ -67,9 +67,9 @@ static DWORD find_slot(HANDLE h, DWORD val, int wide) {
     return 0;
 }
 
-typedef struct { DWORD pid, page, slot; HANDLE h; const char *name; } Hook;
+typedef struct { DWORD pid, page, slot; HANDLE h; const char *name; int kind; } Hook;
 
-static int install(Hook *hk, DWORD pid, const char *dll, const char *fn, const char *label) {
+static int install(Hook *hk, DWORD pid, const char *dll, const char *fn, const char *label, int kind) {
     HANDLE h = hk->h;
     HMODULE m = LoadLibraryA(dll);
     FARPROC p = m ? GetProcAddress(m, fn) : NULL;
@@ -92,6 +92,8 @@ static int install(Hook *hk, DWORD pid, const char *dll, const char *fn, const c
     cd[n++] = 0xA3; *(DWORD *)(cd + n) = pv + 4; n += 4;
     cd[n++] = 0x8B; cd[n++] = 0x44; cd[n++] = 0x24; cd[n++] = 0x28;
     cd[n++] = 0xA3; *(DWORD *)(cd + n) = pv + 8; n += 4;
+    cd[n++] = 0x8B; cd[n++] = 0x44; cd[n++] = 0x24; cd[n++] = 0x2C;
+    cd[n++] = 0xA3; *(DWORD *)(cd + n) = pv + 12; n += 4;
     cd[n++] = 0x61;
     cd[n++] = 0xFF; cd[n++] = 0x25; *(DWORD *)(cd + n) = pv + 0x100; n += 4;
 
@@ -104,7 +106,7 @@ static int install(Hook *hk, DWORD pid, const char *dll, const char *fn, const c
     ReadProcessMemory(h, (void *)(UINT_PTR)slot, &old, 4, &wr);
     if (!WriteProcessMemory(h, (void *)(UINT_PTR)slot, &hv, 4, &wr)) { L("  %s: patch slot loi", fn); free(bb); return 0; }
     free(bb);
-    hk->page = pv; hk->slot = slot; hk->name = label;
+    hk->page = pv; hk->slot = slot; hk->name = label; hk->kind = kind;
     L("  hook %-14s pid=%-6lu slot=0x%-8lx (cu 0x%lx) -> 0x%lx", label, pid, slot, old, hv);
     return 1;
 }
@@ -120,36 +122,71 @@ int main(int argc, char **argv) {
     DWORD hooked[16]; int nhooked = 0;
 
     for (int t = 0; t < seconds * 4; t++) {
+        /* phát hiện process mới -> đưa vào danh sách chờ hook */
+        static struct { DWORD pid; HANDLE h; int attempts; int done[4]; } P[16];
+        static int np = 0;
         HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         PROCESSENTRY32 pe; pe.dwSize = sizeof pe;
         if (Process32First(snap, &pe)) do {
             if (_stricmp(pe.szExeFile, "CA.exe") != 0) continue;
-            int done = 0;
-            for (int i = 0; i < nhooked; i++) if (hooked[i] == pe.th32ProcessID) done = 1;
-            if (done || nhooked >= 16) continue;
+            int known = 0;
+            for (int i = 0; i < np; i++) if (P[i].pid == pe.th32ProcessID) known = 1;
+            if (known || np >= 16) continue;
             HANDLE h = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE |
                                    PROCESS_QUERY_INFORMATION, FALSE, pe.th32ProcessID);
             if (!h) continue;
             L("process pid=%lu", pe.th32ProcessID);
-            Hook a = {0}, b = {0}, c = {0};
-            a.h = b.h = c.h = h;
-            a.pid = b.pid = c.pid = pe.th32ProcessID;
-            if (install(&a, pe.th32ProcessID, "kernel32.dll", "ExitProcess", "ExitProcess")) hooks[nh++] = a;
-            if (install(&c, pe.th32ProcessID, "user32.dll", "MessageBoxA", "MessageBoxA")) hooks[nh++] = c;
-            hooked[nhooked++] = pe.th32ProcessID;
+            P[np].pid = pe.th32ProcessID; P[np].h = h; P[np].attempts = 0;
+            for (int k = 0; k < 4; k++) P[np].done[k] = 0;
+            np++;
         } while (Process32Next(snap, &pe));
         CloseHandle(snap);
 
+        /* thử hook lại cho từng process (IAT có thể dựng muộn) */
+        static const struct { const char *dll, *fn, *label; int kind; } SPEC[4] = {
+            {"ntdll.dll",  "NtCreateFile",       "NtCreateFile", 3},
+            {"ntdll.dll",  "NtTerminateProcess", "NtTerminate",  0},
+            {"user32.dll", "MessageBoxA",        "MessageBoxA",  1},
+            {"kernel32.dll","CreateFileA",       "CreateFileA",  1},
+        };
+        for (int i = 0; i < np; i++) {
+            if (P[i].attempts > 60) continue;
+            P[i].attempts++;
+            for (int k = 0; k < 4; k++) {
+                if (P[i].done[k]) continue;
+                Hook hk = {0}; hk.h = P[i].h; hk.pid = P[i].pid;
+                if (install(&hk, P[i].pid, SPEC[k].dll, SPEC[k].fn, SPEC[k].label, SPEC[k].kind)) {
+                    hooks[nh++] = hk; P[i].done[k] = 1;
+                }
+            }
+        }
+
         for (int i = 0; i < nh; i++) {
-            DWORD v[3] = {0, 0, 0}; SIZE_T got = 0;
+            DWORD v[4] = {0, 0, 0, 0}; SIZE_T got = 0;
             if (!ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)hooks[i].page, v, sizeof v, &got)) continue;
             if (!v[0]) continue;
-            L("%s pid=%lu: caller=0x%lx arg0=0x%lx arg1=0x%lx",
-              hooks[i].name, hooks[i].pid, v[0], v[1], v[2]);
-            if (strcmp(hooks[i].name, "MessageBoxA") == 0 && v[1]) {
-                char txt[400] = {0};
+            if (hooks[i].kind == 3) {                   /* NtCreateFile: arg2 = POBJECT_ATTRIBUTES */
+                DWORD oa = v[3], us = 0, bufp = 0;
+                ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)(oa + 8), &us, 4, &got);
+                if (us) ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)(us + 4), &bufp, 4, &got);
+                wchar_t wt[260] = {0};
+                if (bufp) ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)bufp, wt, sizeof wt - 2, &got);
+                L("NtCreateFile pid=%lu caller=0x%lx oa=0x%lx path=%ws", hooks[i].pid, v[0], oa, wt);
+            } else {
+                L("%s pid=%lu: caller=0x%lx arg0=0x%lx arg1=0x%lx",
+                  hooks[i].name, hooks[i].pid, v[0], v[1], v[2]);
+            }
+            if (hooks[i].kind == 1 && v[1]) {          /* ANSI string ở arg0 */
+                char txt[300] = {0};
                 ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)v[1], txt, sizeof txt - 1, &got);
-                L("   text = %s", txt);
+                L("   path = %s", txt);
+            } else if (hooks[i].kind == 2 && v[1]) {   /* wide string ở arg0 */
+                wchar_t wt[300] = {0};
+                if (ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)v[1], wt, sizeof wt - 2, &got) && wt[0]) {
+                    char a[600] = {0};
+                    WideCharToMultiByte(CP_UTF8, 0, wt, -1, a, sizeof a - 1, NULL, NULL);
+                    L("   pathW = %s", a);
+                }
             }
             DWORD z[3] = {0, 0, 0};
             WriteProcessMemory(hooks[i].h, (void *)(UINT_PTR)hooks[i].page, z, sizeof z, &got);
