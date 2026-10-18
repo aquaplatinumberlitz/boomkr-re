@@ -881,3 +881,42 @@ Hook `ntdll!NtWriteFile` bằng cùng cơ chế trampoline:
    + `caller` = chỗ gọi ⇒ lần ra hàm log ⇒ lên `ProcessPatch`.
 
 Toàn bộ hạ tầng cho bước này đã có; chỉ còn tính `N` cho `NtWriteFile`.
+
+## 29. Hook `ntdll!NtWriteFile` → client hiện dialog Hàn (anti-tamper) — **[VERIFIED]**
+
+### Đã làm
+
+- Lấy RVA `NtWriteFile` từ **export table** của `mod_77bd0000_ntdll.dll.bin` (parse tay vì image xếp theo VA):
+  `RVA = 0x72C00`, `ZwWriteFile` cùng địa chỉ.
+- Disassemble prologue: `mov eax, 0x1A0008` (5 byte) ⇒ **N = 5**.
+- Mở rộng stub bắt thêm `arg5`/`arg6` (buffer/length của NtWriteFile).
+- Chạy: `krhookpro.exe CA.exe <out> 25 ntdll.dll NtWriteFile 5` **trước** khi start client.
+
+Kết quả:
+
+```
+hook(tramp) pid=8592 F=0x77c42c00 N=5 -> stub 0x22a0200
+```
+
+⇒ Hook cài được, **và client hiện ngay dialog tiếng Hàn** (mojibake `??? ? ???...`).
+
+### Diễn giải
+
+Dialog xuất hiện **chỉ khi** ta vá `ntdll!NtWriteFile` ⇒ đây là **phản ứng anti-tamper của Themida**
+(phát hiện byte đầu của API hệ thống bị sửa), **không phải** tiến trình đi xa hơn.
+
+Chứng cứ bổ trợ: trước đó, mọi thay đổi runtime (inject DLL, patch IAT, patch forwarder) đều dẫn tới
+dialog/lỗi tương tự; chạy **plain** thì không có dialog.
+
+### Kết luận cuối của đêm
+
+Themida KR phát hiện **cả hai**:
+1. DLL lạ trong process (inject) → "Cannot find binkw32.dll";
+2. **Byte đầu của API hệ thống bị vá** (IAT/forwarder/ntdll) → dialog tiếng Hàn.
+
+⇒ Đường duy nhất còn lại đúng như mục tiêu ban đầu: **patch FILE** (không đụng bộ nhớ runtime).
+Muốn biết patch chỗ nào vẫn cần **một lần quan sát không xâm lấn** — gợi ý:
+- dùng **ETW/WPR** hoặc `Process Monitor` trong VM (không sửa process) để xem `ProcessPatch` mở/đọc file gì;
+- hoặc so sánh 2 dump (trước/sau khi dialog hiện) để tìm vùng dữ liệu thay đổi;
+- hoặc chấp nhận đọc dialog bằng cách **đổi system locale sang Korean** trong VM (không sửa process,
+  không kích hoạt anti-tamper) — đây là cách sạch nhất còn lại.

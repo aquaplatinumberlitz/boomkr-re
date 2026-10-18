@@ -91,6 +91,10 @@ int main(int argc, char **argv) {
             s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 8; n += 4;
             s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x2C;
             s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 12; n += 4;
+            s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x38;
+            s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 16; n += 4;
+            s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x3C;
+            s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 20; n += 4;
             s2[n++] = 0x61;
             s2[n++] = 0xFF; s2[n++] = 0x25; *(DWORD *)(s2 + n) = pv + 0x100; n += 4;
                 stubAddr = pv + 0x200;
@@ -116,6 +120,10 @@ int main(int argc, char **argv) {
                 s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 8; n += 4;
                 s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x2C;
                 s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 12; n += 4;
+            s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x38;
+            s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 16; n += 4;
+            s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x3C;
+            s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 20; n += 4;
                 s2[n++] = 0x61;
                 s2[n++] = 0xE9; *(DWORD *)(s2 + n) = tramp - (pv + 0x200 + n + 4); n += 4;
                 stubAddr = pv + 0x200;
@@ -136,9 +144,19 @@ int main(int argc, char **argv) {
         CloseHandle(snap);
 
         for (int i = 0; i < nt; i++) {
-            DWORD v[4] = {0, 0, 0, 0}; SIZE_T g2 = 0;
-            if (!ReadProcessMemory(T[i].h, (void *)(UINT_PTR)T[i].page, v, sizeof v, &g2)) continue;
+            DWORD v[8] = {0}; SIZE_T g2 = 0;
+            if (!ReadProcessMemory(T[i].h, (void *)(UINT_PTR)T[i].page, v, 24, &g2)) continue;
             if (!v[0]) continue;
+            if (v[5] && v[6] && v[6] < 256) {
+                char b2[260] = {0};
+                if (ReadProcessMemory(T[i].h, (void *)(UINT_PTR)v[5], b2, v[6], &g2)) {
+                    for (DWORD k = 0; k < v[6] && k < 255; k++) if (b2[k] == '\r' || b2[k] == '\n') b2[k] = ' ';
+                    L("%s pid=%lu caller=0x%lx len=%lu | %s", fn, T[i].pid, v[0], v[6], b2);
+                    DWORD z2[8] = {0};
+                    WriteProcessMemory(T[i].h, (void *)(UINT_PTR)T[i].page, z2, 24, &g2);
+                    continue;
+                }
+            }
             char buf[260] = {0};
             if (v[2] && v[3] && v[3] < 256 && ReadProcessMemory(T[i].h, (void *)(UINT_PTR)v[2], buf, v[3], &g2))
                 for (DWORD k = 0; k < v[3] && k < 255; k++) if (buf[k] == '\r' || buf[k] == '\n') buf[k] = ' ';
