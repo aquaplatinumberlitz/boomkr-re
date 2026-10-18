@@ -207,3 +207,49 @@ Hạn chế:
 
 Việc tiếp: (a) dump ở 0,65 s và so sánh vùng exec mới; (b) hoặc tìm `jmp [reg*4]`/bảng handler trong
 các vùng đã dump để nhận dạng VM KR.
+
+## 11. Image unpacked + nhận dạng VM KR — **[VERIFIED]**
+
+### Cách lấy được image
+
+`tools/krdump.py --delay 3` (Wine bị làm chậm bởi `WINEDEBUG=+file` ghi ra file) → process sống đủ lâu
+→ dump `/proc/<pid>/mem` → **6 section đổi**:
+
+| section | va | size | entropy sau dump | nghĩa |
+|---|---|---|---|---|
+| (không tên → `.text`) | `0x00401000` | `0x764c00` | **5,92** | code game **đã giải mã** |
+| `.rsrc` | `0x01698000` | `0x59c00` | 4,82 | resource |
+| `.idata` | `0x0197a000` | `0x200` | 1,47 | vẫn nhỏ (IAT dựng động) |
+| (trống) | `0x0197b000` | `0x200` | 0,84 | |
+| `gulxdsye` | `0x01c76000` | `0x1e6c00` | **7,95** | bytecode VM (vẫn mã hoá) |
+| `gsowkarq` | `0x01e5d000` | `0x200` | 4,42 | stub |
+
+`out/kr-unpacked.exe` (10.141.152 B) — **đúng bằng kích thước file gốc**, chỉ nội dung section đổi.
+`out/kr-unpacked-text.exe` = bản đã đặt tên section đầu thành `.text` và `gulxdsye` → `.themida`
+(tool `vmdevirt` cần tên `.text` để không nhầm toàn bộ image là vùng VM).
+
+### Nhận dạng VM — khác VN rõ rệt
+
+```
+python3 vmdevirt.py discover out/kr-unpacked-text.exe
+  sites 102  distinct stub heads 26
+```
+
+| | VN | **KR** |
+|---|---|---|
+| marker `EB 10 57 4C 20` | 73 | **0** |
+| site gọi vào VM | 607 | **102** |
+| stub head | 390 (1 head dùng 73 lần) | **26** (mỗi head ~4 lần) |
+| mẫu dispatch trong `.text` | `jmp [edi+eax*4]` | **457** chỗ `jmp [eax/ecx/edx*4+disp]` |
+| vùng VM | 5 section Themida | 1 section `.themida` 1,9 MB + 2 section nhỏ |
+
+⇒ **KR là đời VM khác**: không dùng marker, không có một entry dùng chung, và dispatch rải rác
+(`eax/ecx/edx`). Theo phân loại trong `docs/vmdevirt.md`, đây nhiều khả năng là kiểu **chained/FALCON**
+hơn là threaded của VN.
+
+### Việc tiếp (G3 sâu hơn)
+
+1. `profile` cần **snapshot tại một site** — chưa có. Có thể lấy bằng cách cho client chạy tới site
+   (khó, vì nó chết ở `ProcessPatch`) hoặc emulate từ image unpack với ngữ cảnh dựng tay.
+2. Trước đó: xác định **bảng handler** của KR bằng cách soi 457 chỗ `jmp [reg*4+disp]` — bảng nằm ở
+   đâu (`.text`? vùng ẩn danh?), bao nhiêu entry.

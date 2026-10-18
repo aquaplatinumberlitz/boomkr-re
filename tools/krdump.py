@@ -129,6 +129,7 @@ def dump_regions(pid, outdir: pathlib.Path):
     maps = pathlib.Path(f"/proc/{pid}/maps").read_text(errors="replace")
     mem = open(f"/proc/{pid}/mem", "rb", 0)
     n = 0
+    manifest = []
     for line in maps.splitlines():
         m = re.match(r"([0-9a-f]+)-([0-9a-f]+) (\S{4}) \S+ \S+ \S+\s*(.*)", line)
         if not m:
@@ -145,8 +146,10 @@ def dump_regions(pid, outdir: pathlib.Path):
             continue
         name = f"{lo:08x}_{len(buf):x}.bin"
         (outdir / name).write_bytes(buf)
+        manifest.append(f"{lo:08x} {len(buf):x} {perm} {path}")
         n += 1
     mem.close()
+    (outdir.parent / (outdir.name + "_manifest.txt")).write_text("\n".join(manifest) + "\n")
     print(f"{n} vùng exec -> {outdir}")
     return n
 
@@ -157,6 +160,7 @@ def main():
     ap.add_argument("--out", default=str(OUT / "kr-unpacked.exe"))
     ap.add_argument("--wait", type=float, default=15)
     ap.add_argument("--delay", type=float, default=3.0, help="chờ bao lâu sau khi thấy pid rồi dump")
+    ap.add_argument("--no-image", action="store_true", help="chỉ dump vùng exec, không ghi đè section")
     a = ap.parse_args()
     src = pathlib.Path(a.src)
     exe = src / "CA.exe"
@@ -167,9 +171,10 @@ def main():
     for attempt in range(1, 4):
         if log.exists():
             log.unlink()
+        (OUT).mkdir(parents=True, exist_ok=True)
+        logf = open(OUT / f"wine_{int(time.time())}.log", "wb")
         proc = subprocess.Popen(["wine", "CA.exe"], cwd=str(src), env=wine_env(),
-                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                                start_new_session=True)
+                                stdout=logf, stderr=logf, start_new_session=True)
         pid = find_pid(timeout=a.wait)
         if not pid:
             proc.kill()
@@ -189,7 +194,7 @@ def main():
         print(f"lần {attempt}: ProcessPatch={'đã tới' if hit else 'chưa (dump sớm)'}")
         try:
             ok = dump_image(pid, exe, out)
-            dump_regions(pid, out.parent / "regions")
+            dump_regions(pid, out.parent / ("regions_" + str(a.delay)))
             if ok:
                 proc.kill()
                 return
