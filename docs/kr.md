@@ -344,3 +344,39 @@ unpack một phần + xác nhận cơ chế chống VM nằm ở `.themida`.
 2. Tìm xref tới chuỗi `ProcessPatch` (`0x17917xx` trong vùng private) ⇒ tìm hàm kiểm tra.
 3. Patch nhánh thoát (`exitcode=1`) trên **bản copy** trong VM, chạy lại ⇒ nếu qua được thì VM KR mới
    bắt đầu giải mã `.themida`, lúc đó dump lại.
+
+## 14. Dump trong Windows: image vẫn packed ở 1,1 s — **[VERIFIED]**
+
+`tools/krdump_win.ps1` (bản 64-bit-safe; bản VN lỗi `OverflowException` vì `BaseAddress.ToInt32()`).
+Chụp module `CA.exe` tại 4 mốc 300/600/900/1100 ms:
+
+| mốc | kích thước | chuỗi `ProcessPatch` | entropy `.text` |
+|---|---|---|---|
+| 300 ms | 31.842.304 B | 0/2 | 7,90 |
+| 600 ms | 31.842.304 B | 0/2 | 7,90 |
+| 900 ms | 31.842.304 B | 0/2 | 7,90 |
+| 1100 ms | 31.842.304 B | 0/2 | 7,90 |
+
+⇒ **Trong Windows, image không hề unpack** trước khi client thoát: `ProcessPatch` thất bại **trước**
+bước giải nén. (Chuỗi log nằm ở vùng private chỉ xuất hiện khi unpack; ở Wine ta bắt được vì client
+treo trong `WinTrust` đủ lâu.)
+
+### Hệ quả — chặn duy nhất hiện tại
+
+| Hướng | Trạng thái |
+|---|---|
+| Wine | chết `0xC0000096` tại `0x20760B9` (`push ds` trong WoW64) |
+| winedbg | anti-debug: SIGSEGV cùng địa chỉ, không tới `ExitProcess` |
+| Windows, dump theo thời gian | image chưa unpack (client thoát ở ~1 s) |
+| Windows, dump sau khi unpack | **không thể** vì unpack xảy ra *sau* `ProcessPatch` |
+
+⇒ Muốn có image unpack của KR **bắt buộc phải qua `ProcessPatch`**. Ba cách, theo thứ tự khả thi:
+
+1. **Đọc dialog tiếng Hàn** để biết nó đòi gì. Cách sạch: bật locale Hàn cho **riêng phiên** —
+   đã có `wine-kr` nhưng Wine chết trước dialog; trong Windows phải đổi system locale (ảnh hưởng VN).
+   Cách không ảnh hưởng VN: chạy client KR trong **một VM Windows thứ hai** hoặc snapshot VM rồi đổi
+   locale, đọc xong khôi phục.
+2. **Patch mù**: hook `ExitProcess` trong WinBoat bằng một DLL thay thế (đã có `tools/launcher/inject.c`
+   làm mẫu) → khi client gọi `ExitProcess(1)`, log backtrace/return address → tìm ra chỗ thoát, rồi patch.
+3. **Chặn `ProcessPatch`**: nếu nó gọi `WinTrust`/`WinINet` (đã thấy load các DLL đó), hook các API này
+   để luôn trả "thành công" — có thể đủ để client đi tiếp mà không cần biết nội dung dialog.
