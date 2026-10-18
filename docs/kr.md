@@ -838,3 +838,46 @@ vòng watch** và chưa kiểm tra ranh giới instruction.
 2. Áp cho `ntdll!NtWriteFile` (mọi write đều qua đây) → bắt dòng `ProcessPatch...` + caller.
 3. Từ caller, disassemble trong `modO.bin`, tìm nhánh trả 1, patch (file hoặc bộ nhớ).
 4. Xác nhận `.themida` đổi entropy → chuyển sang ctx/bảng handler.
+
+## 28. Prologue hook + trampoline hoạt động, nhưng vẫn không bắt được write — **[VERIFIED]**
+
+### Tính ranh giới instruction offline (host có capstone)
+
+`kernelbase!WriteFile` (RVA `0x1193D0`, từ dump `mod_770d0000_KERNELBASE.dll.bin`):
+
+```
+0x771E93D0: 6A 18              push 0x18          (2 B)
+0x771E93D2: 68 58 96 2B 77     push 0x772B9658    (5 B)
+⇒ N = 7 byte
+```
+
+### Tool đã hỗ trợ `N` (trampoline)
+
+```
+krhookpro.exe <exe|pid> <outdir> <giay> <dll> <func> [N]
+```
+
+- `N = 0`: chỉ xử lý forwarder (`FF 25`).
+- `N ≥ 5`: vá `N` byte đầu bằng `E9 rel32` + `90`, trampoline = `N` byte gốc + `E9` về `F+N`.
+
+Chạy thật:
+
+```
+hook(tramp) pid=1336 F=0x771e93d0 N=7 -> stub 0x22a0200
+ket thuc (giu hook)
+```
+
+⇒ Hook **cài thành công** (không crash, client vẫn chạy), nhưng trong 12–25 s **vẫn 0 lần** bắt được
+`WriteFile`. Kết luận: đường ghi CALog **không đi qua** `kernelbase!WriteFile` — nhiều khả năng đi thẳng
+`ntdll!NtWriteFile` (WOW64: msvcrt → ntdll → syscall).
+
+### Bước cuối còn lại (rõ ràng, ngắn)
+
+Hook `ntdll!NtWriteFile` bằng cùng cơ chế trampoline:
+1. Lấy RVA từ export table của `mod_*_ntdll.dll.bin` (có sẵn trong dump).
+2. Disassemble prologue bằng capstone → `N` (stub syscall thường `B8 imm32` = 5 byte).
+3. Chạy `krhookpro ... ntdll.dll NtWriteFile <N>` **trước** khi client start.
+4. `arg1` = HANDLE, `arg2` = IO_STATUS_BLOCK*, `arg3` = buffer, `arg4` = length → đọc buffer ra nội dung CALog
+   + `caller` = chỗ gọi ⇒ lần ra hàm log ⇒ lên `ProcessPatch`.
+
+Toàn bộ hạ tầng cho bước này đã có; chỉ còn tính `N` cho `NtWriteFile`.

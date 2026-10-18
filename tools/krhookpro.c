@@ -38,8 +38,9 @@ static DWORD mod_base(DWORD pid, const char *n) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 6) { printf("usage: krhookpro.exe <exe|pid> <outdir> <giay> <dll> <func>\n"); return 2; }
+    if (argc < 6) { printf("usage: krhookpro.exe <exe|pid> <outdir> <giay> <dll> <func> [N]\n"); return 2; }
     int seconds = atoi(argv[3]);
+    int NBYTES = argc > 6 ? atoi(argv[6]) : 0;   /* 0 = chỉ xử lý forwarder */
     const char *dll = argv[4], *fn = argv[5];
     CreateDirectoryA(argv[2], NULL);
     char path[MAX_PATH]; snprintf(path, sizeof path, "%s\\hookpro.log", argv[2]);
@@ -66,15 +67,21 @@ int main(int argc, char **argv) {
             DWORD F = base + (DWORD)((UINT_PTR)p - (UINT_PTR)m);
             unsigned char orig[8] = {0}; SIZE_T g = 0;
             if (!ReadProcessMemory(h, (void *)(UINT_PTR)F, orig, 8, &g)) { CloseHandle(h); continue; }
-            if (!(orig[0] == 0xFF && orig[1] == 0x25)) { CloseHandle(h); continue; }
-            DWORD slot = *(DWORD *)(orig + 2), real = 0;
-            if (!ReadProcessMemory(h, (void *)(UINT_PTR)slot, &real, 4, &g)) { CloseHandle(h); continue; }
+            int is_fwd = (orig[0] == 0xFF && orig[1] == 0x25);
+            if (!is_fwd && NBYTES < 5) { CloseHandle(h); continue; }
+            DWORD slot = 0, real = 0;
+            if (is_fwd) {
+                slot = *(DWORD *)(orig + 2);
+                if (!ReadProcessMemory(h, (void *)(UINT_PTR)slot, &real, 4, &g)) { CloseHandle(h); continue; }
+            }
             void *pg = VirtualAllocEx(h, NULL, 0x1000, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
             if (!pg) { CloseHandle(h); continue; }
             DWORD pv = (DWORD)(UINT_PTR)pg;
             unsigned char blob[0x400]; memset(blob, 0, sizeof blob);
-            *(DWORD *)(blob + 0x100) = real;
             int n = 0; unsigned char *s2 = blob + 0x200;
+            DWORD stubAddr;
+            if (is_fwd) {
+                *(DWORD *)(blob + 0x100) = real;
             s2[n++] = 0x60;
             s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x20;
             s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 0; n += 4;
@@ -86,14 +93,45 @@ int main(int argc, char **argv) {
             s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 12; n += 4;
             s2[n++] = 0x61;
             s2[n++] = 0xFF; s2[n++] = 0x25; *(DWORD *)(s2 + n) = pv + 0x100; n += 4;
-            SIZE_T wr = 0;
-            if (!WriteProcessMemory(h, pg, blob, sizeof blob, &wr)) { CloseHandle(h); continue; }
-            DWORD stubAddr = pv + 0x200, oldp = 0;
-            VirtualProtectEx(h, (void *)(UINT_PTR)slot, 4, PAGE_EXECUTE_READWRITE, &oldp);
-            if (!WriteProcessMemory(h, (void *)(UINT_PTR)slot, &stubAddr, 4, &wr)) { CloseHandle(h); continue; }
-            VirtualProtectEx(h, (void *)(UINT_PTR)slot, 4, oldp, &oldp);
-            L("hook pid=%lu slot=0x%lx (real 0x%lx) -> stub 0x%lx", pe.th32ProcessID, slot, real, stubAddr);
-            T[nt].pid = pe.th32ProcessID; T[nt].slot = slot; T[nt].page = pv; T[nt].h = h; nt++;
+                stubAddr = pv + 0x200;
+                SIZE_T wr0 = 0;
+                if (!WriteProcessMemory(h, pg, blob, sizeof blob, &wr0)) { CloseHandle(h); continue; }
+                DWORD oldp0 = 0;
+                VirtualProtectEx(h, (void *)(UINT_PTR)slot, 4, PAGE_EXECUTE_READWRITE, &oldp0);
+                if (!WriteProcessMemory(h, (void *)(UINT_PTR)slot, &stubAddr, 4, &wr0)) { CloseHandle(h); continue; }
+                VirtualProtectEx(h, (void *)(UINT_PTR)slot, 4, oldp0, &oldp0);
+                L("hook(fwd) pid=%lu slot=0x%lx real=0x%lx -> stub 0x%lx", pe.th32ProcessID, slot, real, stubAddr);
+            } else {
+                /* trampoline: copy N byte gốc + jmp F+N */
+                DWORD tramp = pv + 0x100;
+                memcpy(blob + 0x100, orig, NBYTES);
+                blob[0x100 + NBYTES] = 0xE9;
+                *(DWORD *)(blob + 0x100 + NBYTES + 1) = (F + NBYTES) - (tramp + NBYTES + 5);
+                s2[n++] = 0x60;
+                s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x20;
+                s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 0; n += 4;
+                s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x24;
+                s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 4; n += 4;
+                s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x28;
+                s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 8; n += 4;
+                s2[n++] = 0x8B; s2[n++] = 0x44; s2[n++] = 0x24; s2[n++] = 0x2C;
+                s2[n++] = 0xA3; *(DWORD *)(s2 + n) = pv + 12; n += 4;
+                s2[n++] = 0x61;
+                s2[n++] = 0xE9; *(DWORD *)(s2 + n) = tramp - (pv + 0x200 + n + 4); n += 4;
+                stubAddr = pv + 0x200;
+                SIZE_T wr1 = 0;
+                if (!WriteProcessMemory(h, pg, blob, sizeof blob, &wr1)) { CloseHandle(h); continue; }
+                unsigned char patch[16]; memset(patch, 0x90, sizeof patch);
+                patch[0] = 0xE9;
+                *(DWORD *)(patch + 1) = stubAddr - (F + 5);
+                DWORD oldp1 = 0;
+                VirtualProtectEx(h, (void *)(UINT_PTR)F, NBYTES, PAGE_EXECUTE_READWRITE, &oldp1);
+                if (!WriteProcessMemory(h, (void *)(UINT_PTR)F, patch, NBYTES, &wr1)) { CloseHandle(h); continue; }
+                VirtualProtectEx(h, (void *)(UINT_PTR)F, NBYTES, oldp1, &oldp1);
+                FlushInstructionCache(h, (void *)(UINT_PTR)F, NBYTES);
+                L("hook(tramp) pid=%lu F=0x%lx N=%d -> stub 0x%lx", pe.th32ProcessID, F, NBYTES, stubAddr);
+            }
+            T[nt].pid = pe.th32ProcessID; T[nt].slot = F; T[nt].page = pv; T[nt].h = h; nt++;
         } while (Process32Next(snap, &pe));
         CloseHandle(snap);
 
