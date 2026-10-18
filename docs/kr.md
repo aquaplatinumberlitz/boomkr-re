@@ -160,3 +160,50 @@ Thử trong WinBoat (Windows 10 19045, admin), thư mục riêng, **không** đ�
    dump ngay ~0,9 s sau khi start để bắt image đã unpack ⇒ có thể qua **G2 mà không cần qua G1**.
 2. Nếu dump được: `doctor` + `discover` trên image unpack ⇒ trả lời G3 (VM đời nào).
 3. Nếu không dump được: đọc `CAKR.ini` (mã hoá) / hook `ProcessPatch` — cần quyết định thêm.
+
+## 9. Môi trường Wine cô lập (không đụng bản VN) — **[VERIFIED]**
+
+| Thành phần | Đường dẫn | Ghi chú |
+|---|---|---|
+| Wine prefix | `/home/admin/wine-kr/prefix` | tạo bằng `wineboot`, **không** dùng `~/.wine` |
+| Fontconfig riêng | `/home/admin/wine-kr/fonts.conf` | chỉ trỏ `/home/admin/wine-kr/fonts` + `noto-cjk` (có **Noto Sans CJK KR**) |
+| Locale Hàn riêng | `/home/admin/wine-kr/locale/ko_KR.UTF-8` | `localedef` vào thư mục riêng, dùng qua `LOCPATH` — **không cần root, không đổi locale hệ thống** |
+| Bản chạy | `/home/admin/boomkr-run` (1,4 GB, hardlink) | đã bỏ `BlackCipher/`, `Dwarf/`, `CAWH.sys`… |
+
+Chạy:
+
+```bash
+WINEPREFIX=/home/admin/wine-kr/prefix FONTCONFIG_FILE=/home/admin/wine-kr/fonts.conf \
+LOCPATH=/home/admin/wine-kr/locale LC_ALL=ko_KR.UTF-8 wine CA.exe
+```
+
+Kết quả: client **chạy được dưới Wine** (khác bản VN: VN chết ở anti-VM `0xC0000096` trong Wine).
+Dưới Wine client đi tới `ProcessPatch` rồi tự thoát sau **~0,8 s** (`CALog.log` không kịp ghi `EndOfInit`).
+
+> Đổi codepage/ngôn ngữ hệ thống **không cần** nữa: locale Hàn chỉ tồn tại trong `LOCPATH` của prefix KR.
+
+## 10. Dump image đã unpack từ Wine — **[VERIFIED một phần]**
+
+`tools/krdump.py`: chạy `wine CA.exe`, tìm pid, chờ ~0,5 s (image đã unpack), đọc
+`/proc/<pid>/maps` + `/proc/<pid>/mem`, ghi đè section của file gốc, và dump mọi vùng exec.
+
+Kết quả lần chạy tốt nhất (`--delay 0.5`):
+
+```
+.idata     va=0x0197a000 size=0x200    <- mem
+           va=0x0197b000 size=0x200    <- mem
+gulxdsye   va=0x01c76000 size=0x1e6c00 <- mem   (vùng VM 1,99 MB)
+gsowkarq   va=0x01e5d000 size=0x200    <- mem   (stub)
+4 section đổi -> out/kr-unpacked.exe
+384 vùng exec -> out/regions/
+```
+
+Hạn chế:
+- `doctor` trên `out/kr-unpacked.exe` vẫn báo `PACKED`: **marker = 0** (KR vốn không có marker VN) và
+  `.idata` vẫn `0x200` (chưa thấy IAT mới ở thời điểm dump).
+- 384 vùng exec đã dump **không chứa marker**; code đã unpack có thể nằm ở vùng xuất hiện **sau** 0,5 s.
+- Process chỉ sống ~0,8 s → cần dump muộn hơn (0,65–0,75 s) hoặc bắt thời điểm chuyển sang code unpack
+  (ptrace/last-branch), rồi quét theo **mẫu dispatch** thay vì marker.
+
+Việc tiếp: (a) dump ở 0,65 s và so sánh vùng exec mới; (b) hoặc tìm `jmp [reg*4]`/bảng handler trong
+các vùng đã dump để nhận dạng VM KR.
