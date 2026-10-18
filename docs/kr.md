@@ -505,3 +505,39 @@ chuyển mã), không nằm dạng plaintext trong bộ nhớ tại thời đi�
 
 ⇒ **image unpack: 70% → 85%** (module unpacked + toàn bộ vùng commit; còn thiếu `.themida` và việc xác
 định chính xác chuỗi dialog).
+
+## 19. Môi trường VM: ổ đĩa, drive mapping, và lỗi "Cannot find binkw32.dll" — **[VERIFIED]**
+
+### Bản đồ ổ đĩa (WinBoat guest)
+
+| ổ | loại | tổng | trống | ghi chú |
+|---|---|---|---|---|
+| `C:` | Fixed | 34,0 GB | **17,1 GB** | ổ hệ thống, dùng để chạy client |
+| `V: W: X: Y: Z:` | Remote (share) | 99,8 GB | 55,6 GB | **cùng một share** `\\host.lan\Data` — mỗi lần `pushd` lại tạo thêm một letter mới |
+
+⇒ Đừng tin "hết chỗ" khi thấy `ERROR 112`: lúc đó `C:` chỉ còn ~2 GB vì các thư mục `C:\krdump*`
+(140 MB × nhiều bản). Sau khi dọn: **17,1 GB** — đủ chứa bản client 1,8 GB.
+
+### Vì sao client báo "Cannot find 'binkw32.dll'" khi chạy từ share
+
+`CA.exe` có manifest **`requireAdministrator`**. Tiến trình elevated **không thấy các ổ mạng mapped**
+của phiên người dùng → `GetCurrentDirectory`/DLL search theo đường dẫn share thất bại, dù file có đó.
+
+**Cách đúng:** copy client về **ổ local** rồi chạy:
+
+```
+robocopy \\host.lan\Data\boomkr-full C:\boomkr-full /E /NFL /NDL /NJH /NJS
+C:\boomkr-full\krlaunch.exe C:\boomkr-full\CA.exe C:\boomkr-full\krhook.dll
+```
+
+`krlaunch.exe` đặt `lpCurrentDirectory` = thư mục chứa exe (đã vá), nên DLL cạnh exe luôn tìm thấy.
+
+### Bài học vận hành (tránh lặp lại)
+
+1. **Click vào console trước khi gõ** — nếu không, vài ký tự đầu bị rơi (`taskkill` → `/F /IM CA.exe`).
+2. **Lệnh dài nên đóng gói vào `.bat` trên share** rồi chỉ gõ đường dẫn ngắn (`win\kr_dump.bat`).
+3. Dialog Themida của tiến trình **đã chết** vẫn treo trên desktop và cướp focus → phải bấm OK hoặc
+   reboot VM trước khi thí nghiệm tiếp.
+4. Phiên bị **khoá idle** sau ~30 phút → đăng nhập lại `admin`/`admin`; nếu hiện bảng chọn session thì
+   chọn dòng thứ hai.
+5. Sau reboot, các ổ mạng cũ mất → chỉ dùng `\\host.lan\Data` (UNC) hoặc ổ `C:`.
