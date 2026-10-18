@@ -253,3 +253,50 @@ hơn là threaded của VN.
    (khó, vì nó chết ở `ProcessPatch`) hoặc emulate từ image unpack với ngữ cảnh dựng tay.
 2. Trước đó: xác định **bảng handler** của KR bằng cách soi 457 chỗ `jmp [reg*4+disp]` — bảng nằm ở
    đâu (`.text`? vùng ẩn danh?), bao nhiêu entry.
+
+## 12. Tìm bảng handler — **KHÔNG có bảng tĩnh** (kết quả quyết định) — **[VERIFIED]**
+
+### Nơi code unpack thực sự nằm
+
+Chuỗi log (`InitBeforePatch`, `ProcessPatch`, `EndOfInit! exitcode=`) **không có trong file dump theo
+section**, mà nằm ở vùng private `0x00B66000` (18.956.288 B) — một vùng Themida cấp trong **khoảng trống
+địa chỉ của image** (giữa `.text` kết thúc `0xA65C00` và `.rsrc` `0x1698000`).
+
+| chuỗi | VA |
+|---|---|
+| `InitBeforePatch` | `0x017913C9` |
+| `ProcessPatch` | `0x0179179C` |
+| `EndOfInit! exitcode=` | `0x01792249` |
+
+⇒ Khi dump "theo section" ta chỉ lấy được phần bị ghi đè, còn **code/string unpack thật nằm ở vùng
+private**. Đây là lý do `doctor` vẫn báo PACKED.
+
+### Quét dispatch — hai nơi, cùng một kết luận
+
+| nơi | `jmp [reg*4+disp]` | bảng lớn nhất | đích |
+|---|---|---|---|
+| `.text` (image) | 457 | 164 entry | `.text` |
+| vùng private `0xB66000` | **1.105** | 17 entry | cùng vùng |
+
+- **Tất cả** bảng đều nhỏ (2–164 entry, phần lớn 2–8) và **không có bảng nào được nhiều điểm dispatch
+  dùng chung** (`dùng bởi 1 điểm` cho gần như 100%).
+- Không bảng nào trỏ vào `.themida` (vùng bytecode 1,9 MB).
+
+⇒ Đây là **jump table C++ bình thường** (switch/case), **không phải bảng handler của VM**.
+KR **không dùng bảng handler tĩnh theo opcode** như VN (178 entry trong ctx).
+
+### Hệ quả
+
+KR nhiều khả năng là kiểu **chained**: mỗi handler tự tính handler kế tiếp rồi nhảy thẳng (không qua bảng).
+Điều này khớp với 3 dữ kiện khác: **0 marker**, mỗi stub head dùng ~4 lần (không có entry chung), và
+bytecode vẫn mã hoá 7,95 trong `.themida`.
+
+⇒ Pipeline `vmdevirt` của VN (`handlers` → `opcodes` → `profile`) **không dùng trực tiếp được** cho KR.
+Cần backend **chained**: đi theo cạnh handler→handler, đọc "đích kế tiếp" từ thân handler.
+
+### Việc tiếp
+
+1. Theo 26 stub head vào `.themida` để xem mẫu vào VM (có prologue chung không).
+2. Dựng **image lai** có map vùng `0xB66000` vào đúng VA (thêm section) để `capstone`/IDA nhìn thấy code
+   unpack — hiện nó nằm ngoài file.
+3. Muốn có runtime: phải qua `ProcessPatch` (patch nhánh thoát) — hiện là chặn duy nhất.
