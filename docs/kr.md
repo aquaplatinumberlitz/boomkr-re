@@ -95,3 +95,24 @@ Lệnh: `python3 tools/krctl.py manifest` → `out/manifest.json`.
 
 Mọi việc **runtime** (chạy client, unpack, protocol, khoá `Fx*`) đều chờ **KR-002** — quyết định phạm vi
 và pháp lý của chủ dự án (`MASTER_PLAN` §6.3, D-01/D-03). Project này **không** chạy `CA.exe`.
+
+## 7. KR-002 — QUYẾT ĐỊNH (2026-10-18, chủ dự án)
+
+| Trục | Quyết định |
+|---|---|
+| Mục tiêu | **(A) offline-preservation** — giữ/khôi phục game chạy được **không cần server Nexon**; client + server giả chạy LAN/offline (hoặc remaster) |
+| Chạy client KR | **Có** — cần chạy để lấy dữ liệu (unpack, khoá pack, protocol) trong môi trường cô lập |
+| Anti-cheat | **Gỡ** — loại bỏ GameGuard/BlackCipher khỏi bản chạy cục bộ để client khởi động offline |
+| Phân phối | **Không** phân phối binary/asset gốc; không đưa thành phần anti-cheat vào bất kỳ bản build nào |
+
+### Hệ quả kỹ thuật (ràng buộc tự đặt)
+
+1. Mọi thử nghiệm chạy client **chỉ trong WinBoat**, thư mục riêng `C:\boomkr` — không đụng `C:\boom` (VN),
+   không sửa `boomKR/` gốc trên host.
+2. **Cắt mạng ra ngoài** khi chạy (không gửi dữ liệu tới Nexon). Chỉ giữ host-share để lấy file.
+3. Gỡ anti-cheat bằng cách **loại bỏ/đổi tên thành phần** trong bản copy (không viết patch phát hành):
+   `BlackCipher/`, `CAWH.sys`, `nmcosrv.exe`, `gameguard.des`, `ngclient.aes`.
+4. Nếu client thoát vì thiếu anti-cheat: chuyển sang **patch điểm gọi khởi tạo AC** trong `CA.exe`
+   (chỉ trên bản copy cục bộ) — ghi rõ offset vào tài liệu.
+5. Không login tài khoản thật, không capture traffic server thật.
+6. Mọi artefact nặng nằm ở `out/` (git-ignored) hoặc ngoài repo.
