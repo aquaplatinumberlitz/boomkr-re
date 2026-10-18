@@ -1,4 +1,24 @@
-# Build KR — phát hiện tĩnh
+# RE client Boom Online KR — nhật ký
+
+> **TL;DR (cuối đêm 2026‑10‑18/19)**
+>
+> | Hạng mục | Kết quả | Bằng chứng |
+> |---|---|---|
+> | Asset 13/13 pack | ✅ **100%** (51.467 entry, 1.367 MB) — khoá = 4 byte đầu `.idx` | §16 |
+> | Trích xuất asset | ✅ Ogg/map/sprite đúng định dạng | §16 |
+> | Manifest patch | ✅ 95% (schema + size 173/173); ❌ 3 hash cần payload `.nxgz` | §3, §17 |
+> | Phân tích PE tĩnh | ✅ xong | §1, §4 |
+> | Client chạy trong VM | ✅ chạy được, tự unpack | §10, §15 |
+> | Image unpack (module) | ✅ `.text` entropy 6,45, có chuỗi log | §18, §22 |
+> | `.themida` (bytecode VM) | ❌ **luôn 7,94** — VM chưa bao giờ chạy | §23, §26 |
+> | Vượt `ProcessPatch` | ❌ **chưa** — xem §29 | §24, §27, §29 |
+> | Protocol / server KR | ⬜ 0% (chưa tới được) | — |
+>
+> **Vì sao dừng:** Themida KR phát hiện **cả** DLL lạ (inject) **và** byte đầu API hệ thống bị vá
+> (IAT/forwarder/`ntdll!NtWriteFile`) → mọi cách quan sát runtime đều kích hoạt anti-tamper.
+> Đường còn lại: patch **file** (đúng mục tiêu) nhưng cần biết check ở đâu — mà muốn biết thì cần
+> một lần quan sát **không xâm lấn** (đổi locale Hàn để đọc dialog, hoặc Procmon/ETW).
+> Chi tiết bàn giao: §25, §27, §29.
 
 Tác giả: dsh · 2026-10-18 · build `00967` (2026-06-10) tại `/home/admin/boom-re/boomKR/`.
 Mọi mục có tag bằng chứng theo `MASTER_PLAN` §7.
