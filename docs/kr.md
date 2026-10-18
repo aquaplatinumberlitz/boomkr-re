@@ -300,3 +300,47 @@ Cần backend **chained**: đi theo cạnh handler→handler, đọc "đích k�
 2. Dựng **image lai** có map vùng `0xB66000` vào đúng VA (thêm section) để `capstone`/IDA nhìn thấy code
    unpack — hiện nó nằm ngoài file.
 3. Muốn có runtime: phải qua `ProcessPatch` (patch nhánh thoát) — hiện là chặn duy nhất.
+
+## 13. Wine: dừng ở privileged instruction (giống VN) — **[VERIFIED]**
+
+### Bằng chứng
+
+`WINEDEBUG=+relay` (dòng cuối trước khi chết):
+
+```
+Call KERNEL32.ExitProcess(c0000096) ret=140003800
+```
+
+`+seh`:
+
+```
+Exception 0xc0000096 (EXCEPTION_PRIV_INSTRUCTION) addr=0x020760B9
+wow64cpu.dll + 0x1110        <- chạy qua WoW64 của Wine
+```
+
+`0x020760B9` = **byte đầu section `.themida`** (`0x02076000 + 0xB9`). Byte ở đó là `1E` = `push ds` —
+hợp lệ trong 32-bit thật, **không hợp lệ trong chế độ 64-bit của WoW64** không dịch được
+⇒ Wine (CachyOS, WoW64-only) không chạy nổi, **đúng như bản VN** (`docs/runtime.md`: `0xC0000096`).
+
+### Hệ quả
+
+| Môi trường | Kết quả |
+|---|---|
+| Wine (local) | chết `0xC0000096` tại `0x20760B9`; chỉ dump được image **một phần** (6 section, `.themida` vẫn mã hoá 7,95) |
+| WinBoat (Windows thật) | đi qua điểm đó, tới `ProcessPatch`, thoát `exitcode=1` |
+
+⇒ Muốn chạy KR **phải dùng Windows thật** (WinBoat), không phải Wine. Giá trị Wine mang lại: image
+unpack một phần + xác nhận cơ chế chống VM nằm ở `.themida`.
+
+### Debugger cũng bị chặn
+
+`winedbg --gdb` + `break ExitProcess`: process **SIGSEGV tại `0x020760B9`** (cùng địa chỉ) trước khi tới
+`ExitProcess` ⇒ có anti-debug/anti-VM ở đúng chỗ đó; `catch syscall exit_group` của gdb cũng không bắt được.
+
+### Việc tiếp (đúng đường)
+
+1. Trong **WinBoat**, dump bộ nhớ `CA.exe` (sửa `live_dump.ps1` bị `OverflowException` — nó cast
+   `IntPtr.ToInt32()`; với process 32-bit dưới PS 64-bit phải dùng `ToInt64`).
+2. Tìm xref tới chuỗi `ProcessPatch` (`0x17917xx` trong vùng private) ⇒ tìm hàm kiểm tra.
+3. Patch nhánh thoát (`exitcode=1`) trên **bản copy** trong VM, chạy lại ⇒ nếu qua được thì VM KR mới
+   bắt đầu giải mã `.themida`, lúc đó dump lại.
