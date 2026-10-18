@@ -800,3 +800,41 @@ Kết luận cho đêm: 3 việc còn lại đúng thứ tự
 1. prologue hook + trampoline (§25) để lấy caller của `ProcessPatch...`;
 2. patch nhánh trả 1;
 3. xác nhận `.themida` đổi entropy rồi mới sang ctx/handler.
+
+## 27. Prologue/forwarder hook — kết quả và giới hạn cuối — **[VERIFIED]**
+
+### kernel32!WriteFile là forwarder
+
+```
+pid=224 kernel32!WriteFile = 0x77753850
+prologue: FF 25 5C 10 7B 77 CC CC      ; jmp dword ptr [0x777B105C]
+slot 0x777B105C -> real 0x771E93D0     ; kernelbase!WriteFile
+```
+
+Đã vá slot forwarder → stub (log + `jmp real`) **trước khi client chạy** (`hook pid=224 ... -> stub 0x23b0200`),
+nhưng **0 lần bắt được WriteFile**: vì CRT (`msvcrt`) gọi **kernelbase!WriteFile trực tiếp**, không qua
+forwarder của kernel32.
+
+### Vì sao mọi hướng IAT/forwarder đều trượt
+
+| đường | ai gọi | hook của ta có thấy? |
+|---|---|---|
+| IAT của `CA.exe` | code game (nếu có) | ❌ 0 call |
+| forwarder `kernel32!WriteFile` | ai import từ kernel32 | ❌ 0 call (CRT không đi đường này) |
+| IAT của `msvcrt/ucrtbase` | CRT | ❌ không có slot `WriteFile` |
+| `kernelbase!WriteFile` (hàm thật) | CRT | cần **prologue hook** — tool hiện chỉ xử lý forwarder |
+| `ntdll!NtWriteFile` | mọi đường | cần prologue hook (syscall stub, 5 byte đầu không an toàn để vá) |
+
+### Kết luận cho đêm
+
+Đã xác định **chính xác** cái còn thiếu: một **prologue hook tổng quát có disassembler** (capstone) để
+tìm ranh giới instruction ≥5 byte, dựng trampoline, áp cho `kernelbase!WriteFile` hoặc `ntdll!NtWriteFile`.
+Tool hiện tại (`krhookpro`) chỉ làm được nhánh forwarder; nhánh trampoline đã viết nhưng **chưa nối vào
+vòng watch** và chưa kiểm tra ranh giới instruction.
+
+### Nếu tiếp tục (1–2 giờ)
+
+1. Nhúng capstone vào `krhookpro` (hoặc gọi `capstone` từ Python rồi sinh trampoline trong C).
+2. Áp cho `ntdll!NtWriteFile` (mọi write đều qua đây) → bắt dòng `ProcessPatch...` + caller.
+3. Từ caller, disassemble trong `modO.bin`, tìm nhánh trả 1, patch (file hoặc bộ nhớ).
+4. Xác nhận `.themida` đổi entropy → chuyển sang ctx/bảng handler.
