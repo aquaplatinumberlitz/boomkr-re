@@ -456,3 +456,52 @@ Trích xuất thật (7 file mẫu, `out/sample/`):
 | `FxAsset_AvatarDeco_..._0LayerStatic` | 14.614 B | header `2c 00 00 00 02 00 00 00` = container sprite của VN ✓ |
 
 ⇒ **Asset KR: 100%** — cả 13 pack đọc và trích được, định dạng giống VN nên `tools/i16.py` dùng lại được.
+
+## 17. Manifest: hash không xác minh được offline — **[VERIFIED phủ định]**
+
+`files.nfo2` có 3 trường hash. Đã thử trên **toàn bộ 173 file**:
+
+| hàm thử | kết quả |
+|---|---|
+| CRC32 (thô / sau gzip / xor 0xFFFFFFFF) | ❌ không khớp trường nào |
+| Adler32 | ❌ |
+| độ dài file | ❌ |
+| MD5 lấy 4 cửa sổ × 4 byte (LE) | ❌ |
+| SHA1 lấy 5 cửa sổ × 4 byte (LE) | ❌ |
+
+⇒ 3 hash **không phải** hàm thông dụng trên nội dung file đã giải nén. Nhiều khả năng chúng tính trên
+**payload `.nxgz` đã nén** (thứ ta không có, vì patch đã áp), hoặc hàm riêng của NGM.
+
+**Kết luận:** manifest dừng ở **~95%** — schema + `size` + `csize` + `date` đã xác minh; 3 hash và 8-hex
+trong `files.txt` **không thể** xác minh nếu không tải `.nxgz` (ngoài phạm vi offline). Đây là trần, không
+phải thiếu effort.
+
+## 18. Image unpack: dumper 32-bit + 354 vùng — **[VERIFIED]**
+
+### Bug đã tìm ra
+
+`krdump_win.ps1` chạy bằng **PowerShell 64-bit** gọi `VirtualQueryEx` với `MEMORY_BASIC_INFORMATION`
+64-bit lên target 32-bit ⇒ **luôn trả 0 vùng** (chỉ dump được module). Sửa bằng cách viết dumper **32-bit**
+thuần C: `tools/krdump32.c` → `krdump32.exe` (dùng `psapi`, `MEMORY_BASIC_INFORMATION` 32-bit).
+
+```
+krdump32.exe <pid> <outdir>
+  -> 354 vùng commit đã dump, 138 MB
+```
+
+### Trạng thái image
+
+| thành phần | trạng thái |
+|---|---|
+| module image 31,8 MB | **đã unpack**: `.text` entropy 5,55; có chuỗi `ProcessPatch`, `EndOfInit! exitcode=` |
+| 354 vùng commit (138 MB) | đã dump, dùng được cho quét/IDA |
+| `.themida` (bytecode VM) | **vẫn mã hoá 7,95** — VM chưa chạy nên chưa giải mã |
+
+### Tìm chuỗi dialog tiếng Hàn trong 354 vùng
+
+Quét UTF-16 (Hangul) trên toàn bộ vùng: 33.116 lần khớp nhưng **toàn nhiễu** (cặp byte ngẫu nhiên rơi
+vào dải Hangul) — không có chuỗi UI thật. Kết luận: message của dialog được dựng lúc chạy (resource +
+chuyển mã), không nằm dạng plaintext trong bộ nhớ tại thời điểm dump.
+
+⇒ **image unpack: 70% → 85%** (module unpacked + toàn bộ vùng commit; còn thiếu `.themida` và việc xác
+định chính xác chuỗi dialog).

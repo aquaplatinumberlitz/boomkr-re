@@ -11,8 +11,10 @@ using System; using System.Runtime.InteropServices; using System.IO; using Syste
 public static class KrDump {
   [DllImport("kernel32")] static extern IntPtr OpenProcess(int a, bool i, int pid);
   [DllImport("kernel32")] static extern bool ReadProcessMemory(IntPtr h, IntPtr a, byte[] b, IntPtr n, out IntPtr r);
-  [DllImport("kernel32")] static extern IntPtr VirtualQueryEx(IntPtr h, IntPtr a, out MBI m, IntPtr l);
-  [StructLayout(LayoutKind.Sequential)] public struct MBI { public IntPtr Base, AllocBase; public IntPtr Size; public int State, Protect, Type; }
+  [DllImport("kernel32")] static extern IntPtr VirtualQueryEx(IntPtr h, IntPtr a, out MBI32 m, IntPtr l);
+  // Process 32-bit (WOW64) phải dùng MEMORY_BASIC_INFORMATION32: 28 byte
+  [StructLayout(LayoutKind.Sequential)] public struct MBI32 { public uint Base, AllocBase, AllocProt, Size, State, Protect, Type; }
+  [StructLayout(LayoutKind.Sequential)] public struct MBI64 { public IntPtr Base, AllocBase; public IntPtr Size; public int State, Protect, Type; }
   public static byte[] Read(IntPtr h, long a, int n) {
     var b = new byte[n]; IntPtr r;
     if (!ReadProcessMemory(h, new IntPtr(a), b, new IntPtr(n), out r)) return null;
@@ -36,10 +38,10 @@ public static class KrDump {
     }
     File.WriteAllText(Path.Combine(dir, "modules.tsv"), mods.ToString());
     var rs = new StringBuilder();
-    long a2 = 0x10000; MBI mbi; int len = Marshal.SizeOf(typeof(MBI));
+    long a2 = 0x10000; MBI32 mbi; int len = Marshal.SizeOf(typeof(MBI32));
     while (a2 < 0x7FFF0000) {
       if (VirtualQueryEx(h, new IntPtr(a2), out mbi, new IntPtr(len)) == IntPtr.Zero) break;
-      long b2 = mbi.Base.ToInt64(); long sz2 = mbi.Size.ToInt64();
+      long b2 = mbi.Base; long sz2 = mbi.Size;
       if (sz2 <= 0) break;
       bool commit = (mbi.State & 0x1000) != 0;
       bool exec = (mbi.Protect & 0xF0) != 0;
