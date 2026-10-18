@@ -1043,3 +1043,44 @@ và không phải lỗi codepage của Windows. Muốn đọc nội dung phải 
 - Client **không chết**: sống 45 thread / 75 MB, không có kết nối mạng, chờ vô hạn.
 - Có dialog khi chạy local, nhưng nội dung đã thành `?`.
 - Không có file nào mở thất bại trong 12 s đầu ⇒ `ProcessPatch` không fail vì thiếu file.
+
+## 32. Hook MessageBox/Dialog từ ngoài — KHÔNG có IAT slot ⇒ dialog không phải từ process này — **[VERIFIED phủ định]**
+
+### Đã thử
+
+Chạy bản **local** (`C:\boomkr\CA.exe`, nơi dialog xuất hiện) + hook IAT từ ngoài (`krhookmem`),
+quét **IAT của exe** và **IAT của mọi module** trong process cho các API sau:
+
+| API | slot tìm thấy |
+|---|---|
+| `MessageBoxA` | ❌ |
+| `MessageBoxW` | ❌ |
+| `MessageBoxIndirectA/W` | ❌ |
+| `DialogBoxParamA/W` | ❌ |
+| `CreateDialogParamA/W` | ❌ |
+| `ExitProcess` | ✅ `0x1D7E7A4` (hook cài được, 0 call) |
+
+⇒ Trong process `CA.exe` **không module nào import** các API hộp thoại đó.
+
+### Suy ra
+
+Dialog class `#32770` mà ta thấy **không phải** do `MessageBox*`/`DialogBoxParam*` từ process này tạo.
+Hai khả năng còn lại:
+1. Dialog thuộc **process khác** (client spawn process con — ta đã thấy nhiều `CA.exe` và `CAWH.sys`);
+2. Dialog tạo bằng `CreateWindowExW(...#32770...)` hoặc `CreateDialogIndirectParam` với template
+   resource (nhưng `CreateDialogParamA/W` cũng không có slot ⇒ nghiêng về (1)).
+
+### Việc tiếp (rõ ràng)
+
+1. Sửa `tools/grab_dialog.ps1` để in **PID thật của cửa sổ** (`GetWindowThreadProcessId`) — hiện nó in
+   PID của chính PowerShell nên không dùng được.
+2. Nếu dialog thuộc process con → mở rộng `krhookmem` cho **tên process bất kỳ** (hiện chỉ `CA.exe`)
+   và hook `MessageBoxW`/`CreateWindowExW` ở đó.
+3. Nếu vẫn không có slot → hook **`CreateWindowExW`** (mọi dialog đều qua đây) để lấy `return address`.
+
+### Trạng thái tổng (cuối)
+
+- Asset: **100%**; manifest 95%; image unpack (module) xong; `.themida` chưa giải mã.
+- Client **sống**, không mạng, không thoát; dialog chỉ hiện khi chạy từ ổ local; nội dung dialog đã thành `?`.
+- Mọi can thiệp runtime (inject / vá IAT / vá forwarder / vá prologue ntdll) đều bị anti-tamper phát hiện
+  hoặc không quan sát được gì.

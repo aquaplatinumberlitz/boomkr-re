@@ -104,6 +104,37 @@ static int install_api(Hook *hk, DWORD pid, HANDLE h, const char *dll, const cha
     return 0;
 }
 
+/* patch moi slot trong TAT CA module (tìm IAT của user32 trong DLL khác) */
+static int install_all(Hook *out, int max, DWORD pid, HANDLE h, const char *dll, const char *fn, const char *label, int kind) {
+    HMODULE m = LoadLibraryA(dll);
+    FARPROC p = m ? GetProcAddress(m, fn) : NULL;
+    if (!p) return 0;
+    DWORD rva = (DWORD)((UINT_PTR)p - (UINT_PTR)m);
+    DWORD base = mod_base(pid, dll);
+    if (!base) return 0;
+    DWORD fnVa = base + rva;
+    HANDLE s = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid);
+    MODULEENTRY32 me; me.dwSize = sizeof me; int n = 0;
+    if (Module32First(s, &me)) do {
+        DWORD mb = (DWORD)(UINT_PTR)me.modBaseAddr, msz = me.modBaseSize;
+        SIZE_T got = 0;
+        unsigned char *b = (unsigned char *)malloc(msz);
+        if (!b) continue;
+        if (ReadProcessMemory(h, (void *)(UINT_PTR)mb, b, msz, &got)) {
+            for (SIZE_T i = 0; i + 4 <= got && n < max; i += 4) {
+                DWORD v; memcpy(&v, b + i, 4);
+                if (v == fnVa) {
+                    Hook hk = {0};
+                    if (patch_slot(&hk, h, pid, fnVa, mb + (DWORD)i, label, kind)) out[n++] = hk;
+                }
+            }
+        }
+        free(b);
+    } while (Module32Next(s, &me));
+    CloseHandle(s);
+    return n;
+}
+
 /* patch moi slot trong cac module CRT: msvcrt, ucrtbase, msvcrXX, api-ms-win-crt-* */
 static int install_crt(Hook *out, int max, DWORD pid, HANDLE h, const char *fn, const char *label, int kind) {
     HMODULE km = LoadLibraryA("kernel32.dll");
@@ -146,7 +177,7 @@ int main(int argc, char **argv) {
     log_ = fopen(path, "w");
 
     Hook hooks[64]; int nh = 0;
-    struct { DWORD pid; HANDLE h; int attempts; int done[6]; } P[16]; int np = 0;
+    struct { DWORD pid; HANDLE h; int attempts; int done[12]; } P[16]; int np = 0;
 
     for (int t = 0; t < seconds * 4; t++) {
         HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -161,7 +192,7 @@ int main(int argc, char **argv) {
             if (!h) continue;
             L("process pid=%lu", pe.th32ProcessID);
             P[np].pid = pe.th32ProcessID; P[np].h = h; P[np].attempts = 0;
-            for (int k = 0; k < 6; k++) P[np].done[k] = 0;
+            for (int k = 0; k < 12; k++) P[np].done[k] = 0;
             np++;
         } while (Process32Next(snap, &pe));
         CloseHandle(snap);
@@ -173,6 +204,14 @@ int main(int argc, char **argv) {
             if (!P[i].done[1]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "MessageBoxA", "MessageBoxA", 1)) { hooks[nh++] = hk; P[i].done[1] = 1; } }
             if (!P[i].done[2]) { int c = install_crt(&hooks[nh], 6, P[i].pid, P[i].h, "WriteFile", "WriteFile(CRT)", 4); if (c) { nh += c; P[i].done[2] = 1; } }
             if (!P[i].done[3]) { int c = install_crt(&hooks[nh], 4, P[i].pid, P[i].h, "CreateFileW", "CreateFileW(CRT)", 2); if (c) { nh += c; P[i].done[3] = 1; } }
+            if (!P[i].done[4]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "MessageBoxW", "MessageBoxW", 2)) { hooks[nh++] = hk; P[i].done[4] = 1; } }
+            if (!P[i].done[5]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "DialogBoxParamW", "DialogBoxParamW", 0)) { hooks[nh++] = hk; P[i].done[5] = 1; } }
+            if (!P[i].done[6]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "CreateDialogParamW", "CreateDialogParamW", 0)) { hooks[nh++] = hk; P[i].done[6] = 1; } }
+            if (!P[i].done[7]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "MessageBoxIndirectA", "MessageBoxIndirectA", 0)) { hooks[nh++] = hk; P[i].done[7] = 1; } }
+            if (!P[i].done[8]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "DialogBoxParamA", "DialogBoxParamA", 0)) { hooks[nh++] = hk; P[i].done[8] = 1; } }
+            if (!P[i].done[9]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "CreateDialogParamA", "CreateDialogParamA", 0)) { hooks[nh++] = hk; P[i].done[9] = 1; } }
+            if (!P[i].done[10]) { int c = install_all(&hooks[nh], 8, P[i].pid, P[i].h, "user32.dll", "MessageBoxW", "MessageBoxW(any)", 2); if (c) { nh += c; P[i].done[10] = 1; } }
+            if (!P[i].done[11]) { int c = install_all(&hooks[nh], 8, P[i].pid, P[i].h, "user32.dll", "MessageBoxA", "MessageBoxA(any)", 1); if (c) { nh += c; P[i].done[11] = 1; } }
         }
 
         for (int i = 0; i < nh; i++) {
