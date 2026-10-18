@@ -940,3 +940,44 @@ Muốn biết patch chỗ nào vẫn cần **một lần quan sát không xâm l
 - hoặc so sánh 2 dump (trước/sau khi dialog hiện) để tìm vùng dữ liệu thay đổi;
 - hoặc chấp nhận đọc dialog bằng cách **đổi system locale sang Korean** trong VM (không sửa process,
   không kích hoạt anti-tamper) — đây là cách sạch nhất còn lại.
+
+## 30. Đổi system locale VM sang Korean — kết quả — **[VERIFIED]**
+
+### Đã làm (được chủ dự án cho phép)
+
+```
+Set-WinSystemLocale -SystemLocale ko-KR     -> OK
+HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage\ACP = 949
+reboot VM -> đăng nhập lại
+```
+
+### Kết quả
+
+| Việc | Kết quả |
+|---|---|
+| ACP = 949 (Korean) | ✅ áp dụng sau reboot |
+| Client chạy plain | vẫn **thoát im lặng**, `CALog: ProcessPatch... / EndOfInit! exitcode=1` |
+| Dialog của game | **không xuất hiện** (không phải lỗi font — game không hiện dialog) |
+| Dialog anti-tamper (khi inject) | hiện **tiếng Anh**: *"Cannot find 'binkw32.dll'. Please, re-install this application"* |
+
+⇒ Đổi locale **không** mở được nội dung `ProcessPatch`, vì client **không hiển thị** thông báo —
+nó chỉ ghi CALog rồi thoát. Dialog tiếng Hàn thấy trước đây là của Themida/anti-tamper, không phải của game.
+
+### Đã thử tiếp để tìm chỗ thoát (đều phủ định)
+
+| hook | kết quả |
+|---|---|
+| `ExitProcess` (IAT, từ ngoài) | 0 call |
+| `NtTerminateProcess` (prologue, N=5, `mov eax, 0x7002c`) | 0 call |
+| `RtlExitUserProcess` | chưa thử (N=5, RVA `0x5d650`) |
+
+⇒ Client thoát bằng đường khác (có thể `RtlExitUserProcess`, hoặc thoát từ **process con** mà tool không
+kịp hook, hoặc `TerminateProcess` trên chính nó từ một thread khác).
+
+### Việc tiếp
+
+1. Hook `RtlExitUserProcess` (N=5, RVA `0x5d650`) — cùng cơ chế `krhookpro`.
+2. Nếu vẫn 0 call: chụp **process tree** ngay khi client chạy (`wmic process where "name='CA.exe'" get
+   ProcessId,ParentProcessId,CreationDate`) để biết process nào thực sự thoát.
+3. Cách không xâm lấn khác: bật **logman/ETW** cho provider `Microsoft-Windows-Kernel-File` để xem file
+   cuối cùng `ProcessPatch` mở trước khi thoát.
