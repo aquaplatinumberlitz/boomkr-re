@@ -77,10 +77,22 @@ static BOOL WINAPI my_InternetReadFile(HINTERNET h, LPVOID buf, DWORD want, LPDW
     return TRUE;
 }
 
+/* Chặn thoát: nếu code != 0 thì KHÔNG gọi ExitProcess thật, chỉ log rồi trả về.
+ * Mục đích: xem client có đi tiếp được qua cửa ProcessPatch hay không. */
+static int g_nosuppress_done;
+
 static void WINAPI my_ExitProcess(UINT code) {
     void *ra0 = __builtin_return_address(0);
-    void *ra1 = __builtin_return_address(1);
-    krlog("ExitProcess(%u) gọi từ %p (caller của caller %p)", code, ra0, ra1);
+    krlog("ExitProcess(%u) gọi từ %p", code, ra0);
+    if (code != 0) {
+        /* chỉ chặn lần đầu để tránh vòng lặp vô hạn */
+        if (!g_nosuppress_done) {
+            g_nosuppress_done = 1;
+            krlog("*** CHẶN ExitProcess(%u): trả về thay vì thoát ***", code);
+            return;
+        }
+        krlog("*** bỏ qua chặn, thoát thật ***");
+    }
     ExitProcess(code);
 }
 
@@ -109,6 +121,7 @@ static int WINAPI my_WideCharToMultiByte(UINT cp, DWORD flags, LPCWSTR in, int i
 }
 
 static int WINAPI my_MessageBoxA(HWND h, LPCSTR text, LPCSTR cap, UINT type) {
+    krlog("MessageBoxA gọi từ %p", __builtin_return_address(0));
     hexlog("MessageBoxA text", text);
     hexlog("MessageBoxA caption", cap);
     return MessageBoxA(h, text, cap, type);

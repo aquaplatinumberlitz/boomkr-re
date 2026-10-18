@@ -20,9 +20,15 @@ int main(int argc, char **argv) {
     lstrcatA(cmd, " ");
     lstrcatA(cmd, "");
 
+    /* CWD = thư mục chứa exe (client tìm DLL theo CWD) */
+    char dir[MAX_PATH];
+    lstrcpynA(dir, argv[1], MAX_PATH);
+    char *slash = strrchr(dir, '\\');
+    if (slash) *slash = 0;
+
     STARTUPINFOA si = {0}; si.cb = sizeof si;
     PROCESS_INFORMATION pi = {0};
-    if (!CreateProcessA(NULL, cmd, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi)) {
+    if (!CreateProcessA(NULL, cmd, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, dir, &si, &pi)) {
         printf("CreateProcess lỗi %lu\n", GetLastError());
         return 1;
     }
