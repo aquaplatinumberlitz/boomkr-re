@@ -8,20 +8,38 @@ project VN đang được một session khác làm song song.
 - Master plan & phân vai: [`docs/MASTER_PLAN.md`](../boom-re/docs/MASTER_PLAN.md)
 - Kế hoạch KR: [`docs/kr-re-plan.md`](../boom-re/docs/kr-re-plan.md)
 
-## Trạng thái
+## Trạng thái (cập nhật 2026-10-18, cuối ngày)
 
 | Việc | Trạng thái | Bằng chứng |
 |---|---|---|
-| KR-ASSET-001 — pack nào đọc được | ✅ **4/13** | `out/packs.json`, `docs/kr.md` §2 |
-| KR-001 — giải manifest patch | ✅ schema + kiểm size 173/173 | `out/manifest.json`, `docs/kr.md` §3 |
-| PRES-002 (phần KR) — SHA-256 build | ✅ 177 file | `out/boomKR.sha256` |
-| KR-002 — quyết định phạm vi/pháp lý | ⏸ **chờ chủ dự án** | — |
-| KR-ASSET-002 — khoá 9 pack `Fx*` | ⛔ cần KR-002 (phải chạy client) | — |
-| KR-003 — so sánh PE tĩnh | ⛔ cần KR-002 | — |
-| Chạy client / unpack / protocol | ⛔ **không làm** khi chưa có KR-002 | `MASTER_PLAN` §6.3 |
+| KR-002 — quyết định phạm vi/pháp lý | ✅ **đã chốt**: offline-preservation, chạy trong VM cô lập, gỡ anti-cheat, **không phân phối** | `docs/kr.md` §7 |
+| KR-ASSET-001 — pack đọc được | ✅ **13/13** (51.467 entry, 1.367 MB) | `docs/kr.md` §16, `out/packs.json` |
+| KR-ASSET-002 — khoá các pack `Fx*` | ✅ **giải xong**: khoá = **4 byte đầu của `.idx`** (không cần chạy client) | `docs/kr.md` §16 |
+| Trích xuất asset | ✅ kiểm chứng: Ogg/map/sprite lấy ra đúng định dạng | `docs/kr.md` §16 |
+| KR-001 — manifest patch | ✅ schema + `size` khớp **173/173**; ❌ 3 hash không xác minh được (tính trên payload `.nxgz` đã nén) | `docs/kr.md` §3, §17 |
+| PRES-002 (KR) — SHA-256 build | ✅ 177 file | `out/boomKR.sha256` |
+| KR-003 — phân tích PE tĩnh | ✅ xong (section/entry/import/manifest/chữ ký/CEF) | `docs/kr.md` §1, §4 |
+| **Chạy client KR** | 🟡 **chạy được trong VM** qua hook+inject, sống >20 s (RSS 68–85 MB), **tự unpack**; ❌ **dừng ở `ProcessPatch`** rồi thoát | `docs/kr.md` §8, §15 |
+| **Image unpack** | 🟡 **85%**: module image 31,8 MB **đã giải mã** (`.text` entropy 5,55) + **359 vùng** commit (138 MB); ❌ `.themida` vẫn 7,95 | `docs/kr.md` §10, §18 |
+| Devirt VM KR | 🟡 **10%**: xác định **khác đời VN** — 0 marker, 102 site/26 head, **không bảng handler tĩnh** (1.562 điểm `jmp [reg*4+disp]` đều là jump table C++) ⇒ nghi kiểu **chained/FALCON** | `docs/kr.md` §11, §12 |
+| Protocol KR | ⬜ **0%** — client chưa từng mở kết nối | — |
+| Server KR | ⬜ **0%** | — |
 
-> Theo `MASTER_PLAN` §6.3: mọi việc **runtime** của KR bị chặn bởi **KR-002** (quyết định phạm vi +
-> pháp lý). Project này chỉ làm phần **tĩnh/asset**, đúng những việc không cần gate.
+Tổng: **asset + hiểu build + manifest ≈ 95%**; **chơi offline được ≈ 25%**.
+
+### "Trạng thái client" nghĩa là gì
+
+1. **Chạy được**: `CA.exe` khởi động trong WinBoat (Windows 10), không crash ngay.
+2. **Tự unpack**: Themida giải mã code vào bộ nhớ; ta dump được module image 31,8 MB đã giải mã
+   (`.text` entropy 5,55, có chuỗi `ProcessPatch`, `EndOfInit! exitcode=`).
+3. **Dừng ở bước kiểm tra khởi động** (`ProcessPatch`): hiện dialog **tiếng Hàn** rồi thoát
+   `exitcode=1`. Nội dung dialog **không đọc được** vì app đổi wide→ANSI bằng ACP=1252 trước khi hiện
+   (`MessageBoxA` nhận toàn byte `?`).
+4. **Vì vậy VM chưa chạy**: section `.themida` (1,9 MB bytecode) **vẫn mã hoá 7,95** — đây là lý do
+   protocol/VM/server đều 0%: không phải khó, mà **chưa tới được**.
+5. **Đã có đồ nghề để phá**: hook DLL (`krhook.dll`) log được địa chỉ gọi `MessageBoxA` và **chặn
+   `ExitProcess(≠0)`**; launcher inject `krlaunch.exe`; dumper 32-bit `krdump32.exe` (359 vùng); image
+   unpacked để disassemble.
 
 ## Nguyên tắc: không copy code
 
