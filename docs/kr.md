@@ -782,3 +782,21 @@ Sau khi có **caller của dòng `ProcessPatch...`**:
 - Click vào console trước khi gõ.
 - `krdump32.exe <tên exe>` tự tìm pid (tiện khi client tự spawn process con).
 - Dump module phải đọc **theo khối 1 MB** (module có trang không đọc được).
+
+## 26. Thí nghiệm chạy dài 5 phút — **[VERIFIED phủ định]**
+
+Cho client chạy plain 5 phút rồi dump:
+
+```
+module 14.725.120 B   (nhỏ hơn 31,8 MB — tiến trình đang thoát dở)
+.text 6,45 · .themida 0,00 (vùng nằm ngoài file dump)
+CALog: ProcessPatch... / InitBeforePatch / ProcessPatch...   (vẫn lặp)
+```
+
+⇒ **Không có mốc thời gian nào client tự giải mã `.themida`**. Vòng lặp `ProcessPatch` không tự khỏi;
+muốn VM chạy **bắt buộc** phải can thiệp vào nhánh quyết định.
+
+Kết luận cho đêm: 3 việc còn lại đúng thứ tự
+1. prologue hook + trampoline (§25) để lấy caller của `ProcessPatch...`;
+2. patch nhánh trả 1;
+3. xác nhận `.themida` đổi entropy rồi mới sang ctx/handler.
