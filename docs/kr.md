@@ -728,3 +728,57 @@ byte đầu của API — cần thử và so sánh với plain run.
    ⇒ ra thẳng hàm log ⇒ lần ngược lên `ProcessPatch`.
 2. Hoặc hook `ntdll!NtWriteFile` (thấp nhất, mọi đường đều qua).
 3. Khi có caller của dòng `ProcessPatch...`, disassemble quanh đó trong `modO.bin` để tìm nhánh trả 1.
+
+## 25. Bàn giao: trạng thái cuối + công thức còn thiếu — **[HANDOVER]**
+
+### Đang ở đâu
+
+| Hạng mục | Trạng thái | Bằng chứng |
+|---|---|---|
+| Asset 13/13 pack | ✅ | §16 |
+| Manifest | ✅ 95% (hash cần `.nxgz`) | §3, §17 |
+| Image unpack (module) | ✅ `.text` 6,45; chuỗi có | §18, §22 |
+| `.themida` (bytecode VM) | ❌ luôn 7,94 | §23, §24 |
+| Client chạy (plain) | ✅ sống, nhưng **lặp** `ProcessPatch` | §24 |
+| Vượt `ProcessPatch` | ❌ **chưa** | — |
+
+### Vì sao khó: mọi thứ đều đi qua CRT/ntdll, không qua IAT của exe
+
+- Hook IAT của `CA.exe` bắt được `ExitProcess`, `CreateFileA` — nhưng **0 lần gọi**.
+- `CALog` được ghi qua **msvcrt**, nên call `WriteFile` nằm trong IAT của msvcrt (không phải của exe).
+- `MessageBoxA`, `CreateFileW`, `NtCreateFile` **không có slot** trong dải ảnh ⇒ Themida tự resolve.
+
+### Công thức còn thiếu (để vòng sau làm)
+
+**Prologue hook + trampoline** (bắt được *mọi* caller, kể cả trong DLL):
+
+```asm
+; tại entry của hàm F, ghi đè 6 byte:
+68 <stub>        push stub
+C3               ret              ; = nhảy tới stub, KHÔNG đổi thanh ghi, stack cân bằng
+
+; stub (trong trang RWX của ta):
+60               pushad
+; ghi [retaddr, arg0, arg1, arg2] vào sink
+61               popad
+E9 <trampoline>  jmp trampoline
+
+; trampoline: copy N byte gốc của F (đủ nguyên instruction) + E9 về F+N
+```
+
+Chọn `N` bằng cách disassemble `F` (capstone) cho tới khi đủ ≥ 6 byte và không cắt giữa instruction.
+Với `kernel32!WriteFile` / `ntdll!NtWriteFile` / `NtCreateFile` đều làm được.
+
+Sau khi có **caller của dòng `ProcessPatch...`**:
+1. `objdump`/capstone quanh caller trong `out/modO.bin` (image unpacked);
+2. tìm nhánh trả 1 (`mov eax,1` / `xor eax,eax; inc eax` …) và điều kiện nhảy tới đó;
+3. patch **trong file** (copy trong VM) hoặc **trong bộ nhớ** (ghi từ ngoài, không inject) tại đúng nhánh;
+4. chạy lại → nếu `.themida` đổi entropy ⇒ VM đã chạy ⇒ sang bước ctx/bảng handler (§3 của
+   `docs/devirt-themida-huong-dan.md`).
+
+### Mẹo vận hành đã kiểm chứng
+
+- Lệnh dài → đóng gói `.bat` trên share, chỉ gõ đường dẫn ngắn (phím hay rơi chữ đầu).
+- Click vào console trước khi gõ.
+- `krdump32.exe <tên exe>` tự tìm pid (tiện khi client tự spawn process con).
+- Dump module phải đọc **theo khối 1 MB** (module có trang không đọc được).
