@@ -541,3 +541,57 @@ C:\boomkr-full\krlaunch.exe C:\boomkr-full\CA.exe C:\boomkr-full\krhook.dll
 4. Phiên bị **khoá idle** sau ~30 phút → đăng nhập lại `admin`/`admin`; nếu hiện bảng chọn session thì
    chọn dòng thứ hai.
 5. Sau reboot, các ổ mạng cũ mất → chỉ dùng `\\host.lan\Data` (UNC) hoặc ổ `C:`.
+
+## 20. Anti-tamper: chính DLL inject gây lỗi "Cannot find binkw32.dll" — **[VERIFIED]**
+
+### Bằng chứng
+
+| thí nghiệm | kết quả |
+|---|---|
+| `krhook.dll` có trong `C:\boomkr` (358.963 B, kiểm bằng `dir`) + chạy qua `krlaunch` | ❌ Themida: *"Cannot find 'binkw32.dll'"* |
+| `binkw32.dll` có trong `V:\boomkr-full` + chạy qua `krlaunch` | ❌ cùng lỗi |
+| **chạy trực tiếp** `start "" V:\boomkr-full\CA.exe` (không inject) | ✅ **không lỗi**, process sống (72,7 MB) |
+
+⇒ File **không hề thiếu**. Lỗi xuất hiện **chỉ khi có DLL lạ trong process** ⇒ đây là **anti-tamper của
+Themida** nguỵ trang thành "thiếu DLL".
+
+### Hệ quả cho chiến lược
+
+1. **Inject bằng `CreateRemoteThread(LoadLibraryA)` bị phát hiện.** Cần cách khác:
+   - patch **import table** hoặc **entry point** trong file (chạy code ta trước, không thêm module lạ), hoặc
+   - **không hook gì cả**: chạy plain, chờ đúng trạng thái rồi dump (plain run sống 72 MB), hoặc
+   - dùng cơ chế mà Themida cho qua (AppInit/hook hệ thống) — rủi ro tương tự.
+2. Bài học: mọi thí nghiệm "sửa hành vi" phải **so với plain run** để loại nhiễu do chính hook gây ra.
+
+### Trạng thái process khi chạy plain
+
+```
+CA.exe  5748  (có inject krhook)   85.832 K
+CA.exe 12016  (plain, không inject) 72.712 K
+```
+
+Cả hai **sống**, không hiện cửa sổ game. Dump pid 12016 cho ra module của **process khác**
+(`CAWH.sys`, `nmco3.dll`, `mswsock`…) ⇒ pid đó không phải tiến trình chính của `CA.exe`; cần chọn đúng
+pid theo `modules.tsv` (module `CA.exe` base `0x400000`).
+
+## 21. Ổ đĩa VM: con số "17 GB trống" là sai — **[VERIFIED]**
+
+```
+wmic logicaldisk → C: 34,0 GB, free 17.171.763.264
+fsutil file createnew C:\bigtest.bin 1500000000
+   → Error: There is not enough space on the disk.
+```
+
+⇒ Đĩa ảo (thin-provision) đã chạm hạn mức; Windows vẫn báo free sai.
+
+Đã dọn **chỉ trong `C:` của VM**:
+
+| thư mục | dung lượng | ghi chú |
+|---|---|---|
+| `C:\Nexon` | 974 MB | bản cài KR cũ (không dùng, ta chạy từ `V:\boomkr-full`) |
+| `C:\dumps` | 281 MB | dump cũ |
+| `C:\krdump*` | 144 MB | dump tạm của ta |
+
+Sau khi dọn: tạo được file 1,2 GB (`226 MB` còn lại sau khi tạo) ⇒ **~1,4 GB dùng được**.
+
+**Không xoá gì ngoài VM.** Mọi thao tác xoá chỉ là `rd /s /q` trên `C:` trong guest.
