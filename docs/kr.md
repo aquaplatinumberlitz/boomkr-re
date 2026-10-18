@@ -116,3 +116,47 @@ và pháp lý của chủ dự án (`MASTER_PLAN` §6.3, D-01/D-03). Project nà
    (chỉ trên bản copy cục bộ) — ghi rõ offset vào tài liệu.
 5. Không login tài khoản thật, không capture traffic server thật.
 6. Mọi artefact nặng nằm ở `out/` (git-ignored) hoặc ngoài repo.
+
+## 8. Gate G1 — client có chạy được? **KẾT QUẢ: KHÔNG (một phần)**
+
+Thử trong WinBoat (Windows 10 19045, admin), thư mục riêng, **không** đụng `C:\boom` của VN.
+
+### Chuỗi thử
+
+| # | Cấu hình | Kết quả |
+|---|---|---|
+| 1 | bản sạch anti-cheat (`boomkr-run`: bỏ `BlackCipher/`, `Dwarf/`, `CAWH.sys`, `GameGuard.des`, `NGM*`, `nmco*`) | Themida: **"Cannot find 'nmco3.dll'"** → client không vào được |
+| 2 | + `nmco3.dll`, `nmcogame.dll`, `NGMDll.dll`, `NGMResource.dll`, `NGClient.aes` | Themida: **"Cannot find 'CAWH.sys'"** |
+| 3 | + `CAWH.sys`, `GameGuard.des` | dialog **tiếng Hàn, hiện `???`** rồi thoát |
+| 4 | bản **đầy đủ** (`boomkr-full`, có `BlackCipher/`) | `CALog.log`: `InitBeforePatch` → `ProcessPatch...` → **`EndOfInit! exitcode=1`** → thoát |
+| 5 | `CALauncher.exe` | thoát ngay, không log, không cửa sổ |
+
+### Bằng chứng
+
+`boomkr-run/CALog.log` (client tự ghi):
+```
+967 : InitBeforePatch
+967 : ProcessPatch...
+967 : EndOfInit! exitcode=1
+```
+- `tasklist` sau 15 s: **không còn** `CA.exe`/`NGM*`/`GameGuard*` → client thoát.
+- Client **đã tự unpack xong** trước khi tới `ProcessPatch` (log do code game ghi, không phải stub).
+- Dialog tiếng Hàn **không đọc được**: app dùng `MessageBoxA`, text cp949 đã bị thay bằng `?` trước khi
+  hiển thị. `GetWindowTextW` cũng chỉ trả `???` (`tools/grab_dialog.ps1`) ⇒ không lấy được nội dung.
+- Đổi codepage hệ thống sang 949 (Korean) sẽ đọc được, nhưng **ảnh hưởng client VN (cp1258)** đang dùng
+  chung VM ⇒ chưa làm.
+
+### Kết luận G1
+
+- Client **không chạy được** ở dạng nguyên bản: dừng ở `ProcessPatch` với `exitcode=1`.
+- **Không phải do anti-cheat bị gỡ** (bản đầy đủ cũng dừng cùng chỗ, cùng exit code).
+- Nghi vấn chính **[HYPOTHESIS]**: `ProcessPatch` cần **patch server / NGM** (mạng) hoặc token do
+  launcher ghi vào `CAKR.ini`; launcher cũng thoát vì không có server Nexon.
+- Hệ quả: muốn qua G1 phải **patch bỏ `ProcessPatch`** hoặc **giả lập NGM/patch server**.
+
+### Việc tiếp theo (G1)
+
+1. Viết **dumper riêng cho KR** (tool `live_dump.ps1` của VN lỗi `OverflowException` với process này);
+   dump ngay ~0,9 s sau khi start để bắt image đã unpack ⇒ có thể qua **G2 mà không cần qua G1**.
+2. Nếu dump được: `doctor` + `discover` trên image unpack ⇒ trả lời G3 (VM đời nào).
+3. Nếu không dump được: đọc `CAKR.ini` (mã hoá) / hook `ProcessPatch` — cần quyết định thêm.
