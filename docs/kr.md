@@ -414,3 +414,45 @@ hoặc hàm tự viết). Muốn đọc phải: (a) hook `MultiByteToWideChar`/`
 - Đã có **process sống** ⇒ có thể dump bất cứ lúc nào, thậm chí sau khi bấm OK (nếu hook chặn `ExitProcess`
   bằng cách không gọi hàm thật — hiện hook chỉ log rồi gọi thật).
 - `.themida` vẫn 7,95 ⇒ VM chưa chạy; phải qua `ProcessPatch` mới giải mã.
+
+## 16. KHOÁ PACK = 4 BYTE ĐẦU CỦA `.idx` — 13/13 pack mở được **[VERIFIED]**
+
+### Phát hiện
+
+Dword đầu tiên của file `.idx` **chính là khoá giải mã** (không phải hằng số trong exe):
+
+| pack | 4 byte đầu | = key | khớp |
+|---|---|---|---|
+| `CharTE` | `fc 01 b2 05` | `95551996` | trùng khoá VN đã biết ✓ |
+| `fx` | `b0 3c 96 71` | `1906092848` | trùng khoá VN ✓ |
+| `FxSound` | `ca da ef 6a` | `1794104010` | mới |
+| `FxMap` | `ca da ef 5b` | `1542445770` | mới |
+| `FxTile` | `ca da ef 2d` | `770693834` | mới |
+| `FxMonster` | `ca da ef 4c` | `1290787530` | mới |
+| `FxStage` | `ca da ef 6c` | `1827658442` | mới |
+| `FxContents` | `ca da ef 4d` | `1307564746` | mới |
+| `FxDesktop` | `ca da ef 7b` | `2079316682` | mới |
+| `FxHiddenCatch` | `ca da ef 4f` | `1341119178` | mới |
+| `FxCharacter` | `ca da ef 21` | `570350282` | mới |
+
+⇒ Không cần chạy client để lấy khoá: đọc 4 byte đầu là đủ. `tools/krctl.py` đã dùng **khoá tự thân**.
+
+### Kết quả
+
+```
+13/13 pack đọc được
+CharTE 20.744 · EmoTE 10.040 · FxCharacter 3.571 · FxTile 3.248 · FxMap 3.033 ·
+FxDesktop 2.077 · FxMonster 1.403 · FxStage 1.274 · FxContents 873 · FxSound 797 ·
+fx 4.093 · FxHiddenCatch 303 · FxAsset 11      = 51.467 entry, 1.367 MB
+```
+
+Trích xuất thật (7 file mẫu, `out/sample/`):
+
+| file | kích thước | kiểm chứng |
+|---|---|---|
+| `FxSound_MP3_AliceRabbit` | 3.549.656 B | `file`: **Ogg Vorbis, stereo 44.1 kHz** ✓ |
+| `FxSound_MP3_Aliens` | 480.189 B | ogg |
+| `FxMap_Bonus_Airplane1` | 44.782 B | header `08 00 00 00 02 00 00 00` (cùng họ container với `.idd`) |
+| `FxAsset_AvatarDeco_..._0LayerStatic` | 14.614 B | header `2c 00 00 00 02 00 00 00` = container sprite của VN ✓ |
+
+⇒ **Asset KR: 100%** — cả 13 pack đọc và trích được, định dạng giống VN nên `tools/i16.py` dùng lại được.

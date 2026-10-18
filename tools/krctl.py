@@ -40,6 +40,11 @@ def load_idf():
     return idf
 
 
+def self_key(data):
+    """KR: 4 byte đầu của .idx CHÍNH LÀ khoá (CharTE fc01b205 = 95551996)."""
+    return struct.unpack_from("<I", data, 0)[0]
+
+
 def probe_key(idf, idx_path):
     """Dò khoá cho một .idx: parse thành công + tên đọc được + nhiều entry."""
     data = idx_path.read_bytes()
@@ -69,6 +74,16 @@ def cmd_packs(a):
                 key = KEYS[idx.stem]
             except Exception as ex:
                 print(f"  {idx.stem}: lỗi với khoá đã biết: {ex}", file=sys.stderr)
+        if ents is None:
+            # KR: 4 byte đầu của .idx chính là khoá (CharTE fc01b205 = 95551996)
+            try:
+                data = idx.read_bytes()
+                k = struct.unpack_from("<I", data, 0)[0]
+                ver2, ents2, _ = idf.parse_idx(idf.decrypt_idx(data, k))
+                if ents2 and len(ents2) > 5 and ver2 == 15:
+                    key, ver, ents = k, ver2, ents2
+            except Exception:
+                pass
         if ents is None:
             key, ver, ents = probe_key(idf, idx)
         if ents is None:
