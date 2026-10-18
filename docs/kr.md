@@ -639,3 +639,51 @@ không lần được bằng xref tĩnh. Chuỗi cũng vậy (0 xref tuyệt đ�
 2. Sau khi biết dialog nói gì, patch đúng nhánh trong file (hoặc patch bộ nhớ) để vượt `ProcessPatch`.
 
 Công cụ cần: `krhookmem.c` (32-bit): alloc + write shellcode + patch slot + poll sink.
+
+## 23. Instrument từ ngoài (không inject): hook IAT để bắt call site — **[VERIFIED]**
+
+### Công cụ `tools/krhookmem.c` → `krhookmem.exe`
+
+Ý tưởng: Themida phát hiện DLL lạ (anti-tamper), nhưng **ghi bộ nhớ từ ngoài** thì không thêm module nào.
+Với mỗi API cần theo dõi:
+
+1. `user32/kernel32` base trong target + **RVA export** (RVA giống nhau mọi process) → địa chỉ hàm thật.
+2. Quét dải ảnh `0x400000..0x2250000` tìm **IAT slot** chứa địa chỉ đó.
+3. `VirtualAllocEx` 1 trang RWX: `[sink 0x100 | realptr | shellcode]`.
+4. Shellcode: `pushad; ghi [retaddr, arg0, arg1] vào sink; popad; jmp [realptr]`.
+5. Patch slot → shellcode; poll sink từ ngoài.
+
+### Kết quả chạy thật
+
+```
+process pid=8332
+  hook ExitProcess    slot=0x1d7e7a4  (cu 0x77754650) -> 0xb650104
+  MessageBoxA: khong thay IAT slot
+ket thuc (giu hook)
+```
+
+- **Hook ExitProcess thành công** (slot `0x1D7E7A4`, giá trị cũ đúng `kernel32!ExitProcess`).
+- MessageBoxA chưa có slot tại thời điểm hook (IAT dựng muộn) → cần **thử lại định kỳ**.
+- Trong 45 s, client **không gọi ExitProcess**, **không hiện dialog**, và **không thoát**.
+- Dump lúc đang sống: `.text` 6,45 nhưng **`.themida` vẫn 7,94** ⇒ VM **chưa** chạy.
+
+### Slot đã biết (từ dump tĩnh `modO.bin`)
+
+| API | slot | ghi chú |
+|---|---|---|
+| `MessageBoxA` | `0x1F4FC5A` | chỉ xuất hiện ở giai đoạn muộn |
+| `ExitProcess` | `0x16EA11C`, `0x1D7E7A4`, `0x1FE5325` | 2 slot đầu aligned; cái thứ 3 lệch (dữ liệu) |
+| `TerminateProcess` | — | không được import |
+
+### Bug đã sửa trong quá trình làm
+
+- Quét slot: `DWORD *b` nhưng index `i` theo **byte** ⇒ đọc tràn, tool chết im lặng. Sửa bằng `memcpy(&v, cb+i, 4)`.
+- Quét toàn dải 0x10000..0x7FFF0000 quá chậm ⇒ giới hạn `0x400000..0x2250000`.
+- `TerminateProcess` không có slot ⇒ bỏ hook đó, tránh quét vô ích.
+
+### Việc tiếp
+
+1. **Thử lại hook MessageBoxA** mỗi 2 s trong 30 s đầu (IAT dựng muộn).
+2. Nếu client không bao giờ gọi ExitProcess/MessageBoxA: tìm **chỗ nó dừng** bằng cách so sánh 2 dump
+   theo thời gian (vùng nào thay đổi) hoặc hook `Sleep`/`WaitForSingleObject`/`connect`.
+3. Mục tiêu cuối: tìm nhánh quyết định của `ProcessPatch` để patch, rồi xác nhận `.themida` giải mã.
