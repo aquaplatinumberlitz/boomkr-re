@@ -981,3 +981,59 @@ kịp hook, hoặc `TerminateProcess` trên chính nó từ một thread khác).
    ProcessId,ParentProcessId,CreationDate`) để biết process nào thực sự thoát.
 3. Cách không xâm lấn khác: bật **logman/ETW** cho provider `Microsoft-Windows-Kernel-File` để xem file
    cuối cùng `ProcessPatch` mở trước khi thoát.
+
+## 31. Ba thí nghiệm quan sát (RtlExit / process tree / ETW) — **[VERIFIED]**
+
+### 1. Hook `RtlExitUserProcess` (N=5, RVA 0x5d650)
+
+```
+hook(tramp) pid=672 F=0x77c2d650 N=5 -> stub 0x2370200
+ket thuc (giu hook)      → 0 call
+```
+
+### 2. Process tree ngay khi chạy
+
+```
+ParentProcessId  ProcessId  ThreadCount  WorkingSetSize
+9268             672        45           75.190.272
+```
+
+⇒ Client **không thoát**: 45 thread, 75 MB, và `netstat -no` cho pid 672 **rỗng** (không có kết nối mạng).
+Nghĩa là nó **đứng chờ một việc gì đó local**, không phải "exitcode=1 rồi chết" như ta tưởng — dòng
+`EndOfInit! exitcode=1` trong CALog là của các lần chạy trước.
+
+### 3. ETW `Microsoft-Windows-Kernel-File` (built-in, không xâm lấn)
+
+```
+logman create trace KF -p Microsoft-Windows-Kernel-File 0xFFFF -o C:\kf.etl -ets
+… chạy client 12 s …
+logman stop KF -ets ; tracerpt C:\kf.etl -o kf.xml -of XML -y
+```
+
+- 2.416 event có `FileName`, **0 event Status khác 0** (không có open nào thất bại).
+- Client chạy **từ share UNC**: `\Device\Mup\;LanmanRedirector\;V:\host.lan\Data\boomkr-full\…`
+- File được mở lặp: `CALog.log` (14 lần), `ndadata\.pak`, `ndadata\WDA report.txt` (cả hai **0 byte**).
+
+### 4. Phát hiện mới: chạy từ ổ **local** thì hiện dialog
+
+```
+start "" /D C:\boomkr C:\boomkr\CA.exe
+→ tasklist: CA.exe pid 6840, 73 MB
+→ CALog: 967 : InitBeforePatch / 967 : ProcessPatch...
+→ MÀN HÌNH: dialog tiếng Hàn (class #32770, title "??? ??")
+```
+
+Chạy từ share thì **không** có dialog; chạy từ `C:\boomkr` (bản 48 MB, đủ DLL, không có pack) thì **có**.
+⇒ Đường dẫn/loại ổ ảnh hưởng tới nhánh xử lý.
+
+### 5. Dialog vẫn là "?" dù ACP = 949
+
+`GetWindowTextW` trên dialog trả `??? ??` ⇒ chuỗi **đã bị phá trước khi hiển thị**, không phải lỗi font
+và không phải lỗi codepage của Windows. Muốn đọc nội dung phải bắt **trước** bước chuyển mã
+(`WideCharToMultiByte`/`wcstombs` bên trong client) — nhưng đó lại là can thiệp runtime (anti-tamper).
+
+### Trạng thái cuối
+
+- Client **không chết**: sống 45 thread / 75 MB, không có kết nối mạng, chờ vô hạn.
+- Có dialog khi chạy local, nhưng nội dung đã thành `?`.
+- Không có file nào mở thất bại trong 12 s đầu ⇒ `ProcessPatch` không fail vì thiếu file.
