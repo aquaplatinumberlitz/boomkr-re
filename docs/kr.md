@@ -595,3 +595,47 @@ fsutil file createnew C:\bigtest.bin 1500000000
 Sau khi dọn: tạo được file 1,2 GB (`226 MB` còn lại sau khi tạo) ⇒ **~1,4 GB dùng được**.
 
 **Không xoá gì ngoài VM.** Mọi thao tác xoá chỉ là `rd /s /q` trên `C:` trong guest.
+
+## 22. Dump sạch (không inject) + kỹ thuật IAT-slot tìm call site — **[VERIFIED một phần]**
+
+### Dump plain run: 700 vùng, module đọc đủ
+
+`krdump32.exe <exe|pid> <outdir>`:
+- đọc module **theo khối 1 MB** trong từng vùng con (`ReadProcessMemory` một phát 31,8 MB thất bại vì
+  có trang không đọc được → trước đó ghi ra toàn số 0);
+- in `doc=0x...` để biết thực đọc được bao nhiêu;
+- in thêm **RVA export** của API quan trọng (RVA giống nhau giữa mọi process, khác ASLR).
+
+Kết quả (pid `CA.exe`, plain không inject):
+
+```
+module CA.exe base=00400000 size=0x1e62000 doc=0x1e60000
+.text entropy 6.45 · .rsrc 5.98 · .themida 7.94
+có chuỗi ProcessPatch / EndOfInit! exitcode=
+700 vùng commit
+```
+
+### Tìm call site của MessageBoxA
+
+```
+export user32.dll!MessageBoxA rva=0x81230
+export user32.dll!MessageBoxW rva=0x81750
+→ MessageBoxA VA = user32base + 0x81230 = 0x774C1230
+```
+
+- Quét `FF 15 <slot>` trong image: **0** call site.
+- Quét toàn image tìm dword = `0x774C1230`: **1** slot → **`0x01F4FC5A`** (IAT nằm trong vùng private).
+- Tìm tham chiếu tới địa chỉ slot: **0**.
+
+⇒ Code gọi MessageBoxA **gián tiếp qua base register + offset** (không có imm32 trỏ tới slot), nên
+không lần được bằng xref tĩnh. Chuỗi cũng vậy (0 xref tuyệt đối tới `ProcessPatch`).
+
+### Hướng tiếp theo (không cần debugger, không inject DLL)
+
+1. **Instrument bộ nhớ từ ngoài**: `VirtualAllocEx` một trang RWX + shellcode nhỏ trong target, patch
+   IAT slot `0x1F4FC5A` trỏ vào shellcode; shellcode ghi con trỏ `text`/`caption` vào trang "sink" rồi
+   `jmp` tới MessageBoxA thật. Ta đọc sink từ ngoài ⇒ **đọc được nội dung dialog** (kể cả tiếng Hàn nếu
+   nó còn là wide/ANSI gốc) mà **không thêm module lạ** → không kích hoạt anti-tamper.
+2. Sau khi biết dialog nói gì, patch đúng nhánh trong file (hoặc patch bộ nhớ) để vượt `ProcessPatch`.
+
+Công cụ cần: `krhookmem.c` (32-bit): alloc + write shellcode + patch slot + poll sink.
