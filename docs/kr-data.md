@@ -361,3 +361,33 @@ Tốc độ đi bộ của nhân vật **suy ra được từ dữ liệu animat
 
 Việc cần làm: parse frame record của animation `Walk` cho `Character/C00`, cộng thời lượng, chia cho số ô
 mỗi chu kỳ (kiểm bằng ảnh GIF/frame).
+
+## 16. Frame record 48 byte: giải được một phần (tài liệu cũ ghi "chưa làm")
+
+Lấy `FxCharacter/Character/C00-WalkLeft_ALayer{Static,Adjust}` (KR) và so với `Blink`:
+
+```
+WalkLeft_Static  [-5, 42, 0, idx, 0, 0, 26..34, 32, 56, 67, 8, 66]   (5 frame)
+WalkLeft_Adjust  [-2, 60,-1, idx, 0, 0, 42..44, 55..57, 56, 67, 8, 66] (5 frame)
+Blink_Static     [-3, 42, 0, idx, 0, 0, 34, 32..36, 56, 67, 8, 66]   (3 frame)
+```
+
+12 × u32, nhận diện:
+
+| word | nghĩa suy ra | cơ sở |
+|---|---|---|
+| [3] | **chỉ số frame** | 0,1,2,3,4 tăng đều |
+| [6], [7] | **offset x, y** | đổi theo frame; Adjust (lớp hiệu chỉnh) lệch khác Static |
+| [8..11] | hằng số 56, 67, 8, 66 | có thể là hitbox/tâm |
+| [0] | −5 / −2 / −3 | chưa rõ (âm) |
+| [1] | 42 (Static) / 60 (Adjust) | nghi **bề rộng canvas** |
+| [2] | 0 / −1 | chưa rõ |
+
+**Không thấy trường thời lượng rõ ràng** ⇒ timing animation có thể là hằng số trong code, không nằm trong sprite.
+
+### Hệ quả cho "tốc độ"
+
+- Chu kỳ đi bộ = **5 frame** (đã biết).
+- Nhưng **không suy được ô/giây** nếu không biết (a) ms/frame và (b) số ô mỗi chu kỳ.
+- ⇒ Vẫn phải đo hành vi. Mà client VN hiện không chạy (exit 5) — cần dựng lại Wine prefix
+  (`WINEPREFIX` mới + cài D3DX9) hoặc chạy client trong WinBoat (như KR) rồi đo bằng screenshot.
