@@ -304,3 +304,22 @@ Cần đối chiếu 1 trong 2 cách:
 2. Hoặc so sánh với hành vi: nhân vật C01 có field 4 = 2 → nếu vào game C01 nổ xa hơn C00 (field 4 = 1) thì xác nhận.
 
 `config/gameplay.json` vẫn giữ `null` cho tốc độ; `bomb.radius_cells_per_power` sẽ lấy theo field tầm nổ khi chốt.
+
+## 14. Chốt một phần + ghi nhận phần còn treo
+
+Đã đưa vào `config/gameplay.json`:
+
+| Khoá | Giá trị | Cơ sở |
+|---|---|---|
+| `bomb.fuse_s` | 2.5 | đo từ log (111 → 151) |
+| `bomb.radius_cells_per_power` | **1 ô / 1 power** | tầm nổ mặc định 1, mỗi ItemFire +1 (`docs/oc_e-game.md` §5a-5d) |
+| `items.drop_weight_raw` | Bomb 3650, Fire 2800, Roller 2000, Punch 300, Hollow/Skeleton 200, Shoe/MaxPower 150 | `fx/Attr/ItemAttr.bin` (bảng thật) |
+| `bomber_attr` | layout 61B, VN 41 / KR 67 nhân vật | `sub_97124A` |
+
+**Còn treo**: đúng field nào là **tốc độ**. Đã khoanh vùng còn 4 ứng viên (field 2/3/5/7) trong 11 field.
+Cách tìm tiếp (đã thử một phần):
+- quét instruction theo displacement `+0x1E4/+0x1EC/+0x1F8/+0x204` — chỉ ra các hàm dùng chung
+  (`sub_415081`, `sub_4157BD`), chưa phải getter của bomber;
+- hướng tốt hơn: tìm vtable của **CGOCAHeroGameBomber** (331 vf) và soi các vf đọc trực tiếp
+  `[this+0x1E4..0x224]` — đã thấy `vf134` đọc `+136` (field 9), `vf74` đọc `+135/+137` (field 8/10);
+- hoặc so sánh hành vi: nhân vật khác nhau (field 2 khác nhau: 4 vs 5) rồi đo thời gian đi 10 ô.

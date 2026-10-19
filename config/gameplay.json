@@ -1,62 +1,84 @@
 {
-  "_note": "Cấu hình gameplay lấy từ bản VN (boom-re/server) làm giá trị khởi điểm cho bản rewrite KR. Số nào ghi null là CHƯA biết — cần tune hoặc RE thêm.",
-  "_provenance": {
-    "server_defaults": "boom-re/server/src/session.rs (env defaults)",
-    "world_geometry": "boom-re/docs/map.md (tile 40px, stride 101)",
-    "item_weights": "boom-re/docs/map.md (prob% theo item trong placement của map)",
-    "monster": "boomkr-re/data/kr/monster_physics.json + monster_drop.json"
-  },
-  "world": {
-    "tile_px": 40,
-    "grid_stride": 101,
-    "grid_cell_dwords_v1000": 2,
-    "grid_cell_dwords_v1001": 3
-  },
-  "match": {
-    "round_time_s": 120.0,
-    "bomb_fuse_s": 2.5,
-    "match_end_delay_s": 3.0,
-    "turn_mode": 4,
-    "start_op": 117,
-    "begin_op": 191,
-    "room_type": 19
-  },
-  "bomb": {
-    "power_default": 1,
-    "power_max": 9,
-    "radius_cells_per_power": null,
-    "chain_reaction": null,
-    "note": "power do client gửi trong packet đặt bom; bán kính/lan CHƯA xác định — cần tune"
-  },
-  "movement": {
-    "speed_cells_per_s": null,
-    "accel_cells_per_s2": null,
-    "note": "VN server chỉ relay vị trí client gửi, không mô phỏng — phải chọn số cho bản rewrite rồi tune"
-  },
-  "items": {
-    "drop_weight_percent": {
-      "Shoe": 100,
-      "Shark": 100,
-      "MaxPower": 10,
-      "Fire": 30,
-      "Bomb": 30,
-      "Roller": 30
-    },
-    "kinds": {
-      "0": "ItemBomb (+1 bom)",
-      "1": "ItemFire (+tầm nổ)",
-      "2": "ItemRoller",
-      "3": "ItemShoe (tốc độ)",
-      "4": "ItemPunch",
-      "5": "ItemMaxPower",
-      "6": "ItemHollow",
-      "7": "ItemSkeleton0"
-    },
-    "effect_per_kind": null
-  },
-  "monster": {
-    "physics_file": "data/kr/monster_physics.json",
-    "drop_file": "data/kr/monster_drop.json",
-    "note": "45 monster, 760 bản ghi reward (MonLevel x Difficulty) — dữ liệu KR thật"
+ "_note": "Cấu hình gameplay lấy từ bản VN (boom-re/server) làm giá trị khởi điểm cho bản rewrite KR. Số nào ghi null là CHƯA biết — cần tune hoặc RE thêm.",
+ "_provenance": {
+  "server_defaults": "boom-re/server/src/session.rs (env defaults)",
+  "world_geometry": "boom-re/docs/map.md (tile 40px, stride 101)",
+  "item_weights": "boom-re/docs/map.md (prob% theo item trong placement của map)",
+  "monster": "boomkr-re/data/kr/monster_physics.json + monster_drop.json"
+ },
+ "world": {
+  "tile_px": 40,
+  "grid_stride": 101,
+  "grid_cell_dwords_v1000": 2,
+  "grid_cell_dwords_v1001": 3
+ },
+ "match": {
+  "round_time_s": 120.0,
+  "bomb_fuse_s": 2.5,
+  "match_end_delay_s": 3.0,
+  "turn_mode": 4,
+  "start_op": 117,
+  "begin_op": 191,
+  "room_type": 19
+ },
+ "bomb": {
+  "power_default": 1,
+  "power_max": 9,
+  "radius_cells_per_power": 1,
+  "chain_reaction": "unknown",
+  "note": "power do client gửi trong packet đặt bom; bán kính/lan CHƯA xác định — cần tune",
+  "radius_note": "tầm nổ = giá trị field bomber ('vf31' trong boom-re docs), mặc định 1, mỗi ItemFire +1; đơn vị = ô"
+ },
+ "movement": {
+  "speed_cells_per_s": null,
+  "accel_cells_per_s2": null,
+  "note": "VN server chỉ relay vị trí client gửi, không mô phỏng — phải chọn số cho bản rewrite rồi tune",
+  "candidates": {
+   "table": "data/kr/bomber_attr.json",
+   "note": "11 field/nhân vật; field4∈{1,2} nghi số bom/tầm nổ, field5 clamp≤10; tốc độ là 1 trong field 2/3/5/7 — chưa chốt"
   }
+ },
+ "items": {
+  "drop_weight_percent": {
+   "Shoe": 100,
+   "Shark": 100,
+   "MaxPower": 10,
+   "Fire": 30,
+   "Bomb": 30,
+   "Roller": 30
+  },
+  "kinds": {
+   "0": "ItemBomb (+1 bom)",
+   "1": "ItemFire (+tầm nổ)",
+   "2": "ItemRoller",
+   "3": "ItemShoe (tốc độ)",
+   "4": "ItemPunch",
+   "5": "ItemMaxPower",
+   "6": "ItemHollow",
+   "7": "ItemSkeleton0"
+  },
+  "effect_per_kind": null,
+  "drop_weight_raw": {
+   "ItemBomb": 3650,
+   "ItemFire": 2800,
+   "ItemRoller": 2000,
+   "ItemPunch": 300,
+   "ItemHollow": 200,
+   "ItemSkeleton0": 200,
+   "ItemShoe": 150,
+   "ItemMaxPower": 150
+  },
+  "drop_weight_source": "fx/Attr/ItemAttr.bin (bảng thật; data/kr/VN_ItemAttr.bin)"
+ },
+ "monster": {
+  "physics_file": "data/kr/monster_physics.json",
+  "drop_file": "data/kr/monster_drop.json",
+  "note": "45 monster, 760 bản ghi reward (MonLevel x Difficulty) — dữ liệu KR thật"
+ },
+ "bomber_attr": {
+  "layout": "u32 nameLen + name + 11×u32 = 61B/entry",
+  "vn": 41,
+  "kr": 67,
+  "file": "data/kr/bomber_attr.json"
+ }
 }
