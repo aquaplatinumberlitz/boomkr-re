@@ -1,0 +1,6487 @@
+{
+"source": "namu.moe/w/크레이지 아케이드/경험치표 (mirror của namu.wiki)",
+"max_level": 720,
+"total_exp_720": 78000000,
+"levels": [
+{
+"level": 1,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 0,
+"total_exp": 0
+},
+{
+"level": 2,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 400,
+"total_exp": 400
+},
+{
+"level": 3,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 600,
+"total_exp": 1000
+},
+{
+"level": 4,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 800,
+"total_exp": 1800
+},
+{
+"level": 5,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 2800
+},
+{
+"level": 6,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 3800
+},
+{
+"level": 7,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 6300
+},
+{
+"level": 8,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 7300
+},
+{
+"level": 9,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 8300
+},
+{
+"level": 10,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 10800
+},
+{
+"level": 11,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 11800
+},
+{
+"level": 12,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 12800
+},
+{
+"level": 13,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 15300
+},
+{
+"level": 14,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 16300
+},
+{
+"level": 15,
+"medal": "Bronze",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 17300
+},
+{
+"level": 16,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 5200,
+"total_exp": 22500
+},
+{
+"level": 17,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 23500
+},
+{
+"level": 18,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 24500
+},
+{
+"level": 19,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 27000
+},
+{
+"level": 20,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 28000
+},
+{
+"level": 21,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 29000
+},
+{
+"level": 22,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 31500
+},
+{
+"level": 23,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 32500
+},
+{
+"level": 24,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 33500
+},
+{
+"level": 25,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 36000
+},
+{
+"level": 26,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 37000
+},
+{
+"level": 27,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 38000
+},
+{
+"level": 28,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 40500
+},
+{
+"level": 29,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 41500
+},
+{
+"level": 30,
+"medal": "Silver",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 42500
+},
+{
+"level": 31,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 7600,
+"total_exp": 50100
+},
+{
+"level": 32,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 51100
+},
+{
+"level": 33,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 52100
+},
+{
+"level": 34,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 54600
+},
+{
+"level": 35,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 55600
+},
+{
+"level": 36,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 56600
+},
+{
+"level": 37,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 59100
+},
+{
+"level": 38,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 60100
+},
+{
+"level": 39,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 61100
+},
+{
+"level": 40,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 63600
+},
+{
+"level": 41,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 64600
+},
+{
+"level": 42,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 65600
+},
+{
+"level": 43,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 2500,
+"total_exp": 68100
+},
+{
+"level": 44,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 1000,
+"total_exp": 69100
+},
+{
+"level": 45,
+"medal": "Gold",
+"title": "Beginner",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 1000,
+"total_exp": 70100
+},
+{
+"level": 46,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 5200,
+"total_exp": 75300
+},
+{
+"level": 47,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 4600,
+"total_exp": 79900
+},
+{
+"level": 48,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 4600,
+"total_exp": 84500
+},
+{
+"level": 49,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 7600,
+"total_exp": 92100
+},
+{
+"level": 50,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 4600,
+"total_exp": 96700
+},
+{
+"level": 51,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 101500
+},
+{
+"level": 52,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 109300
+},
+{
+"level": 53,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 114100
+},
+{
+"level": 54,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 118900
+},
+{
+"level": 55,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 126700
+},
+{
+"level": 56,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 131500
+},
+{
+"level": 57,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 136300
+},
+{
+"level": 58,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 144100
+},
+{
+"level": 59,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 148900
+},
+{
+"level": 60,
+"medal": "Bronze",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 153700
+},
+{
+"level": 61,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 13200,
+"total_exp": 166900
+},
+{
+"level": 62,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 171700
+},
+{
+"level": 63,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 176500
+},
+{
+"level": 64,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 184300
+},
+{
+"level": 65,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 189100
+},
+{
+"level": 66,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 193900
+},
+{
+"level": 67,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 201700
+},
+{
+"level": 68,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 206500
+},
+{
+"level": 69,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 211300
+},
+{
+"level": 70,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 219100
+},
+{
+"level": 71,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 223900
+},
+{
+"level": 72,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 228700
+},
+{
+"level": 73,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 236500
+},
+{
+"level": 74,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 241300
+},
+{
+"level": 75,
+"medal": "Silver",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 246100
+},
+{
+"level": 76,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 18000,
+"total_exp": 264100
+},
+{
+"level": 77,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 268900
+},
+{
+"level": 78,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 273700
+},
+{
+"level": 79,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 281500
+},
+{
+"level": 80,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 286300
+},
+{
+"level": 81,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 291100
+},
+{
+"level": 82,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 298900
+},
+{
+"level": 83,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 303700
+},
+{
+"level": 84,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 308500
+},
+{
+"level": 85,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 316300
+},
+{
+"level": 86,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 321100
+},
+{
+"level": 87,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 325900
+},
+{
+"level": 88,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 7800,
+"total_exp": 333700
+},
+{
+"level": 89,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 4800,
+"total_exp": 338500
+},
+{
+"level": 90,
+"medal": "Gold",
+"title": "Veteran",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 4800,
+"total_exp": 343300
+},
+{
+"level": 91,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 22200,
+"total_exp": 365500
+},
+{
+"level": 92,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 5400,
+"total_exp": 370900
+},
+{
+"level": 93,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 5400,
+"total_exp": 376300
+},
+{
+"level": 94,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 8400,
+"total_exp": 384700
+},
+{
+"level": 95,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 5400,
+"total_exp": 390100
+},
+{
+"level": 96,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 5400,
+"total_exp": 395500
+},
+{
+"level": 97,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 8400,
+"total_exp": 403900
+},
+{
+"level": 98,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 5400,
+"total_exp": 409300
+},
+{
+"level": 99,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 414900
+},
+{
+"level": 100,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 423500
+},
+{
+"level": 101,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 429100
+},
+{
+"level": 102,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 434700
+},
+{
+"level": 103,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 443300
+},
+{
+"level": 104,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 448900
+},
+{
+"level": 105,
+"medal": "Bronze",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 454500
+},
+{
+"level": 106,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 14000,
+"total_exp": 468500
+},
+{
+"level": 107,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 474100
+},
+{
+"level": 108,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 479700
+},
+{
+"level": 109,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 488300
+},
+{
+"level": 110,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 493900
+},
+{
+"level": 111,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 499500
+},
+{
+"level": 112,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 508100
+},
+{
+"level": 113,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 513700
+},
+{
+"level": 114,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 519300
+},
+{
+"level": 115,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 527900
+},
+{
+"level": 116,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 533500
+},
+{
+"level": 117,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 539100
+},
+{
+"level": 118,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 547700
+},
+{
+"level": 119,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 553300
+},
+{
+"level": 120,
+"medal": "Silver",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 558900
+},
+{
+"level": 121,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 18800,
+"total_exp": 577700
+},
+{
+"level": 122,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 583300
+},
+{
+"level": 123,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 588900
+},
+{
+"level": 124,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 597500
+},
+{
+"level": 125,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 603100
+},
+{
+"level": 126,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 608700
+},
+{
+"level": 127,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 617300
+},
+{
+"level": 128,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 622900
+},
+{
+"level": 129,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 628500
+},
+{
+"level": 130,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 637100
+},
+{
+"level": 131,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 642700
+},
+{
+"level": 132,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 648300
+},
+{
+"level": 133,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 8600,
+"total_exp": 656900
+},
+{
+"level": 134,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 5600,
+"total_exp": 662500
+},
+{
+"level": 135,
+"medal": "Gold",
+"title": "Expert",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 5600,
+"total_exp": 668100
+},
+{
+"level": 136,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 32000,
+"total_exp": 700100
+},
+{
+"level": 137,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 6200,
+"total_exp": 706300
+},
+{
+"level": 138,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 6200,
+"total_exp": 712500
+},
+{
+"level": 139,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 9200,
+"total_exp": 721700
+},
+{
+"level": 140,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 6200,
+"total_exp": 727900
+},
+{
+"level": 141,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 6200,
+"total_exp": 734100
+},
+{
+"level": 142,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 9200,
+"total_exp": 743300
+},
+{
+"level": 143,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 6200,
+"total_exp": 749500
+},
+{
+"level": 144,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 6200,
+"total_exp": 755700
+},
+{
+"level": 145,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 9200,
+"total_exp": 764900
+},
+{
+"level": 146,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 6200,
+"total_exp": 771100
+},
+{
+"level": 147,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 6200,
+"total_exp": 777300
+},
+{
+"level": 148,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 9200,
+"total_exp": 786500
+},
+{
+"level": 149,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 6200,
+"total_exp": 792700
+},
+{
+"level": 150,
+"medal": "Bronze",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 6200,
+"total_exp": 798900
+},
+{
+"level": 151,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 14800,
+"total_exp": 813700
+},
+{
+"level": 152,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 820100
+},
+{
+"level": 153,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 826500
+},
+{
+"level": 154,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 835900
+},
+{
+"level": 155,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 842300
+},
+{
+"level": 156,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 848700
+},
+{
+"level": 157,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 858100
+},
+{
+"level": 158,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 864500
+},
+{
+"level": 159,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 870900
+},
+{
+"level": 160,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 880300
+},
+{
+"level": 161,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 886700
+},
+{
+"level": 162,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 893100
+},
+{
+"level": 163,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 902500
+},
+{
+"level": 164,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 908900
+},
+{
+"level": 165,
+"medal": "Silver",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 915300
+},
+{
+"level": 166,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 19600,
+"total_exp": 934900
+},
+{
+"level": 167,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 941300
+},
+{
+"level": 168,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 947700
+},
+{
+"level": 169,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 957100
+},
+{
+"level": 170,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 963500
+},
+{
+"level": 171,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 969900
+},
+{
+"level": 172,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 979300
+},
+{
+"level": 173,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 985700
+},
+{
+"level": 174,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 992100
+},
+{
+"level": 175,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 1001500
+},
+{
+"level": 176,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 1007900
+},
+{
+"level": 177,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 1014300
+},
+{
+"level": 178,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 9400,
+"total_exp": 1023700
+},
+{
+"level": 179,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 6400,
+"total_exp": 1030100
+},
+{
+"level": 180,
+"medal": "Gold",
+"title": "Elite",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 6400,
+"total_exp": 1036500
+},
+{
+"level": 181,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 33800,
+"total_exp": 1070300
+},
+{
+"level": 182,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 15400,
+"total_exp": 1085700
+},
+{
+"level": 183,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 15400,
+"total_exp": 1101100
+},
+{
+"level": 184,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21400,
+"total_exp": 1122500
+},
+{
+"level": 185,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 15400,
+"total_exp": 1137900
+},
+{
+"level": 186,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 15400,
+"total_exp": 1153300
+},
+{
+"level": 187,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21400,
+"total_exp": 1174700
+},
+{
+"level": 188,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 15400,
+"total_exp": 1190100
+},
+{
+"level": 189,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 15400,
+"total_exp": 1205500
+},
+{
+"level": 190,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21400,
+"total_exp": 1226900
+},
+{
+"level": 191,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 15400,
+"total_exp": 1242300
+},
+{
+"level": 192,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 15400,
+"total_exp": 1257700
+},
+{
+"level": 193,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21400,
+"total_exp": 1279100
+},
+{
+"level": 194,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 15400,
+"total_exp": 1294500
+},
+{
+"level": 195,
+"medal": "Bronze",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 15400,
+"total_exp": 1309900
+},
+{
+"level": 196,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 32200,
+"total_exp": 1342100
+},
+{
+"level": 197,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1357500
+},
+{
+"level": 198,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1372900
+},
+{
+"level": 199,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1394300
+},
+{
+"level": 200,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1409700
+},
+{
+"level": 201,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1425100
+},
+{
+"level": 202,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1446700
+},
+{
+"level": 203,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1462300
+},
+{
+"level": 204,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1477900
+},
+{
+"level": 205,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1499500
+},
+{
+"level": 206,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1515100
+},
+{
+"level": 207,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1530700
+},
+{
+"level": 208,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1552300
+},
+{
+"level": 209,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1567900
+},
+{
+"level": 210,
+"medal": "Silver",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1583500
+},
+{
+"level": 211,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 42000,
+"total_exp": 1625500
+},
+{
+"level": 212,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1641100
+},
+{
+"level": 213,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1656700
+},
+{
+"level": 214,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1678300
+},
+{
+"level": 215,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1693900
+},
+{
+"level": 216,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1709500
+},
+{
+"level": 217,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1731100
+},
+{
+"level": 218,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1746700
+},
+{
+"level": 219,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1762300
+},
+{
+"level": 220,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1783900
+},
+{
+"level": 221,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1799500
+},
+{
+"level": 222,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 15600,
+"total_exp": 1815100
+},
+{
+"level": 223,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21600,
+"total_exp": 1836700
+},
+{
+"level": 224,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 15600,
+"total_exp": 1852300
+},
+{
+"level": 225,
+"medal": "Gold",
+"title": "Master",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 77200,
+"total_exp": 1929500
+},
+{
+"level": 226,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 13800,
+"total_exp": 1943300
+},
+{
+"level": 227,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 1957100
+},
+{
+"level": 228,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 1970900
+},
+{
+"level": 229,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 1992200
+},
+{
+"level": 230,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2006000
+},
+{
+"level": 231,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2019800
+},
+{
+"level": 232,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 2041100
+},
+{
+"level": 233,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2054900
+},
+{
+"level": 234,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2068700
+},
+{
+"level": 235,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 2090000
+},
+{
+"level": 236,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2103800
+},
+{
+"level": 237,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2117600
+},
+{
+"level": 238,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 2138900
+},
+{
+"level": 239,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2152700
+},
+{
+"level": 240,
+"medal": "Bronze",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2166500
+},
+{
+"level": 241,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 34800,
+"total_exp": 2201300
+},
+{
+"level": 242,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2215100
+},
+{
+"level": 243,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2228900
+},
+{
+"level": 244,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 2250200
+},
+{
+"level": 245,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2264000
+},
+{
+"level": 246,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2277800
+},
+{
+"level": 247,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21300,
+"total_exp": 2299100
+},
+{
+"level": 248,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 13800,
+"total_exp": 2312900
+},
+{
+"level": 249,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 13800,
+"total_exp": 2326700
+},
+{
+"level": 250,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2348200
+},
+{
+"level": 251,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2362200
+},
+{
+"level": 252,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2376200
+},
+{
+"level": 253,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2397700
+},
+{
+"level": 254,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2411700
+},
+{
+"level": 255,
+"medal": "Silver",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2425700
+},
+{
+"level": 256,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 2472700
+},
+{
+"level": 257,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2486700
+},
+{
+"level": 258,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2500700
+},
+{
+"level": 259,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2522200
+},
+{
+"level": 260,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2536200
+},
+{
+"level": 261,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2550200
+},
+{
+"level": 262,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2571700
+},
+{
+"level": 263,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2585700
+},
+{
+"level": 264,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2599700
+},
+{
+"level": 265,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2621200
+},
+{
+"level": 266,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2635200
+},
+{
+"level": 267,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2649200
+},
+{
+"level": 268,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 21500,
+"total_exp": 2670700
+},
+{
+"level": 269,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 14000,
+"total_exp": 2684700
+},
+{
+"level": 270,
+"medal": "Gold",
+"title": "Champion",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 14000,
+"total_exp": 2698700
+},
+{
+"level": 271,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 35000,
+"total_exp": 2733700
+},
+{
+"level": 272,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 2765700
+},
+{
+"level": 273,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 2797700
+},
+{
+"level": 274,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 2844700
+},
+{
+"level": 275,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 2876700
+},
+{
+"level": 276,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 2908700
+},
+{
+"level": 277,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 2955700
+},
+{
+"level": 278,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 2987700
+},
+{
+"level": 279,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3019700
+},
+{
+"level": 280,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3066700
+},
+{
+"level": 281,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3098700
+},
+{
+"level": 282,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3130700
+},
+{
+"level": 283,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3177700
+},
+{
+"level": 284,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3209700
+},
+{
+"level": 285,
+"medal": "Bronze",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3241700
+},
+{
+"level": 286,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 74000,
+"total_exp": 3315700
+},
+{
+"level": 287,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3347700
+},
+{
+"level": 288,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3379700
+},
+{
+"level": 289,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3426700
+},
+{
+"level": 290,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3458700
+},
+{
+"level": 291,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3490700
+},
+{
+"level": 292,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3537700
+},
+{
+"level": 293,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3569700
+},
+{
+"level": 294,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3601700
+},
+{
+"level": 295,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3648700
+},
+{
+"level": 296,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3680700
+},
+{
+"level": 297,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3712700
+},
+{
+"level": 298,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 47000,
+"total_exp": 3759700
+},
+{
+"level": 299,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 32000,
+"total_exp": 3791700
+},
+{
+"level": 300,
+"medal": "Silver",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 32000,
+"total_exp": 3823700
+},
+{
+"level": 301,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 98200,
+"total_exp": 3921900
+},
+{
+"level": 302,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 32200,
+"total_exp": 3954100
+},
+{
+"level": 303,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 32200,
+"total_exp": 3986300
+},
+{
+"level": 304,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 47200,
+"total_exp": 4033500
+},
+{
+"level": 305,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 32200,
+"total_exp": 4065700
+},
+{
+"level": 306,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 32200,
+"total_exp": 4097900
+},
+{
+"level": 307,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 47200,
+"total_exp": 4145100
+},
+{
+"level": 308,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 32200,
+"total_exp": 4177300
+},
+{
+"level": 309,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 32200,
+"total_exp": 4209500
+},
+{
+"level": 310,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 47200,
+"total_exp": 4256700
+},
+{
+"level": 311,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 32200,
+"total_exp": 4288900
+},
+{
+"level": 312,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 32200,
+"total_exp": 4321100
+},
+{
+"level": 313,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 47200,
+"total_exp": 4368300
+},
+{
+"level": 314,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 32200,
+"total_exp": 4400500
+},
+{
+"level": 315,
+"medal": "Gold",
+"title": "Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 32200,
+"total_exp": 4432700
+},
+{
+"level": 316,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 119200,
+"total_exp": 4551900
+},
+{
+"level": 317,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 4587100
+},
+{
+"level": 318,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 4622300
+},
+{
+"level": 319,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 4672500
+},
+{
+"level": 320,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 4707700
+},
+{
+"level": 321,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 4742900
+},
+{
+"level": 322,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 4793100
+},
+{
+"level": 323,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 4828300
+},
+{
+"level": 324,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 4863500
+},
+{
+"level": 325,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 4913700
+},
+{
+"level": 326,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 4948900
+},
+{
+"level": 327,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 4984100
+},
+{
+"level": 328,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5034300
+},
+{
+"level": 329,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5069500
+},
+{
+"level": 330,
+"medal": "Bronze",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5104700
+},
+{
+"level": 331,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 77200,
+"total_exp": 5181900
+},
+{
+"level": 332,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5217100
+},
+{
+"level": 333,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5252300
+},
+{
+"level": 334,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5302500
+},
+{
+"level": 335,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5337700
+},
+{
+"level": 336,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5372900
+},
+{
+"level": 337,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5423100
+},
+{
+"level": 338,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5458300
+},
+{
+"level": 339,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5493500
+},
+{
+"level": 340,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5543700
+},
+{
+"level": 341,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5578900
+},
+{
+"level": 342,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5614100
+},
+{
+"level": 343,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5664300
+},
+{
+"level": 344,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5699500
+},
+{
+"level": 345,
+"medal": "Silver",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5734700
+},
+{
+"level": 346,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 101200,
+"total_exp": 5895900
+},
+{
+"level": 347,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5871100
+},
+{
+"level": 348,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 35200,
+"total_exp": 5906300
+},
+{
+"level": 349,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 50200,
+"total_exp": 5956500
+},
+{
+"level": 350,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 35200,
+"total_exp": 5991700
+},
+{
+"level": 351,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 35400,
+"total_exp": 6027100
+},
+{
+"level": 352,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 50400,
+"total_exp": 6077500
+},
+{
+"level": 353,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 35400,
+"total_exp": 6112900
+},
+{
+"level": 354,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 35400,
+"total_exp": 6148300
+},
+{
+"level": 355,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 50400,
+"total_exp": 6198700
+},
+{
+"level": 356,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 35400,
+"total_exp": 6234100
+},
+{
+"level": 357,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 35400,
+"total_exp": 6269500
+},
+{
+"level": 358,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 50400,
+"total_exp": 6319900
+},
+{
+"level": 359,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 35400,
+"total_exp": 6355300
+},
+{
+"level": 360,
+"medal": "Gold",
+"title": "King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 35400,
+"total_exp": 6390700
+},
+{
+"level": 361,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 167400,
+"total_exp": 6558100
+},
+{
+"level": 362,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 6596500
+},
+{
+"level": 363,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 6634900
+},
+{
+"level": 364,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 6688300
+},
+{
+"level": 365,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 6726700
+},
+{
+"level": 366,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 6765100
+},
+{
+"level": 367,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 6818500
+},
+{
+"level": 368,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 6856900
+},
+{
+"level": 369,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 6895300
+},
+{
+"level": 370,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 6948700
+},
+{
+"level": 371,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 6987100
+},
+{
+"level": 372,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7025500
+},
+{
+"level": 373,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 7078900
+},
+{
+"level": 374,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7117300
+},
+{
+"level": 375,
+"medal": "Bronze",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7155700
+},
+{
+"level": 376,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 80400,
+"total_exp": 7236100
+},
+{
+"level": 377,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7274500
+},
+{
+"level": 378,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7312900
+},
+{
+"level": 379,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 7366300
+},
+{
+"level": 380,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7404700
+},
+{
+"level": 381,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7443100
+},
+{
+"level": 382,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 7496500
+},
+{
+"level": 383,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7534900
+},
+{
+"level": 384,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7573300
+},
+{
+"level": 385,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 7626700
+},
+{
+"level": 386,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7665100
+},
+{
+"level": 387,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7703500
+},
+{
+"level": 388,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 7756900
+},
+{
+"level": 389,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7795300
+},
+{
+"level": 390,
+"medal": "Silver",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 7833700
+},
+{
+"level": 391,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 104400,
+"total_exp": 7938100
+},
+{
+"level": 392,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 7976500
+},
+{
+"level": 393,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 8014900
+},
+{
+"level": 394,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 8068300
+},
+{
+"level": 395,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 8106700
+},
+{
+"level": 396,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 8145100
+},
+{
+"level": 397,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 53400,
+"total_exp": 8198500
+},
+{
+"level": 398,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 38400,
+"total_exp": 8236900
+},
+{
+"level": 399,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 38400,
+"total_exp": 8275300
+},
+{
+"level": 400,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 53600,
+"total_exp": 8328900
+},
+{
+"level": 401,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 38600,
+"total_exp": 8367500
+},
+{
+"level": 402,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 38600,
+"total_exp": 8406100
+},
+{
+"level": 403,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 53600,
+"total_exp": 8459700
+},
+{
+"level": 404,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 38600,
+"total_exp": 8498300
+},
+{
+"level": 405,
+"medal": "Gold",
+"title": "Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 38600,
+"total_exp": 8536900
+},
+{
+"level": 406,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 175600,
+"total_exp": 8712500
+},
+{
+"level": 407,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 8796100
+},
+{
+"level": 408,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 8879700
+},
+{
+"level": 409,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 8993300
+},
+{
+"level": 410,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 9076900
+},
+{
+"level": 411,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 9160500
+},
+{
+"level": 412,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 9274100
+},
+{
+"level": 413,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 9357700
+},
+{
+"level": 414,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 9441300
+},
+{
+"level": 415,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 9554900
+},
+{
+"level": 416,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 9638500
+},
+{
+"level": 417,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 9722100
+},
+{
+"level": 418,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 9835700
+},
+{
+"level": 419,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 9919300
+},
+{
+"level": 420,
+"medal": "Bronze",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 10002900
+},
+{
+"level": 421,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 167600,
+"total_exp": 10170500
+},
+{
+"level": 422,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 10254100
+},
+{
+"level": 423,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 10337700
+},
+{
+"level": 424,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 10451300
+},
+{
+"level": 425,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 10534900
+},
+{
+"level": 426,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 10618500
+},
+{
+"level": 427,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 10732100
+},
+{
+"level": 428,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 10815700
+},
+{
+"level": 429,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 10899300
+},
+{
+"level": 430,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 11012900
+},
+{
+"level": 431,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 11096500
+},
+{
+"level": 432,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 11180100
+},
+{
+"level": 433,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 11293700
+},
+{
+"level": 434,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 11377300
+},
+{
+"level": 435,
+"medal": "Silver",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 11460900
+},
+{
+"level": 436,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 215600,
+"total_exp": 11676500
+},
+{
+"level": 437,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 11760100
+},
+{
+"level": 438,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 11843700
+},
+{
+"level": 439,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 11957300
+},
+{
+"level": 440,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 12040900
+},
+{
+"level": 441,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 12124500
+},
+{
+"level": 442,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 12238100
+},
+{
+"level": 443,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 12321700
+},
+{
+"level": 444,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 12405300
+},
+{
+"level": 445,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 12518900
+},
+{
+"level": 446,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 12602500
+},
+{
+"level": 447,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 83600,
+"total_exp": 12686100
+},
+{
+"level": 448,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 113600,
+"total_exp": 12799700
+},
+{
+"level": 449,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 83600,
+"total_exp": 12883300
+},
+{
+"level": 450,
+"medal": "Gold",
+"title": "God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 391600,
+"total_exp": 13274900
+},
+{
+"level": 451,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 13364900
+},
+{
+"level": 452,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 13454900
+},
+{
+"level": 453,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 13574900
+},
+{
+"level": 454,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 13664900
+},
+{
+"level": 455,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 13754900
+},
+{
+"level": 456,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 13874900
+},
+{
+"level": 457,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 13964900
+},
+{
+"level": 458,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 14054900
+},
+{
+"level": 459,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 14174900
+},
+{
+"level": 460,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 14264900
+},
+{
+"level": 461,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 14354900
+},
+{
+"level": 462,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 14474900
+},
+{
+"level": 463,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 14564900
+},
+{
+"level": 464,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 14654900
+},
+{
+"level": 465,
+"medal": "Bronze",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 180000,
+"total_exp": 14834900
+},
+{
+"level": 466,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 14924900
+},
+{
+"level": 467,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 15014900
+},
+{
+"level": 468,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 15134900
+},
+{
+"level": 469,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 15224900
+},
+{
+"level": 470,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 15314900
+},
+{
+"level": 471,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 15434900
+},
+{
+"level": 472,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 15524900
+},
+{
+"level": 473,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 15614900
+},
+{
+"level": 474,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 15734900
+},
+{
+"level": 475,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 15824900
+},
+{
+"level": 476,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 15914900
+},
+{
+"level": 477,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 16034900
+},
+{
+"level": 478,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 16124900
+},
+{
+"level": 479,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 16214900
+},
+{
+"level": 480,
+"medal": "Silver",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 228000,
+"total_exp": 16442900
+},
+{
+"level": 481,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 16532900
+},
+{
+"level": 482,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 16622900
+},
+{
+"level": 483,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 16742900
+},
+{
+"level": 484,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 16832900
+},
+{
+"level": 485,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 16922900
+},
+{
+"level": 486,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 17042900
+},
+{
+"level": 487,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 17132900
+},
+{
+"level": 488,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 17222900
+},
+{
+"level": 489,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 17342900
+},
+{
+"level": 490,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 17432900
+},
+{
+"level": 491,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 17522900
+},
+{
+"level": 492,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 120000,
+"total_exp": 17642900
+},
+{
+"level": 493,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 90000,
+"total_exp": 17732900
+},
+{
+"level": 494,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 90000,
+"total_exp": 17822900
+},
+{
+"level": 495,
+"medal": "Gold",
+"title": "Star",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 408000,
+"total_exp": 18230900
+},
+{
+"level": 496,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 18380900
+},
+{
+"level": 497,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 18530900
+},
+{
+"level": 498,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 18730900
+},
+{
+"level": 499,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 18880900
+},
+{
+"level": 500,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 19030900
+},
+{
+"level": 501,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 19230900
+},
+{
+"level": 502,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 19380900
+},
+{
+"level": 503,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 19530900
+},
+{
+"level": 504,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 19730900
+},
+{
+"level": 505,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 19880900
+},
+{
+"level": 506,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 20030900
+},
+{
+"level": 507,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 20230900
+},
+{
+"level": 508,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 20380900
+},
+{
+"level": 509,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 20530900
+},
+{
+"level": 510,
+"medal": "Bronze",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 250000,
+"total_exp": 20780900
+},
+{
+"level": 511,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 20930900
+},
+{
+"level": 512,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 21080900
+},
+{
+"level": 513,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 21280900
+},
+{
+"level": 514,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 21430900
+},
+{
+"level": 515,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 21580900
+},
+{
+"level": 516,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 21780900
+},
+{
+"level": 517,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 21930900
+},
+{
+"level": 518,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 22080900
+},
+{
+"level": 519,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 22280900
+},
+{
+"level": 520,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 22430900
+},
+{
+"level": 521,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 22580900
+},
+{
+"level": 522,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 22780900
+},
+{
+"level": 523,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 22930900
+},
+{
+"level": 524,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 23080900
+},
+{
+"level": 525,
+"medal": "Silver",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 23380900
+},
+{
+"level": 526,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 23530900
+},
+{
+"level": 527,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 23680900
+},
+{
+"level": 528,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 23880900
+},
+{
+"level": 529,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 24030900
+},
+{
+"level": 530,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 24180900
+},
+{
+"level": 531,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 24380900
+},
+{
+"level": 532,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 24530900
+},
+{
+"level": 533,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 24680900
+},
+{
+"level": 534,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 24880900
+},
+{
+"level": 535,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 25030900
+},
+{
+"level": 536,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 25180900
+},
+{
+"level": 537,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 200000,
+"total_exp": 25380900
+},
+{
+"level": 538,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 150000,
+"total_exp": 25530900
+},
+{
+"level": 539,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 150000,
+"total_exp": 25680900
+},
+{
+"level": 540,
+"medal": "Gold",
+"title": "Master-Hero",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 550000,
+"total_exp": 26230900
+},
+{
+"level": 541,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 26430900
+},
+{
+"level": 542,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 26630900
+},
+{
+"level": 543,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 26900900
+},
+{
+"level": 544,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 27100900
+},
+{
+"level": 545,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 27300900
+},
+{
+"level": 546,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 27570900
+},
+{
+"level": 547,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 27770900
+},
+{
+"level": 548,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 27970900
+},
+{
+"level": 549,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 28240900
+},
+{
+"level": 550,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 28440900
+},
+{
+"level": 551,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 28640900
+},
+{
+"level": 552,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 28910900
+},
+{
+"level": 553,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 29110900
+},
+{
+"level": 554,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 29310900
+},
+{
+"level": 555,
+"medal": "Bronze",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 310000,
+"total_exp": 29620900
+},
+{
+"level": 556,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 29820900
+},
+{
+"level": 557,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 210000,
+"total_exp": 30030900
+},
+{
+"level": 558,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 30300900
+},
+{
+"level": 559,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 30500900
+},
+{
+"level": 560,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 30700900
+},
+{
+"level": 561,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 30970900
+},
+{
+"level": 562,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 31170900
+},
+{
+"level": 563,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 31370900
+},
+{
+"level": 564,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 31640900
+},
+{
+"level": 565,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 31840900
+},
+{
+"level": 566,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 32040900
+},
+{
+"level": 567,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 32310900
+},
+{
+"level": 568,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 32510900
+},
+{
+"level": 569,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 32710900
+},
+{
+"level": 570,
+"medal": "Silver",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 362000,
+"total_exp": 33072900
+},
+{
+"level": 571,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 33272900
+},
+{
+"level": 572,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 33472900
+},
+{
+"level": 573,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 33742900
+},
+{
+"level": 574,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 33942900
+},
+{
+"level": 575,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 34142900
+},
+{
+"level": 576,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 31412900
+},
+{
+"level": 577,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 34612900
+},
+{
+"level": 578,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 34812900
+},
+{
+"level": 579,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 35082900
+},
+{
+"level": 580,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 35282900
+},
+{
+"level": 581,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 35482900
+},
+{
+"level": 582,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 270000,
+"total_exp": 35752900
+},
+{
+"level": 583,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 200000,
+"total_exp": 35952900
+},
+{
+"level": 584,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 200000,
+"total_exp": 36152900
+},
+{
+"level": 585,
+"medal": "Gold",
+"title": "Master-King",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 682000,
+"total_exp": 36834900
+},
+{
+"level": 586,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 37134900
+},
+{
+"level": 587,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 37434900
+},
+{
+"level": 588,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 37734900
+},
+{
+"level": 589,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 38034900
+},
+{
+"level": 590,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 38334900
+},
+{
+"level": 591,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 38634900
+},
+{
+"level": 592,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 38934900
+},
+{
+"level": 593,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 39234900
+},
+{
+"level": 594,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 39534900
+},
+{
+"level": 595,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 39834900
+},
+{
+"level": 596,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 40134900
+},
+{
+"level": 597,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 40434900
+},
+{
+"level": 598,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 40734900
+},
+{
+"level": 599,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 41034900
+},
+{
+"level": 600,
+"medal": "Bronze",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 41334900
+},
+{
+"level": 601,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 41634900
+},
+{
+"level": 602,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 41934900
+},
+{
+"level": 603,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 42234900
+},
+{
+"level": 604,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 42534900
+},
+{
+"level": 605,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 42834900
+},
+{
+"level": 606,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 43134900
+},
+{
+"level": 607,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 43434900
+},
+{
+"level": 608,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 43734900
+},
+{
+"level": 609,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 44034900
+},
+{
+"level": 610,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 44334900
+},
+{
+"level": 611,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 44634900
+},
+{
+"level": 612,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 44934900
+},
+{
+"level": 613,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 45234900
+},
+{
+"level": 614,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 45534900
+},
+{
+"level": 615,
+"medal": "Silver",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 45834900
+},
+{
+"level": 616,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 46134900
+},
+{
+"level": 617,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 46434900
+},
+{
+"level": 618,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 46734900
+},
+{
+"level": 619,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 47034900
+},
+{
+"level": 620,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 47334900
+},
+{
+"level": 621,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 47634900
+},
+{
+"level": 622,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 47934900
+},
+{
+"level": 623,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 48234900
+},
+{
+"level": 624,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 48534900
+},
+{
+"level": 625,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 48834900
+},
+{
+"level": 626,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 49134900
+},
+{
+"level": 627,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 49434900
+},
+{
+"level": 628,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 49734900
+},
+{
+"level": 629,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 50034900
+},
+{
+"level": 630,
+"medal": "Gold",
+"title": "Master-Lord",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 465100,
+"total_exp": 50500000
+},
+{
+"level": 631,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 50800000
+},
+{
+"level": 632,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 51100000
+},
+{
+"level": 633,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 51400000
+},
+{
+"level": 634,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 51700000
+},
+{
+"level": 635,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 52000000
+},
+{
+"level": 636,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 52300000
+},
+{
+"level": 637,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 52600000
+},
+{
+"level": 638,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 52900000
+},
+{
+"level": 639,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 53200000
+},
+{
+"level": 640,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 53500000
+},
+{
+"level": 641,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 53800000
+},
+{
+"level": 642,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 54100000
+},
+{
+"level": 643,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 54400000
+},
+{
+"level": 644,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 54700000
+},
+{
+"level": 645,
+"medal": "Bronze",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 55000000
+},
+{
+"level": 646,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 55300000
+},
+{
+"level": 647,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 55600000
+},
+{
+"level": 648,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 55900000
+},
+{
+"level": 649,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 56200000
+},
+{
+"level": 650,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 56500000
+},
+{
+"level": 651,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 56800000
+},
+{
+"level": 652,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 57100000
+},
+{
+"level": 653,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 57400000
+},
+{
+"level": 654,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 57700000
+},
+{
+"level": 655,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 58000000
+},
+{
+"level": 656,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 58300000
+},
+{
+"level": 657,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 58600000
+},
+{
+"level": 658,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 58900000
+},
+{
+"level": 659,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 59200000
+},
+{
+"level": 660,
+"medal": "Silver",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 59500000
+},
+{
+"level": 661,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 59800000
+},
+{
+"level": 662,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 60100000
+},
+{
+"level": 663,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 60400000
+},
+{
+"level": 664,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 60700000
+},
+{
+"level": 665,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 61000000
+},
+{
+"level": 666,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 61300000
+},
+{
+"level": 667,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 61600000
+},
+{
+"level": 668,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 61900000
+},
+{
+"level": 669,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 62200000
+},
+{
+"level": 670,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 62500000
+},
+{
+"level": 671,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 62800000
+},
+{
+"level": 672,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 63100000
+},
+{
+"level": 673,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 63400000
+},
+{
+"level": 674,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 63700000
+},
+{
+"level": 675,
+"medal": "Gold",
+"title": "Master-God",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 500000,
+"total_exp": 64200000
+},
+{
+"level": 676,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 64500000
+},
+{
+"level": 677,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 64800000
+},
+{
+"level": 678,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 65100000
+},
+{
+"level": 679,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 65400000
+},
+{
+"level": 680,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 65700000
+},
+{
+"level": 681,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 66000000
+},
+{
+"level": 682,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 66300000
+},
+{
+"level": 683,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 66600000
+},
+{
+"level": 684,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 66900000
+},
+{
+"level": 685,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 67200000
+},
+{
+"level": 686,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 67500000
+},
+{
+"level": 687,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 67800000
+},
+{
+"level": 688,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 68100000
+},
+{
+"level": 689,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 68400000
+},
+{
+"level": 690,
+"medal": "Bronze",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 68700000
+},
+{
+"level": 691,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 69000000
+},
+{
+"level": 692,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 69300000
+},
+{
+"level": 693,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 69600000
+},
+{
+"level": 694,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 69900000
+},
+{
+"level": 695,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 70200000
+},
+{
+"level": 696,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 70500000
+},
+{
+"level": 697,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 70800000
+},
+{
+"level": 698,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 71100000
+},
+{
+"level": 699,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 71400000
+},
+{
+"level": 700,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 71700000
+},
+{
+"level": 701,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 72000000
+},
+{
+"level": 702,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 72300000
+},
+{
+"level": 703,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 72600000
+},
+{
+"level": 704,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 72900000
+},
+{
+"level": 705,
+"medal": "Silver",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 73200000
+},
+{
+"level": 706,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 73500000
+},
+{
+"level": 707,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 73800000
+},
+{
+"level": 708,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Black",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 74100000
+},
+{
+"level": 709,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 74400000
+},
+{
+"level": 710,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 74700000
+},
+{
+"level": 711,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Green",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 75000000
+},
+{
+"level": 712,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 75300000
+},
+{
+"level": 713,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 75600000
+},
+{
+"level": 714,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Blue",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 75900000
+},
+{
+"level": 715,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 76200000
+},
+{
+"level": 716,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 76500000
+},
+{
+"level": 717,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Yellow",
+"sub_grade": "Storm",
+"need_exp": 300000,
+"total_exp": 76800000
+},
+{
+"level": 718,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Drop",
+"need_exp": 300000,
+"total_exp": 77100000
+},
+{
+"level": 719,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Wave",
+"need_exp": 300000,
+"total_exp": 77400000
+},
+{
+"level": 720,
+"medal": "Gold",
+"title": "Angel-Green",
+"sub_color": "Red",
+"sub_grade": "Storm",
+"need_exp": 600000,
+"total_exp": 78000000
+}
+]
+}

@@ -163,3 +163,133 @@ Ghi chú kèm snippet: "ngồi đĩa bay không nhặt được item nhưng đi 
 
 > Cách lấp 1–3: đo trong client (đã có hạ tầng: prefix `.wine-vn`, `tools/duo_measure.sh`) hoặc RE tĩnh
 > hàm cập nhật di chuyển (`0x708CC8` → strategy `vtbl+32`).
+
+## 9. ĐÀO SÂU 6 KHOẢNG TRỐNG — kết quả
+
+### 9.0 Phát hiện quan trọng: `namu.moe` fetch được
+
+`namu.wiki` bị Cloudflare 403, nhưng **mirror `namu.moe` trả 200** và nội dung đầy đủ.
+Đã lấy về: 아이템 / 경험치표 / 게임 모드 / 전략 및 플레이 팁 / 몬스터 모드 / 맵 / 문서 chính.
+
+| Khoảng trống | Kết quả | Nguồn |
+|---|---|---|
+| 4. Bảng EXP/Lucci 720 cấp | ✅ **LẤY ĐƯỢC ĐẦY ĐỦ** → `data/kr/exp_table.json` (720 cấp, cần/tổng EXP, huy hiệu) | `크레이지 아케이드/경험치표` |
+| 1. Thời gian bị nhốt trước khi chết | 🟡 có **cơ chế**, **không có số giây** | `게임 모드` |
+| 2. Quy đổi cấp tốc độ → ô/giây | ❌ không có công thức; **nhưng có thang quy chiếu** (xe cộ dùng cùng thang: rùa 1, cú 5, UFO 10…) | `아이템` |
+| 3. Fuse chính xác | 🟡 ja.wikipedia: bóng **ném** nổ sau **3 s**; bóng đặt thường vẫn chưa có số | ja.wikipedia |
+| 5. Công thức Magic Market | ❌ không có trang namu (`/마법 마켓` → 404); không có trong pack | — |
+| 6. Tỉ lệ rơi đồ theo map | ❌ web không có số; **dữ liệu pack tốt hơn** (`ItemAttr` weight + `prob%` trong map) | — |
+
+### 9.1 Cơ chế bị nhốt (gap #1) — có mô tả, không có số
+
+> "물방울에 갇힌 채 시간이 너무 오래 경과하면 물방울이 점점 불투명하게 변하고, 캐릭터의 모습이 완전히
+> 보이지 않게 되면 물방울이 터져서 죽게 된다."
+> "물방울 속에서는 **바늘**을 써서 벗어나거나 **산소통**을 써서 익사하기까지의 시간을 연장할 수 있다."
+
+⇒ Cơ chế: bong bóng **mờ dần**, khi nhân vật không còn thấy → nổ → chết. Có item **산소통 (Oxygen)** kéo dài.
+Không nêu giây ⇒ vẫn phải **đo** (hoặc đọc hằng số trong client).
+
+### 9.2 Thang tốc độ (gap #2) — cùng thang với xe cộ
+
+Từ `크레이지 아케이드/아이템` (mục 탈것):
+
+| Đối tượng | Tốc độ (cùng thang với speed nhân vật) |
+|---|---|
+| Rùa (거북이) | **1** |
+| Cú mèo (부엉이) | **5** |
+| Xe tăng (탱크) | **5** |
+| Rùa cướp biển (해적 거북이) | **9** |
+| Đĩa bay (우주선) | **10** |
+| Đĩa hỏng | **1** |
+| Xe goòng (đường ray / ngoài ray) | **10 / 2** (dùng 모터 → 10 mọi nơi) |
+| Xe kart (xăng >1/3 / cạn / nitro) | **10 / 4 / 11.5** |
+| Thùng gà rán (치킨통, thay UFO) | = **10**, không bao giờ hỏng |
+| Cá mập (아쿠아) | nuốt 3 bóng, nhả 2 bóng/lần |
+
+⇒ Nhân vật nhanh nhất (Sue/Lei/Lucy 6–10, Super Luxury Ethi 7–10) **bằng tốc độ UFO (10)**.
+Vẫn **không có** quy đổi sang ô/giây ⇒ 1 phép đo là đủ để suy ra toàn bảng (giả thuyết tuyến tính).
+
+### 9.3 Item và con số (từ namu `아이템`)
+
+| Item | Tác dụng / số |
+|---|---|
+| 물풍선 Bubble | +1 số bóng |
+| 액체 Fluid | +1 tầm nổ (1 ô) |
+| 울트라 물풍선 Ultra | tầm nổ → **max của nhân vật** ngay lập tức |
+| 롤러 Roller | +1 tốc độ |
+| 붉은 악마 Red Devil | tốc độ → **max** + **đẩy được bóng** |
+| 스케이트 Skate | (map băng) tốc độ → max |
+| 장갑 Glove | **ném** bóng đi xa |
+| 신발 Shoes | **đẩy** bóng |
+| 슈퍼맨 Superman | mọi chỉ số → max **tạm thời** (không bất tử; trúng nước thì mất) |
+| 초록 악마 Green Devil | **nhả** 1 item đã ăn → giảm 1 bậc chỉ số đó |
+| 압정 Push-Pin | bóng chạm là nổ ngay |
+| 바나나 Banana | trượt tới vật cản; đặt **1/3/5** quả (trước đây 8) |
+| 트랩 Trap | giữa 2 block; ai đi qua → bị nhốt; **1 item cho 2 trap** |
+| 본드 Bond | giảm tốc độ rất mạnh (chậm hơn rùa); nước rửa trôi |
+| 마귀 Devil | đảo hướng điều khiển / đặt bóng tự động |
+| 유령 Ghost | tàng hình tạm thời |
+| 위장도구 Disguise | đổi màu sang đội bạn |
+| 드릴 Drill | phá block trước mặt; **3 lần** |
+| **산소통 Oxygen** | **kéo dài thời gian bị nhốt trước khi chết** (đổi lại vô hiệu hoá kim) |
+| 모터 Motor | xe goòng nhanh trên mọi địa hình |
+| 문워크 Moonwalk | đi **lùi** |
+| 금빛 악마 Golden Devil | (협공배틀) giảm tốc địch → **1** |
+| 바늘 Needle | **Ctrl** để thoát bong bóng (item cash) |
+| 파워산삼 Power Ginseng | buff tạm **15 giây** |
+| 슈퍼 만년삼 Super Ginseng | như trên, **30 giây** |
+| 실드 Shield | **bất tử theo thời gian** (trúng nước thì giảm thời gian) |
+| 센서 Sensor | hiện trước vùng nước sẽ nổ |
+| 투시경 | xem item trong hộp, xa **2 ô** |
+| 통조림 | rùa → rùa cướp biển (speed 9) |
+| 무선 물폭탄 | đặt bom, **Space** để nổ |
+| 다트 Dart | bắn từ xa, nổ bóng ngay |
+| 스프링 Spring | nhảy qua vật cản, tối đa **3 ô** |
+| 엔젤코인 | hồi sinh người **chết sau cùng** |
+
+### 9.4 Máy bay thả item (từ 2003)
+
+Xuất hiện ở các mốc **1:59, 1:36, 1:14, 0:51, 0:29, 0:07** (tính từ lúc bắt đầu), mỗi lần thả **tối đa 2 item**.
+Chỉ thả item tăng chỉ số (bóng/nước/ultra…); map nghĩa trang/mộ **không có** máy bay.
+
+### 9.5 Các con số khác đáng dùng
+
+- **Time bomb mode**: người mang bom được **5 giây**, tốc độ **cố định ở max** của nhân vật.
+- **Phòng**: nếu host không bấm start khi mọi người ready → **10 giây** sau có cảnh báo tự động kick
+  (**30 giây** nếu là 슈퍼방장).
+- **Ladder**: **1 bậc = 60 điểm**.
+- **Đấu trường quái vật**: điểm SS = thời gian/kill tuỳ map — ví dụ 문어대습격: 90–130 s; 골렘대침공 09: **61 s**, 16 kill.
+  Boss khó dần: 대왕거북 < 대왕문어 < 거대골렘 < 황제펭귄 < 황제물개 < 라이트닝킹.
+  엔젤코인 = **3 kill**, boss kill = **5 kill**, chết = **−2 kill**.
+- **Coupling**: thưởng EXP khi thắng từ **+5% → +90%**, kèm Lucci 100–800 tuỳ cặp.
+- **EXP**: 720 cấp, tổng **78.000.000**; hell level mỗi **15 cấp** (3 cấp có 준헬렙); max EXP lưu được **2.147.483.647**.
+
+## 10. Link để mở thủ công (những trang tool không vào được)
+
+Mở bằng trình duyệt thường (Cloudflare sẽ cho qua):
+
+**Hàn — namu.wiki (đầy đủ nhất)**
+- [크레이지 아케이드/아이템](https://namu.wiki/w/크레이지%20아케이드/아이템)
+- [크레이지 아케이드/경험치표](https://namu.wiki/w/크레이지%20아케이드/경험치표)
+- [크레이지 아케이드/게임 모드](https://namu.wiki/w/크레이지%20아케이드/게임%20모드)
+- [크레이지 아케이드/전략 및 플레이 팁](https://namu.wiki/w/크레이지%20아케이드/전략%20및%20플레이%20팁)
+- [크레이지 아케이드/몬스터 모드](https://namu.wiki/w/크레이지%20아케이드/몬스터%20모드)
+- [크레이지 아케이드/맵](https://namu.wiki/w/크레이지%20아케이드/맵)
+
+**Hàn — chính thức Nexon (chặn DNS nội bộ)**
+- [Nhân vật & chỉ số chính thức](https://ca.nexon.com/Info/Character/1)
+- [Guide Object (vật phẩm/đối tượng)](https://ca.nexon.com/CACreators/Guide/Object/2)
+- [크아 잘하는 방법](https://ca.nexon.com/Free/Content/416902)
+- [도감 vật phẩm (gacha)](https://ca.nexon.com/Info/ItemGachapon/99/)
+
+**Trung — DB vật phẩm chính thức + baike**
+- [泡泡堂 items (sdo)](https://bnb.web.sdo.com/web3/intro/items.asp)
+- [泡泡堂 道具 iframe](https://bnb.web.sdo.com/web5/daoju/iframe_daoju.asp?Page=3&cID=3043)
+- [baike.so.com 泡泡堂 (tốc độ xe cộ)](https://baike.so.com/doc/5351493-5586951.html)
+- [biligame 泡泡堂 实战秘诀](https://www.biligame.com.cn/chamber/pptlwjdzzdszmjwsmnfdpzzbdr/)
+
+**Nhật**
+- [ja.wikipedia クレイジーアーケード (bảng chỉ số nhân vật)](https://ja.wikipedia.org/wiki/크레이지%EC%95%84%EC%BC%80%EC%9D%B4%EB%93%9C)
+
+> Cần tìm riêng: **마법 마켓 (Magic Market / Alchemist)** — không có trang namu; nên tìm trên
+> Naver blog / YouTube KR với từ khoá `크레이지 아케이드 마법마켓` `마법마켓 조합`.
