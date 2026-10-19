@@ -571,3 +571,50 @@ Trong màn sảnh, danh sách phòng nằm ở panel trái, các dòng ~`y=400, 
 1. B join đúng phòng A (click dòng phòng) → A chọn map → A BẮT ĐẦU.
 2. Khi cả hai vào map: script đã có `KEYS_A="Right:2:0.4"` + chụp `*_match.png`, `*_step_*.png`.
 3. Phân tích: `px/s` từ Δx giữa các ảnh (mtime), chia 40 px/ô.
+
+## 23. GIẢI XONG `BomberAttr`: tốc độ / số bom / tầm nổ — đối chiếu khớp 8/8 với Wikipedia
+
+Nguồn độc lập: [ja.wikipedia クレイジーアーケード](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AC%E3%82%A4%E3%82%B8%E3%83%BC%E3%82%A2%E3%83%BC%E3%82%B1%E3%83%BC%E3%83%89)
+có bảng nhân vật với 3 chỉ số (水風船の量 = số bom, 水風船の長さ = tầm nổ, 速度 = tốc độ), ghi min–max.
+
+Đối chiếu với `Attr/BomberAttr` (11 field):
+
+| field | nghĩa | ví dụ C00 (Dao) |
+|---|---|---|
+| 0 | chỉ số | 0 |
+| 1 | class/type | 0 |
+| **2, 3** | **tốc độ (min, max)** | **5, 7** ✅ wiki 5–7 |
+| **4, 5** | **số bom (min, max)** | **1, 10** ✅ wiki 1–10 |
+| **6, 7** | **tầm nổ = bán kính theo ô (min, max)** | **1, 7** ✅ wiki 1–7 |
+| 8 | 10 (HP?) | — |
+| 9 | 100 | — |
+| 10 | thay đổi theo nhân vật (chưa rõ) | 9 |
+
+**Kiểm 8/8 khớp tuyệt đối**:
+
+| char | tên | attr (spd/bomb/len) | wiki |
+|---|---|---|---|
+| C00 | Dao | 5-7 / 1-10 / 1-7 | 5-7 / 1-10 / 1-7 ✅ |
+| C01 | Dizni | 4-8 / 2-7 / 1-9 | 4-8 / 2-7 / 1-9 ✅ |
+| C02 | Uni | 5-8 / 1-6 / 2-7 | 5-8 / 1-6 / 2-7 ✅ |
+| C03 | Mos | 5-8 / 1-8 / 1-5 | 5-8 / 1-8 / 1-5 ✅ |
+| C04 | Marid | 4-8 / 2-9 / 1-6 | 4-8 / 2-9 / 1-6 ✅ |
+| C05 | Ethi | 4-8 / 1-10 / 1-8 | 4-8 / 1-10 / 1-8 ✅ |
+| C06 | Bazzi | 5-9 / 1-6 / 1-7 | 5-9 / 1-6 / 1-7 ✅ |
+| C07 | Kephi | 4-8 / 1-9 / 2-8 | 4-8 / 1-9 / 2-8 ✅ |
+
+⇒ **Không cần RE thêm**: tốc độ, số bom, tầm nổ của **67 nhân vật KR** (41 VN) đã có trong
+`data/kr/bomber_attr.json` (kèm `field_map`). `config/gameplay.json` đã cập nhật.
+
+### Còn đúng 1 ẩn số: quy đổi "speed level" → ô/giây
+
+- Bảng cho **cấp tốc độ 4..10**, không cho đơn vị thời gian.
+- Tương quan giữa nhân vật thì đã biết (Bazzi/Sue nhanh nhất 5–9/6–10, Dizni/Marid/Kephi chậm 4–8).
+- Cách chốt: đo 1 lần (giữ phím 2 s, đếm ô) hoặc RE hằng số trong hàm cập nhật di chuyển.
+  Có level 4..10 thì chỉ cần **một** phép đo để suy ra công thức (giả thuyết: tuyến tính theo level).
+
+### Ghi chú thêm từ Wikipedia (luật)
+
+- Trúng nước không chết ngay: bị **nhốt trong bong bóng nước** một thời gian; đồng đội chạm vào thì hồi sinh,
+  kẻ địch chạm vào thì chết; dùng **kim** tự thoát.
+- Ném/đá bóng: sau khi ném, bóng **nổ sau 3 giây** (không có "giữ ném").
