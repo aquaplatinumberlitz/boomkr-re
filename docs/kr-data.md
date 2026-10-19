@@ -202,3 +202,22 @@ Hai lý do:
    seed `sub_654153` đã có địa chỉ trong `docs/oc_e-game.md` §5h).
 
 Cả hai đều chưa làm trong đêm nay; `config/gameplay.json` để `null` cho tới khi có số.
+
+## 11. RE tĩnh client VN để tìm tốc độ — tiến độ
+
+Dùng IDA MCP trên `boom-re/unpacked_ca.exe` (có sẵn `.i64`).
+
+| Địa chỉ | Vai trò (đã xác nhận bằng decompile) |
+|---|---|
+| `0x71B521` | tick gửi gói: đọc stamp `+19676`, so `+19688`, ngưỡng `0x7D0` (2000 ms), `sub_654153(3) % 12 == 0` → `sub_70E9FC` (gửi 141) |
+| `0x708CC8` | **input dispatch**: nhận `(a2, a3=phím, a4=slot, a5=down)`; với mỗi hướng gọi `sub_6FAF6B / sub_6FB00B / sub_6FB0AB / sub_6FB12D / sub_6FB91F`; nhánh còn lại dispatch qua `vtable+32` của strategy |
+| `0x6FAF6B`, `0x6FB00B`, `0x6FB0AB`, `0x6FB12D`, `0x6FB91F` | handler theo hướng/khe (bomber hiện tại) |
+| `0x6ED146` | tính vùng ảnh hưởng (không phải di chuyển) |
+| `0x6EE7A1` | duyệt ô theo hàng (line-of-sight / vùng) |
+| `0x654153` | PRNG `rand()` bọc theo seed (`dword_E643E4`) |
+
+**Chưa tìm ra**: hằng số thời gian mỗi bước đi (ms/ô) hoặc trường speed của bomber.
+Hướng tiếp: đi từ `0x708CC8` → nhánh strategy `vtbl+32`, hoặc tìm nơi ghi "số bước còn lại" của queue
+(`this+a2+95` là counter đã thấy ở `sub_6FAF6B`).
+
+`config/gameplay.json` vẫn để `null` cho `speed`/`radius`.
