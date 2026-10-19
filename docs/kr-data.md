@@ -430,3 +430,25 @@ Lần chạy gần nhất: **17 ảnh**, `dne:13` = 1, nhưng `pre.png` **toàn 
    `px/s = Δx / Δt` (mtime file), `ô/s = px/s / 40`.
 
 Mọi thứ khác đã sẵn: script, prefix, patch, server, và công thức quy đổi.
+
+## 18. Ảnh chụp **không hề đen** — ảnh đen trước đó là do client đã thoát
+
+Trả lời câu hỏi "sao opus chụp ok mà mình đen": **cùng một lệnh** `import -window root`. Lần trước
+`pre.png` đen vì script chờ `timeout 260` rồi client đã thoát ⇒ root window trống. Không phải lỗi cách chụp.
+
+Bằng chứng lần này (client còn sống): `pre.png` = **409.507 B**, ảnh thật (xem `docs/img/kr/vn_lobby_square.png`).
+
+### Nhưng driver chưa vào được trận
+
+Ảnh cho thấy client đang ở **quảng trường lobby** với popup hướng dẫn "HD Câu cá", tức chuỗi click hiện tại
+(`650,393` → `760,672`) **không mở phòng**. `dne:13` trong CALog là **stage index của quảng trường**, không
+phải "đang trong trận".
+
+⇒ Cần sửa driver theo đúng UI thật:
+1. Đóng popup HD (nút X/▲ ở panel, hoặc click ra ngoài).
+2. Bấm **TẠO PHÒNG** (nút cam ở giữa trên, ~`390,50` theo ảnh 1024×768).
+3. Chọn map → **SẴN SÀNG** (nút cam lớn dưới).
+4. Chờ `dne:13` **và** kiểm ảnh có map đấu (không phải lobby) rồi mới chụp chuỗi.
+
+Toàn bộ hạ tầng đo đã xong: prefix `.wine-vn`, `ca_fixed_patched.exe` chạy được, Xvfb + `import` OK,
+server Rust OK, script `tools/vn_measure.sh` sẵn sàng — chỉ còn toạ độ click đúng.
