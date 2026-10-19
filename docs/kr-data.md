@@ -221,3 +221,36 @@ Hướng tiếp: đi từ `0x708CC8` → nhánh strategy `vtbl+32`, hoặc tìm 
 (`this+a2+95` là counter đã thấy ở `sub_6FAF6B`).
 
 `config/gameplay.json` vẫn để `null` cho `speed`/`radius`.
+
+## 12. Tìm trong boom-re: những thông số DÙNG ĐƯỢC (đã có sẵn)
+
+Rà toàn bộ `boom-re` (main + 7 branch + worktree agent `~/boom-re-oc/*`) — kết quả:
+
+| Thông số | Có ở đâu | Giá trị | Dùng được? |
+|---|---|---|---|
+| Fuse bom | log server VN | **2.500 s** (§10) | ✅ |
+| **Tầm nổ** | `boom-re/docs/oc_e-game.md` §5a-5d | field bomber `vf31`, mặc định **1**; mỗi `ItemFire` **+1** | ✅ (bán kính = tầm nổ, đơn vị ô) |
+| Số bom | cùng chỗ | `vf30`, +1 mỗi `ItemBomb` | ✅ |
+| **Trọng số rơi item** | `fx/Attr/ItemAttr` (bảng thật, `docs/items.md`) | Bomb 3650, Fire 2800, Roller 2000, Punch 300, Hollow/Skeleton 200, Shoe/MaxPower 150 | ✅ |
+| Trọng số theo map | `docs/map.md` | Shoe/Shark 100, MaxPower 10, Fire/Bomb/Roller 30 (%) | ✅ |
+| Tile px / stride | `docs/map.md` | 40 px / 101 | ✅ |
+| **Tốc độ chạy** | **`fx/Attr/BomberAttr`** (mới tìm) | bảng 13 nhân vật, mỗi entry ~12 u32 — **chưa parse đúng layout** | ⏳ cần 1 vòng nữa |
+
+### Bảng `Attr/` vừa tìm thấy (đã trích ra `data/kr/`)
+
+| File | VN | KR |
+|---|---|---|
+| `Attr/BomberAttr` | 2.501 B (13 entry) | 4.087 B |
+| `Attr/ItemAttr` | 20.140 B | 25.597 B |
+| `Attr/MapGroup` | 663 B | 663 B (giống nhau) |
+
+`BomberAttr` bắt đầu bằng `Character/C00`, `Character/C01`, `Character/C03`, `Character/C05`… mỗi entry là
+một dãy số nguyên (ví dụ C01: `1, 0, 4, 8, 2, 7, 1, 9, 10, 100, 9, 13`) — gần như chắc chắn chứa **tốc độ,
+số bom, tầm nổ, HP**. Layout chưa khớp (parse thử 11/12/13 giá trị đều lệch offset) nên **chưa kết luận**
+trường nào là tốc độ.
+
+⇒ Đã copy 6 file nhị phân vào `data/kr/*.bin` để vòng sau parse bằng script đối chiếu VN↔KR (bảng VN nhỏ hơn
+nên dễ suy ra layout).
+
+`config/gameplay.json`: `bomb.radius_cells_per_power` **đã có cơ sở** (= tầm nổ, +1 mỗi Fire) — sẽ cập nhật
+khi chốt; `movement.speed_cells_per_s` vẫn chờ parse `BomberAttr`.
