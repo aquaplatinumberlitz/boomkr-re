@@ -167,3 +167,38 @@ VN **server** không mô phỏng chuyển động/bom — nó nhận vị trí c
 `boom-re/server` không có hằng số tốc độ/bán kính để copy; những số đó nằm trong **client VN** và chưa
 được trích ra thành bảng. Với bản rewrite (tự viết client) thì ta **buộc phải chọn số** — nên để ở
 `config/gameplay.json` và tune dần, thay vì cố RE từ client KR (đang bị anti-tamper chặn).
+
+## 10. Đo từ client VN: fuse đã đo được, tốc độ bị chặn bởi môi trường
+
+### Đo được: thời gian nổ bom
+
+Từ log server VN đã lưu (`boom-re/logs/xvfb/rust_boom/fakeserver.log`):
+
+```
+174.499 [6868] C->S opcode 111   (đặt bom)
+174.499 [6868] S->C opcode 152   (gán id)
+176.999 [6868] S->C opcode 151   (nổ)
+```
+
+⇒ **2.500 s** đúng bằng `BOMB_FUSE`, khớp `config/gameplay.json`.
+
+### Chưa đo được: tốc độ chạy + bán kính nổ
+
+Hai lý do:
+
+1. **Di chuyển không đi qua TCP**: client gửi vị trí bằng engine UDP riêng
+   (`MTUDPBase/CUDPPeer`, xem `boom-re/docs/oc_e-game.md` §12). Log TCP của server **không có**
+   opcode 141 — đã kiểm 2 log lưu: `141=0`.
+2. **Client VN hiện không qua được bước patch**: chạy lại (cả `fakeserver` và server Rust) đều dừng ở
+   `116 : InitBeforePatch` rồi thoát. Log của lần chạy thành công trước đây (`logs/spawn1/CALog.log`)
+   đi tiếp `[XRpt] Sg - INT(dne:1)...` ⇒ khác biệt nằm ở **bản patch/snapshot đang dùng**, không phải server.
+
+### Đường còn lại để lấy tốc độ (khi cần)
+
+1. Khôi phục client VN chạy được (dựng lại `ca_fixed_patched.exe` từ `unpacked_ca.exe` hiện có, hoặc
+   dùng lại quy trình snapshot trong `boom-re/docs/devirt.md`), rồi **đọc bộ nhớ** toạ độ nhân vật theo
+   thời gian (VN không bị anti-tamper như KR) ⇒ px/s ⇒ ô/s.
+2. Hoặc RE tĩnh: tìm hằng số tốc độ trong `unpacked_ca.exe` (hàm queue di chuyển `sub_6ED146`,
+   seed `sub_654153` đã có địa chỉ trong `docs/oc_e-game.md` §5h).
+
+Cả hai đều chưa làm trong đêm nay; `config/gameplay.json` để `null` cho tới khi có số.
