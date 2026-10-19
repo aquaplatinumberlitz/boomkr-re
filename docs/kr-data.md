@@ -254,3 +254,53 @@ nên dễ suy ra layout).
 
 `config/gameplay.json`: `bomb.radius_cells_per_power` **đã có cơ sở** (= tầm nổ, +1 mỗi Fire) — sẽ cập nhật
 khi chốt; `movement.speed_cells_per_s` vẫn chờ parse `BomberAttr`.
+
+## 13. Giải xong `BomberAttr`: layout + ánh xạ field → struct
+
+### Layout (đã kiểm khớp tuyệt đối)
+
+Không có trường count. Mỗi entry: `u32 nameLen, name[nameLen], 11 × u32` = **61 byte** với tên 13 ký tự.
+
+| File | Kích thước | Số entry | Kiểm |
+|---|---|---|---|
+| VN | 2.501 | **41** | 61 × 41 = 2.501 ✅ |
+| KR | 4.087 | **67** | 61 × 67 = 4.087 ✅ |
+
+Dữ liệu: `data/kr/bomber_attr.json` (`{vn:[...], kr:[...]}`).
+
+### Ánh xạ trong client (`sub_97124A`, xref tới chuỗi `Attr/BomberAttr`)
+
+| field | nhận vào | ghi tại | ghi chú từ code |
+|---|---|---|---|
+| 0 | chỉ số nhân vật | `this + 103*idx` | chọn slot |
+| 1 | — | `+116` | `field[1]-1` quyết định **class/kiểu nhân vật** (0 = mặc định) |
+| 2 | — | `+117` | |
+| 3 | — | `+120` | |
+| 4 | — | `+123` | |
+| 5 | — | `+126` | **bị chặn ≤ 10** (`if >10 → 10`) |
+| 6 | — | `+129` | |
+| 7 | — | `+132` | |
+| 8 | — | `+135` | gán trực tiếp (không qua setter) |
+| 9 | — | `+136` | gán trực tiếp |
+| 10 | — | `+137` | |
+
+### Giá trị (VN = KR ở 41 entry đầu, KR có thêm 26 nhân vật)
+
+```
+C00 [0, 0, 5, 7, 1, 10, 1, 7, 10, 100, 9]
+C01 [1, 0, 4, 8, 2, 7, 1, 9, 10, 100, 9]
+C03 [2, 0, 5, 8, 1, 8, 1, 5, 10, 100, 7]
+C05 [3, 0, 4, 8, 1, 10, 1, 8, 10, 100, 7]
+C04 [4, 0, 4, 8, 2, 9, 1, 6, 10, 100, 7]
+```
+
+- field 9 = **100** ở mọi nhân vật; field 8 = 10; field 5 ∈ 7..10 (bị chặn 10).
+- field 4 ∈ {1,2} — trùng với "tầm nổ 1 → 2" mà `docs/oc_e-game.md` mô tả ⇒ **nghi field 4 = tầm nổ ban đầu**.
+
+### Còn lại để chốt
+
+Cần đối chiếu 1 trong 2 cách:
+1. Tìm getter `vf30/vf31` của bomber và xem chúng đọc offset nào (`+123` = field 4, `+126` = field 5, …);
+2. Hoặc so sánh với hành vi: nhân vật C01 có field 4 = 2 → nếu vào game C01 nổ xa hơn C00 (field 4 = 1) thì xác nhận.
+
+`config/gameplay.json` vẫn giữ `null` cho tốc độ; `bomb.radius_cells_per_power` sẽ lấy theo field tầm nổ khi chốt.
