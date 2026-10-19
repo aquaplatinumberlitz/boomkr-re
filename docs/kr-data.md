@@ -323,3 +323,41 @@ Cách tìm tiếp (đã thử một phần):
 - hướng tốt hơn: tìm vtable của **CGOCAHeroGameBomber** (331 vf) và soi các vf đọc trực tiếp
   `[this+0x1E4..0x224]` — đã thấy `vf134` đọc `+136` (field 9), `vf74` đọc `+135/+137` (field 8/10);
 - hoặc so sánh hành vi: nhân vật khác nhau (field 2 khác nhau: 4 vs 5) rồi đo thời gian đi 10 ô.
+
+## 15. Kiểm tra lại "opus đã tìm ra cột tốc độ chưa?" → **CHƯA**
+
+Bằng chứng trong `boom-re` (branch `claude/l10n-kr-vi`, `docs/REWRITE_PLAN.md`):
+
+> "Rào cản thật: **gần như chưa có hằng số gameplay nào được khôi phục**. Thiếu tốc độ, hitbox, fuse bom…"
+> "`BomberAttr.bin` (41 bản ghi × 11 i32) — Có thể là chỉ số gốc của nhân vật, **độ tin cậy thấp**"
+
+⇒ Không có kết luận nào về cột tốc độ trong toàn bộ `boom-re` (main + 7 branch + `~/boom-re-oc/*`).
+
+### Dựng lại patch VN — kết quả
+
+```
+python3 tools/patch_client.py unpacked_ca.exe /tmp/ca_test.exe 127.0.0.1
+→ wrote /tmp/ca_test.exe (18.887.168 B), 4 IP đã thay
+```
+
+Cài vào `wine/Boom/ca_fixed_patched.exe` rồi chạy lại (cả `match_play.sh` + `winedbg` và chạy trực tiếp):
+
+| Cách chạy | Kết quả |
+|---|---|
+| `RUST=1 tools/match_play.sh …` | phiên gdb kết thúc ngay, `CALog` **rỗng**, server **0 gói C→S** |
+| `DISPLAY=:78 wine ca_fixed_patched.exe` | thoát ngay, **exit code 5**, không tạo CALog |
+
+⇒ Client VN hiện **không khởi động được** trong môi trường này (không phải do patch — patch chạy đúng, đã vá 4 IP).
+Đã **khôi phục** binary cũ (`md5 5252883dc786214be0c794b2e06ecbe4`) để không để lại trạng thái hỏng.
+
+### Vì sao vẫn có thể lấy tốc độ mà không cần chạy client (hướng mới)
+
+Tốc độ đi bộ của nhân vật **suy ra được từ dữ liệu animation** (tĩnh, không cần chạy):
+
+1. Sprite nhân vật trong `CharTE` có các frame `..._Left/Right/Up/Down` (đã decode được, xem `docs/kr-content.md`).
+2. Mỗi frame record 48 byte có **thời lượng animation** (đã biết ở `boom-re/docs/assets.md`: "Frame record 48 byte
+   (toạ độ, thời gian animation)").
+3. Một chu kỳ đi bộ = N frame × thời lượng ⇒ thời gian đi 1 ô (ô = 40 px) ⇒ **ô/giây**.
+
+Việc cần làm: parse frame record của animation `Walk` cho `Character/C00`, cộng thời lượng, chia cho số ô
+mỗi chu kỳ (kiểm bằng ảnh GIF/frame).
