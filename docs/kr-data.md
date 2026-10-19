@@ -513,3 +513,29 @@ vẫn là room. Nghi 1 trong 2:
 - Chạy **2 client** (`.wine` + `.wine-vn`, 2 Xvfb) như `tools/duo.sh`, cho client A bấm **BẮT ĐẦU**,
   client B bấm **SẴN SÀNG**; khi cả hai vào trận thì chụp.
 - Hoặc kiểm tra `tools/duo.sh` + `logs/duo/*` (opus đã có log đồng bộ 2 người) để lấy đúng thứ tự.
+
+## 21. Tìm ra lý do trận không bắt đầu: **"CanDecideMap"**
+
+Chạy 2 client (script `tools/duo_vn.sh`, prefix `.wine-vn` + `.wine-vn2`, Xvfb :92/:93), cả hai vào được
+phòng. Client A bấm **BẮT ĐẦU** thì hiện hộp thoại:
+
+> **BẢNG THÔNG BÁO** — `CanDecideMap` — nút **ĐÓNG LẠI**
+
+Ảnh: `docs/img/kr/vn_cannot_decide_map.png`.
+
+Trước đó, đáy màn hình phòng cũng hiện *"Không chọn được bàn đồ này."*, và góc trái có nhãn **"2 PLAYER"**
+cho map Village01.
+
+### Nghĩa
+
+Client **không cho bắt đầu** vì **map chưa được quyết định** (`CanDecideMap` = server/room chưa có map
+hợp lệ). Với Village01 (map 2 người) thì cần **đủ 2 người trong cùng một phòng** rồi mới chọn/duyệt map.
+
+⇒ Chuỗi còn thiếu: **B vào đúng phòng của A** (hiện B ở phòng/sảnh khác) → A chọn map → A bấm BẮT ĐẦU.
+
+### Đã có sẵn để làm tiếp
+
+- `tools/duo_vn.sh` (2 client, 2 prefix, 2 Xvfb) — chạy được, cả hai vào phòng.
+- `CLICKS_A` / `CLICKS_B` là tham số, nên chỉ cần đổi toạ độ click của B để **join phòng** (bấm vào dòng
+  phòng trong danh sách sảnh) và của A để **chọn map** trước khi BẮT ĐẦU.
+- Ảnh `A_lobby.png`, `B_click_1.png`, `A_click_1..5.png` trong `/tmp/duo1/` cho biết toạ độ UI thật.
