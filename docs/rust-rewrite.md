@@ -78,11 +78,15 @@ Các chế độ còn lại nằm trong W3 đã có.
   `rust/krpack` sẽ được gộp vào `boom-assets`, rồi giữ lại ở đây làm tool tham chiếu hoặc xoá.
 - Việc vượt `ProcessPatch`/GameGuard (`docs/kr.md` §25, §33): **hạ ưu tiên**. Chỉ làm nếu cần đo một luật mà KR đã đổi so với VN.
 
-## 6. Rủi ro
+## 6. Quyền sử dụng asset
+
+**Asset KR thuộc quyền sử dụng của team** (theo chủ dự án, 2026-10-19): công ty là công ty con của Nexon tại Việt Nam.
+Profile `vn` và `kr` được dùng như nhau, kể cả cho build phát hành.
+
+## 7. Rủi ro
 
 | Rủi ro | Giảm thiểu |
 |---|---|
-| Asset KR thuộc Nexon, chưa chắc thuộc quyền công ty | **Cần xác nhận bằng văn bản** trước khi phát hành build dùng asset KR. Trong lúc chờ: build phát hành dùng profile `vn`, profile `kr` chỉ dùng nội bộ |
 | KR đã chỉnh luật so với VN; oracle VN đo sai cho KR | Đối chiếu [ARCHIVE] (video KR) ở các tình huống chuẩn; ghi chênh lệch thành tham số riêng của profile `kr` |
 | Alchemist/Baseball không có nguồn đo | Spec từ video + designer; không tính vào chuẩn "~100%" của Fidelity Spec |
 | UI KR không có golden ảnh từ client chạy được | Ảnh/video [ARCHIVE]; nếu sau này vượt được `ProcessPatch` thì chụp lại |
