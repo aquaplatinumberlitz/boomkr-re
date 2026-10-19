@@ -480,3 +480,36 @@ client đã thoát (hết `timeout`). Lần này client còn sống nên ảnh t
    và đo bằng script có sẵn (`tools/vn_measure.sh` chỉ cần sửa để không tự click nữa).
 
 Hạ tầng đo đã hoàn chỉnh: prefix chạy được, ảnh chụp thật, server + script sẵn.
+
+## 20. Dùng lại đúng chuỗi click của opus — vào phòng được, nhưng chưa vào trận
+
+Sửa sai lầm trước: tao đã tự bịa toạ độ. Chuỗi **đã kiểm chứng** nằm trong `boom-re/tools/match_play.sh`:
+
+```
+sleep 20 ; click 650,393        # kênh/quảng trường
+chờ dne:11 ; sleep 25
+click 975,38 (3s) 385,50 (4s) 437,612 (10s) 512,384 (8s)
+chờ dne:13 → vào trận
+```
+
+Trong đó `975,38` = nút **X đóng popup HD** (thứ tao thiếu). Đã tạo `tools/match_measure_vn.sh` = bản sao
+chuỗi này + `WINEPREFIX=.wine-vn` + `wine` (không winedbg) + chụp `mv_*`.
+
+### Kết quả các lần chạy
+
+| Lần | Tới đâu | Ảnh |
+|---|---|---|
+| meas12 | vào **phòng** (tester6, nút **BẮT ĐẦU**) | `click_1..4` |
+| meas13 | `dne:12` → `dne:13`, chụp 18 ảnh | ảnh lại là **phòng** (trận đã kết thúc trước khi chụp) |
+| meas14 | `dne13 at 12:56:51`, `keys done 12:57:04` | 18 ảnh, vẫn là **phòng** |
+
+⇒ Chuỗi click **đúng**, nhưng **trận không hiển thị**: client ở phòng, CALog báo `dne:12/13` mà màn hình
+vẫn là room. Nghi 1 trong 2:
+1. Cần **2 client** (opus từng chạy `tools/duo.sh` với 2 prefix) hoặc cần bấm **SẴN SÀNG** ở client thứ hai;
+2. `BẮT ĐẦU` chỉ hoạt động khi phòng đủ người; 1 người thì server không gửi 189/190/191.
+
+### Việc tiếp (rất cụ thể)
+
+- Chạy **2 client** (`.wine` + `.wine-vn`, 2 Xvfb) như `tools/duo.sh`, cho client A bấm **BẮT ĐẦU**,
+  client B bấm **SẴN SÀNG**; khi cả hai vào trận thì chụp.
+- Hoặc kiểm tra `tools/duo.sh` + `logs/duo/*` (opus đã có log đồng bộ 2 người) để lấy đúng thứ tự.
