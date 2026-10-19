@@ -29,7 +29,9 @@
   "note": "power do client gửi trong packet đặt bom; bán kính/lan CHƯA xác định — cần tune",
   "radius_note": "blast length chính là bán kính theo ô; mỗi item Fire +1; nhân vật có min..max riêng",
   "count_min_max_source": "BomberAttr f4,f5",
-  "blast_length_min_max_source": "BomberAttr f6,f7 (đơn vị = ô)"
+  "blast_length_min_max_source": "BomberAttr f6,f7 (đơn vị = ô)",
+  "fuse_web_hint_s": 3.0,
+  "fuse_note": "VN server dùng 2.5s (đo được ở log). ja.wikipedia: sau khi NÉM/ĐÁ bóng thì 3 giây mới nổ ⇒ fuse gốc nghi 3.0s; cần chốt."
  },
  "movement": {
   "unit": "speed level (4..10), per character",
@@ -86,5 +88,14 @@
   "kr": 67,
   "file": "data/kr/bomber_attr.json"
  },
- "characters_ref": "data/kr/bomber_attr.json (field_map + 41 VN / 67 KR)"
+ "characters_ref": "data/kr/bomber_attr.json (field_map + 41 VN / 67 KR)",
+ "bubble": {
+  "trap": "trúng nước -> bị nhốt trong bong bóng nước, chưa chết ngay",
+  "rescue_ally": "đồng đội chạm vào -> hồi sinh",
+  "kill_enemy": "địch chạm vào -> chết",
+  "self_escape": "dùng kim (ItemHPNeedle) -> tự thoát",
+  "timeout_s": null,
+  "source": "en.wikipedia Crazy Arcade + ja.wikipedia (luật, không có số giây)"
+ },
+ "thrown_bomb_fuse_s": 3.0
 }

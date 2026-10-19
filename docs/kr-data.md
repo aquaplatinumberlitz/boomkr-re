@@ -618,3 +618,17 @@ có bảng nhân vật với 3 chỉ số (水風船の量 = số bom, 水風船
 - Trúng nước không chết ngay: bị **nhốt trong bong bóng nước** một thời gian; đồng đội chạm vào thì hồi sinh,
   kẻ địch chạm vào thì chết; dùng **kim** tự thoát.
 - Ném/đá bóng: sau khi ném, bóng **nổ sau 3 giây** (không có "giữ ném").
+
+### 23b. Số liệu luật chơi lấy được từ web
+
+| Điều | Nguồn | Ghi nhận |
+|---|---|---|
+| Bị nước trúng → **nhốt trong bong bóng**, chưa chết | [en.wikipedia Crazy Arcade](https://en.wikipedia.org/wiki/Crazy_Arcade) | ✅ xác nhận |
+| Đồng đội chạm → hồi sinh; địch chạm → chết; hết thời gian → chết |同上 | ✅ |
+| **Kim** (`ItemHPNeedle`) tự thoát bong bóng | [ja.wikipedia](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AC%E3%82%A4%E3%82%B8%E3%83%BC%E3%82%A2%E3%83%BC%E3%82%B1%E3%83%BC%E3%83%89) | ✅ |
+| Ném/đá bóng: **3 giây sau khi ném thì nổ** | ja.wikipedia | ⚠️ fuse gốc nghi **3.0 s** (VN server đang dùng 2.5 s) |
+| Không có "giữ ném/giữ đá" (khác Bomberman) | ja.wikipedia | ✅ |
+| Tối đa 8 người/phòng; Manner chia đội theo màu, Free tự do | en.wikipedia | ✅ |
+| 720 cấp độ, chia kênh theo level | en.wikipedia | ✅ |
+
+Không nguồn nào cho **số giây bị nhốt** và **quy đổi cấp tốc độ → ô/giây** ⇒ 2 ẩn số này phải tự chốt.
