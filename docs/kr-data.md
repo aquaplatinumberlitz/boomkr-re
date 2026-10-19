@@ -452,3 +452,31 @@ phải "đang trong trận".
 
 Toàn bộ hạ tầng đo đã xong: prefix `.wine-vn`, `ca_fixed_patched.exe` chạy được, Xvfb + `import` OK,
 server Rust OK, script `tools/vn_measure.sh` sẵn sàng — chỉ còn toạ độ click đúng.
+
+## 19. Chụp màn hình OK (đã có ảnh thật) — chặn ở popup HD của lobby
+
+Trả lời câu hỏi "sao opus chụp ok mà mình đen": **cùng lệnh `import -window root`**, ảnh đen trước đó là do
+client đã thoát (hết `timeout`). Lần này client còn sống nên ảnh thật: 409 KB, xem
+`docs/img/kr/vn_lobby_square.png` và các ảnh `/tmp/nav3..5/*.png`.
+
+### Trạng thái luồng tự động
+
+| Bước | Kết quả |
+|---|---|
+| login → chọn kênh (640,393) | ✅ vào **quảng trường lobby** |
+| đóng popup "HD Câu cá" | ❌ popup vẫn còn (click 805,390 × 6, ESC × 2, click ra ngoài đều không tắt) |
+| bấm **TẠO PHÒNG** (390,50) | ❌ không phản hồi — popup HD đang **modal**, chặn click |
+| vào trận | ❌ chưa tới |
+
+Ảnh bằng chứng: `a_lobby.png → b_room.png → c_ready.png` đều là **cùng một màn lobby + popup** ⇒ mọi click sau
+đó bị popup nuốt.
+
+### Hai đường còn lại (chọn 1)
+
+1. **Tắt popup đúng cách**: popup "HD Câu cá" là hướng dẫn nhiều trang (5 chấm), có nút ▲/▼ ở đáy phải
+   (`~805,390` là mũi tên xanh). Cần bấm đúng nút đóng của nó (có thể là nút ▼ nhỏ dưới dòng "Click",
+   hoặc phím `Space`/`Enter`). Hoặc xoá cờ "đã xem HD" trong file cấu hình client (nếu có).
+2. **Bỏ đo tự động**: mày mở client (prefix `.wine-vn` đã sẵn) bằng tay, vào trận, rồi nói tao — tao chụp
+   và đo bằng script có sẵn (`tools/vn_measure.sh` chỉ cần sửa để không tự click nữa).
+
+Hạ tầng đo đã hoàn chỉnh: prefix chạy được, ảnh chụp thật, server + script sẵn.
