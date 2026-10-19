@@ -539,3 +539,35 @@ hợp lệ). Với Village01 (map 2 người) thì cần **đủ 2 người tron
 - `CLICKS_A` / `CLICKS_B` là tham số, nên chỉ cần đổi toạ độ click của B để **join phòng** (bấm vào dòng
   phòng trong danh sách sảnh) và của A để **chọn map** trước khi BẮT ĐẦU.
 - Ảnh `A_lobby.png`, `B_click_1.png`, `A_click_1..5.png` trong `/tmp/duo1/` cho biết toạ độ UI thật.
+
+## 22. Bản đồ UI đã xác định (từ ảnh thật) — còn 2 bước là vào trận
+
+### Client A (host) — chuỗi đã xác nhận bằng ảnh
+
+| Bước | Toạ độ | Ảnh kiểm chứng |
+|---|---|---|
+| Đóng popup HD | `975,38` | `A_click_1` (popup biến mất) |
+| Mở **TẠO PHÒNG** | `385,50` | `A_click_3/4`: dialog "TẠO PHÒNG" (tab ĐẠI CHIẾN / KIỂU NHIỆM VỤ / ĐẤU TRƯỜNG / KIỂU CHƠI, ô tên phòng, nút **XÁC NHẬN** `432,614`) |
+| **XÁC NHẬN** | `437,612` | tạo phòng xong → màn phòng |
+| Chọn bàn đồ | `512,384` | (trong màn phòng) |
+| **BẮT ĐẦU** | `760,660` | nút cam lớn |
+
+⇒ Đúng như chuỗi gốc của `match_play.sh`; trước đó tao đã thay sai hai toạ độ nên kẹt ở dialog tạo phòng.
+
+### Client B (join) — chưa xác nhận
+
+Trong màn sảnh, danh sách phòng nằm ở panel trái, các dòng ~`y=400, 432,...`; nghi click `150,400`.
+
+### Vì sao lần chạy 2 client gần nhất hỏng
+
+`tools/duo_vn.sh` dùng prefix copy `.wine-vn2` và 2 Xvfb; log báo **"Failed creating new xdo instance"** cho client B
+⇒ `xdotool` không gắn được vào `:93` (Xvfb thứ hai chưa lên/khác phiên). Cần:
+- tạo `.wine-vn2` bằng `wineboot -u` (không `cp -a`, vì prefix copy dễ hỏng đường dẫn),
+- đợi `xdpyinfo` sẵn sàng cho **từng** display trước khi chạy driver,
+- hoặc chạy B bằng `xdotool` với `DISPLAY=:93` tường minh ngay trong subshell.
+
+### Còn lại
+
+1. B join đúng phòng A (click dòng phòng) → A chọn map → A BẮT ĐẦU.
+2. Khi cả hai vào map: script đã có `KEYS_A="Right:2:0.4"` + chụp `*_match.png`, `*_step_*.png`.
+3. Phân tích: `px/s` từ Δx giữa các ảnh (mtime), chia 40 px/ô.
