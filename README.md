@@ -12,7 +12,7 @@ project VN đang được một session khác làm song song.
 
 | Việc | Trạng thái | Bằng chứng |
 |---|---|---|
-| KR-002 — quyết định phạm vi | ✅ đã chốt (offline-preservation, VM cô lập, gỡ AC, không phân phối) | `docs/kr.md` §7 |
+| KR-002 — quyết định phạm vi | ✅ đã chốt (offline-preservation, VM cô lập, gỡ AC, không phân phối `CA.exe` gốc; asset KR dùng được cho build Rust) | `docs/kr.md` §7 |
 | Asset pack | ✅ **13/13** — 51.467 entry, 1.367 MB; khoá = 4 byte đầu `.idx` | §16 |
 | Trích xuất asset | ✅ Ogg/map/sprite đúng định dạng | §16 |
 | Manifest patch | ✅ 95% (schema + size 173/173); ❌ 3 hash cần `.nxgz` | §3, §17 |

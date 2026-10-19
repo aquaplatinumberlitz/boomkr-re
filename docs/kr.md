@@ -129,7 +129,7 @@ và pháp lý của chủ dự án (`MASTER_PLAN` §6.3, D-01/D-03). Project nà
 | Mục tiêu | **(A) offline-preservation** — giữ/khôi phục game chạy được **không cần server Nexon**; client + server giả chạy LAN/offline (hoặc remaster) |
 | Chạy client KR | **Có** — cần chạy để lấy dữ liệu (unpack, khoá pack, protocol) trong môi trường cô lập |
 | Anti-cheat | **Gỡ** — loại bỏ GameGuard/BlackCipher khỏi bản chạy cục bộ để client khởi động offline |
-| Phân phối | **Không** phân phối binary/asset gốc; không đưa thành phần anti-cheat vào bất kỳ bản build nào |
+| Phân phối | Asset KR được dùng trong build Rust, kể cả bản phát hành (cập nhật 2026-10-19: công ty là công ty con của Nexon tại VN, xem `docs/rust-rewrite.md` §6). **Không** phân phối `CA.exe` gốc; không đưa thành phần anti-cheat vào bất kỳ bản build nào |
 
 ### Hệ quả kỹ thuật (ràng buộc tự đặt)
 
