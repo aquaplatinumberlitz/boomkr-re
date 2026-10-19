@@ -139,3 +139,31 @@ defence="25" exp="100" damage="100"/>`
 | Google | trang consent, không có kết quả |
 
 ⇒ Không lấy được thông tin ngoài. Theo chỉ đạo: dùng dữ liệu VN + client KR; phần không có thì tự thiết kế.
+
+## 9. Copy cấu hình VN sang dùng tạm (`config/gameplay.json`)
+
+Chủ dự án chỉ ra: VN đã chạy đúng phần này thì lấy luôn, không cần RE lại. Đúng — nhưng cần phân biệt
+**server giữ gì** và **client giữ gì**:
+
+| Tham số | VN giữ ở đâu | Giá trị | Dùng cho KR |
+|---|---|---|---|
+| `round_time` | server (env `ROUND_TIME`) | 120 s | ✅ copy |
+| `bomb_fuse` | server (env `BOMB_FUSE`) | 2.5 s | ✅ copy (giá trị gốc chưa biết, VN đã dùng ổn) |
+| `match_end` | server | 3.0 s | ✅ copy |
+| `turn_mode`, `start_op`, `begin_op`, `room_type` | server | 4, 117, 191, 19 | ✅ copy |
+| Tile px / grid stride | client (RE ở `docs/map.md`) | 40 px / 101 | ✅ copy |
+| Trọng số item rơi | client (placement trong map) | Shoe/Shark 100, MaxPower 10, Fire/Bomb/Roller 30 (%) | ✅ copy |
+| **Tốc độ nhân vật** | **client** | ❌ VN server chỉ relay vị trí client gửi | ⚠️ phải tự chọn + tune |
+| **Bán kính/lan của bom theo power** | **client** | ❌ power do client gửi, server không mô phỏng | ⚠️ phải tự chọn + tune |
+| Hiệu ứng từng item kind | client | ❌ (`docs/oc_e-game.md` ghi "CHƯA KIỂM") | ⚠️ tune |
+| Monster physics + reward | **pack KR** (MonInfo) | ✅ 45 + 760 bản ghi | ✅ dùng luôn |
+
+⇒ Đã gom tất cả vào **`config/gameplay.json`** (JSON hợp lệ, có `_provenance` ghi nguồn từng nhóm).
+Chỗ nào chưa biết để `null` + `note` để lúc code không đoán bừa.
+
+### Vì sao "thiếu" dù VN chạy đúng
+
+VN **server** không mô phỏng chuyển động/bom — nó nhận vị trí client gửi và hẹn giờ nổ. Vì vậy trong
+`boom-re/server` không có hằng số tốc độ/bán kính để copy; những số đó nằm trong **client VN** và chưa
+được trích ra thành bảng. Với bản rewrite (tự viết client) thì ta **buộc phải chọn số** — nên để ở
+`config/gameplay.json` và tune dần, thay vì cố RE từ client KR (đang bị anti-tamper chặn).
