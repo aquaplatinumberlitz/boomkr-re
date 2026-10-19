@@ -1084,3 +1084,42 @@ Hai khả năng còn lại:
 - Client **sống**, không mạng, không thoát; dialog chỉ hiện khi chạy từ ổ local; nội dung dialog đã thành `?`.
 - Mọi can thiệp runtime (inject / vá IAT / vá forwarder / vá prologue ntdll) đều bị anti-tamper phát hiện
   hoặc không quan sát được gì.
+
+## 33. Dialog NEXON là của `NewPatcher.exe`, không phải CA.exe — **[VERIFIED]**
+
+### Xác định chủ cửa sổ (script `tools/whichwin.ps1`)
+
+```
+PID=10472 PROC=NewPatcher CLASS=#32770 TEXT=Nexon      <- dialog NEXON
+PID=7720  PROC=CA         CLASS=#32770 TEXT=??? ??     <- dialog của client
+```
+
+- `grab_dialog.ps1` cũ in **PID của chính PowerShell** (bug) → đã thay bằng `whichwin.ps1`
+  dùng `GetWindowThreadProcessId` + `char[]` (truyền `StringBuilder` cũng bị cắt chuỗi → đã sửa).
+- `EnumChildWindows` trên dialog NEXON: **0 control có text** ⇒ dialog **tự vẽ** (owner-drawn),
+  nên `GetWindowText` không lấy được nội dung.
+
+### Chạy `NewPatcher.exe` trước thì client đi xa hơn
+
+```
+start "" NewPatcher.exe ; (5 s) ; start "" CA.exe
+→ dialog NEXON hiện lên (nút "확인" render đúng tiếng Hàn ⇒ font OK)
+→ CALog vẫn InitBeforePatch / ProcessPatch...
+```
+
+### Thử đọc chữ tự vẽ (chưa xong)
+
+- Thêm hook `ExtTextOutW` (arg5 = chuỗi wide, arg6 = số ký tự — đúng tham số stub đã bắt).
+- Kết quả: tool tìm thấy process (`process pid=6452/7932`) nhưng **không cài được hook nào**:
+  `NewPatcher` không import `ExitProcess`/`MessageBox*`/`ExtTextOutW` qua IAT trong module chính
+  (hoặc import theo ordinal / delay-load).
+- Đã sửa 2 bug trong quá trình: (a) `install_api` quét dải cố định 0x400000..0x2250000 (chỉ đúng cho
+  CA.exe) → đổi sang quét **module chính của process**; (b) `find_slot` từng index sai đơn vị byte.
+
+### Việc tiếp (đúng đường, ngắn)
+
+1. Hook **prologue** `gdi32!ExtTextOutW` trong `NewPatcher.exe` bằng `krhookpro` (trampoline N byte) —
+   tính N offline: cần dump `gdi32.dll` của guest (chạy `krdump32` lúc NewPatcher đang sống) rồi
+   capstone lấy ranh giới instruction.
+2. Hoặc hook `user32!DrawTextW` / `gdi32!TextOutW` cùng cách.
+3. Khi có chuỗi vẽ ra ⇒ biết chính xác NewPatcher báo gì ⇒ biết cần gì để `ProcessPatch` qua.

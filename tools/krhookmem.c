@@ -29,11 +29,22 @@ static DWORD find_pid(const char *arg) {
     return pid;
 }
 
+static DWORD g_modsize;
+
+/* module đầu tiên của process = ảnh chính (nơi chứa IAT) */
+static DWORD main_mod(DWORD pid, DWORD *size) {
+    HANDLE s = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid);
+    MODULEENTRY32 me; me.dwSize = sizeof me; DWORD b = 0;
+    if (Module32First(s, &me)) { b = (DWORD)(UINT_PTR)me.modBaseAddr; if (size) *size = me.modBaseSize; }
+    CloseHandle(s);
+    return b;
+}
+
 static DWORD mod_base(DWORD pid, const char *name) {
     HANDLE s = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid);
     MODULEENTRY32 me; me.dwSize = sizeof me; DWORD b = 0;
     if (Module32First(s, &me)) do {
-        if (_stricmp(me.szModule, name) == 0) { b = (DWORD)(UINT_PTR)me.modBaseAddr; break; }
+        if (_stricmp(me.szModule, name) == 0) { b = (DWORD)(UINT_PTR)me.modBaseAddr; g_modsize = me.modBaseSize; break; }
     } while (Module32Next(s, &me));
     CloseHandle(s);
     return b;
@@ -82,9 +93,13 @@ static int install_api(Hook *hk, DWORD pid, HANDLE h, const char *dll, const cha
     DWORD base = mod_base(pid, dll);
     if (!base) return 0;
     DWORD fnVa = base + rva;
+    DWORD msz2 = 0;
+    DWORD mbase = main_mod(pid, &msz2);
+    if (!mbase) return 0;
+    DWORD scan_end = mbase + (msz2 ? msz2 : 0x2000000);
     MEMORY_BASIC_INFORMATION mbi;
-    unsigned char *a = (unsigned char *)0x400000;
-    while ((UINT_PTR)a < 0x2250000) {
+    unsigned char *a = (unsigned char *)(mbase & ~0xFFF);
+    while ((UINT_PTR)a < scan_end) {
         if (!VirtualQueryEx(h, a, &mbi, sizeof mbi)) break;
         SIZE_T sz = mbi.RegionSize; if (!sz) break;
         if (mbi.State == MEM_COMMIT && (mbi.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE))) {
@@ -172,18 +187,19 @@ static int install_crt(Hook *out, int max, DWORD pid, HANDLE h, const char *fn, 
 int main(int argc, char **argv) {
     if (argc < 3) { printf("usage: krhookmem.exe <exe|pid> <outdir> [giay]\n"); return 2; }
     int seconds = argc > 3 ? atoi(argv[3]) : 30;
+    const char *proc_name = argc > 4 ? argv[4] : "CA.exe";
     CreateDirectoryA(argv[2], NULL);
     char path[MAX_PATH]; snprintf(path, sizeof path, "%s\\hookmem.log", argv[2]);
     log_ = fopen(path, "w");
 
     Hook hooks[64]; int nh = 0;
-    struct { DWORD pid; HANDLE h; int attempts; int done[12]; } P[16]; int np = 0;
+    struct { DWORD pid; HANDLE h; int attempts; int done[16]; } P[16]; int np = 0;
 
     for (int t = 0; t < seconds * 4; t++) {
         HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         PROCESSENTRY32 pe; pe.dwSize = sizeof pe;
         if (Process32First(snap, &pe)) do {
-            if (_stricmp(pe.szExeFile, "CA.exe") != 0) continue;
+            if (_stricmp(pe.szExeFile, proc_name) != 0) continue;
             int known = 0;
             for (int i = 0; i < np; i++) if (P[i].pid == pe.th32ProcessID) known = 1;
             if (known || np >= 16) continue;
@@ -192,7 +208,7 @@ int main(int argc, char **argv) {
             if (!h) continue;
             L("process pid=%lu", pe.th32ProcessID);
             P[np].pid = pe.th32ProcessID; P[np].h = h; P[np].attempts = 0;
-            for (int k = 0; k < 12; k++) P[np].done[k] = 0;
+            for (int k = 0; k < 16; k++) P[np].done[k] = 0;
             np++;
         } while (Process32Next(snap, &pe));
         CloseHandle(snap);
@@ -212,6 +228,10 @@ int main(int argc, char **argv) {
             if (!P[i].done[9]) { hk = (Hook){0}; if (install_api(&hk, P[i].pid, P[i].h, "user32.dll", "CreateDialogParamA", "CreateDialogParamA", 0)) { hooks[nh++] = hk; P[i].done[9] = 1; } }
             if (!P[i].done[10]) { int c = install_all(&hooks[nh], 8, P[i].pid, P[i].h, "user32.dll", "MessageBoxW", "MessageBoxW(any)", 2); if (c) { nh += c; P[i].done[10] = 1; } }
             if (!P[i].done[11]) { int c = install_all(&hooks[nh], 8, P[i].pid, P[i].h, "user32.dll", "MessageBoxA", "MessageBoxA(any)", 1); if (c) { nh += c; P[i].done[11] = 1; } }
+            if (!P[i].done[12]) { int c = install_all(&hooks[nh], 6, P[i].pid, P[i].h, "user32.dll", "CreateWindowExW", "CreateWindowExW", 2); if (c) { nh += c; P[i].done[12] = 1; } }
+            if (!P[i].done[13]) { int c = install_all(&hooks[nh], 6, P[i].pid, P[i].h, "user32.dll", "CreateWindowExA", "CreateWindowExA", 1); if (c) { nh += c; P[i].done[13] = 1; } }
+            if (!P[i].done[14]) { int c = install_all(&hooks[nh], 4, P[i].pid, P[i].h, "user32.dll", "CreateDialogIndirectParamA", "CreateDlgIndA", 0); if (c) { nh += c; P[i].done[14] = 1; } }
+            if (!P[i].done[15]) { int c = install_all(&hooks[nh], 6, P[i].pid, P[i].h, "gdi32.dll", "ExtTextOutW", "ExtTextOutW", 5); if (c) { nh += c; P[i].done[15] = 1; } }
         }
 
         for (int i = 0; i < nh; i++) {
@@ -224,6 +244,13 @@ int main(int argc, char **argv) {
                 if (len && ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)v[1], buf, len, &got)) {
                     for (DWORD k = 0; k < len; k++) if (buf[k] == '\r' || buf[k] == '\n') buf[k] = ' ';
                     L("WriteFile pid=%lu caller=0x%lx len=%lu: %s", hooks[i].pid, v[0], len, buf);
+                }
+            } else if (hooks[i].kind == 5 && v[5] && v[6] && v[6] < 200) {
+                wchar_t wt[260] = {0};
+                if (ReadProcessMemory(hooks[i].h, (void *)(UINT_PTR)v[5], wt, v[6] * 2, &got) && wt[0]) {
+                    char u8[600] = {0};
+                    WideCharToMultiByte(CP_UTF8, 0, wt, v[6], u8, sizeof u8 - 1, NULL, NULL);
+                    L("ExtTextOutW pid=%lu caller=0x%lx len=%lu: %s", hooks[i].pid, v[0], v[6], u8);
                 }
             } else if (hooks[i].kind == 2 && v[1]) {
                 wchar_t wt[260] = {0};
