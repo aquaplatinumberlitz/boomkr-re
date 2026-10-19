@@ -4,3 +4,4 @@ __pycache__/
 *.dll
 *.exe
 target/
+docs/web/raw/
