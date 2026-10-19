@@ -391,3 +391,42 @@ Blink_Static     [-3, 42, 0, idx, 0, 0, 34, 32..36, 56, 67, 8, 66]   (3 frame)
 - Nhưng **không suy được ô/giây** nếu không biết (a) ms/frame và (b) số ô mỗi chu kỳ.
 - ⇒ Vẫn phải đo hành vi. Mà client VN hiện không chạy (exit 5) — cần dựng lại Wine prefix
   (`WINEPREFIX` mới + cài D3DX9) hoặc chạy client trong WinBoat (như KR) rồi đo bằng screenshot.
+
+## 17. Dựng lại Wine prefix: **client VN chạy lại được** (đo còn dở)
+
+### Quy trình đã kiểm chứng
+
+```sh
+WINEPREFIX=$HOME/.wine-vn WINEDEBUG=-all wineboot -u        # prefix mới
+cp ~/.wine/drive_c/windows/system32/d3dx9_30.dll \
+   ~/.wine-vn/drive_c/windows/system32/                     # D3DX9
+cd boom-re/wine/Boom && rm -f CALog.log
+DISPLAY=:82 WINEPREFIX=$HOME/.wine-vn WINEDEBUG=-all wine ca_fixed_patched.exe
+```
+
+Kết quả (chạy đơn, có server VN):
+
+```
+116 : InitBeforePatch
+[XRpt] Sg - INT(dne:1)...  …  dne:10 … dne:11 … dne:13
+116 : EndOfInit!! exitcode=0
+```
+
+⇒ **Qua được bước patch** (trước đó kẹt `InitBeforePatch`), vào tới **phòng chờ** và **một lần vào tới trận**.
+
+### Script đo (đã lưu `tools/vn_measure.sh`)
+
+Luồng: Xvfb :82 → client (prefix mới) → login (xdotool) → vào phòng → bấm **SẴN SÀNG** → chờ `dne:13`
+→ giữ `Right` 14×0.15 s, chụp `import -window root` mỗi lần → `post.png`.
+
+Lần chạy gần nhất: **17 ảnh**, `dne:13` = 1, nhưng `pre.png` **toàn đen** ⇒ tại thời điểm chụp client đã
+đóng (hết thời gian `timeout 260` hoặc bị server kết thúc trận).
+
+### Việc còn lại để ra số tốc độ (rất ngắn)
+
+1. Tăng `timeout` client lên 400 s và **chụp ngay khi** `dne:13` xuất hiện (hiện chờ thêm 10 s → trễ).
+2. Kiểm ảnh đầu phải **không đen** rồi mới chụp chuỗi.
+3. Đo: dùng ảnh `pre` làm nền, khoanh vùng nhân vật (sprite đỏ/áo), lấy tâm qua từng frame;
+   `px/s = Δx / Δt` (mtime file), `ô/s = px/s / 40`.
+
+Mọi thứ khác đã sẵn: script, prefix, patch, server, và công thức quy đổi.
