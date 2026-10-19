@@ -1,5 +1,8 @@
 # Rewrite engine Boom KR bằng Rust: dùng chung engine với VN
 
+> **Hết hiệu lực (2026-10-19).** Kế hoạch, quy tắc và scope hiện hành ở `/home/admin/boom-rs`
+> (`AGENTS.md`, `docs/planning/REWRITE_PLAN.md`). File này chỉ còn là lịch sử.
+
 > Cập nhật 2026-10-19. Kế hoạch gốc của engine nằm ở `boom-re/docs/REWRITE_PLAN.md`
 > (Fidelity Spec, Feel Oracle, kiến trúc crate, lộ trình R0–R7 và W1–W4).
 > Tài liệu này chỉ ghi **phần riêng của KR**. Tag bằng chứng theo `boom-re/docs/MASTER_PLAN.md` §7.
